@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminDashboardDecoratersComponent } from './admin-dashboard-decoraters.component';
+import { AdminDashboardDecoratorsComponent } from './admin-dashboard-decorators.component';
 
 describe('AdminDashboardDecoratersComponent', () => {
-  let component: AdminDashboardDecoratersComponent;
-  let fixture: ComponentFixture<AdminDashboardDecoratersComponent>;
+  let component: AdminDashboardDecoratorsComponent;
+  let fixture: ComponentFixture<AdminDashboardDecoratorsComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AdminDashboardDecoratersComponent]
+      declarations: [AdminDashboardDecoratorsComponent]
     });
-    fixture = TestBed.createComponent(AdminDashboardDecoratersComponent);
+    fixture = TestBed.createComponent(AdminDashboardDecoratorsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -24,7 +24,7 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
-import { AdminDashboardDecoratersComponent } from './components/admin/admin-dashboard-decoraters/admin-dashboard-decoraters.component';
+import { AdminDashboardDecoratorsComponent } from './components/admin/admin-dashboard-decorators/admin-dashboard-decorators.component';
 import { AdminDashboardFirmsComponent } from './components/admin/admin-dashboard-firms/admin-dashboard-firms.component';
 import { AdminDashboardOwnersComponent } from './components/admin/admin-dashboard-owners/admin-dashboard-owners.component';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
@@ -60,7 +60,7 @@ import { AuthService } from './services/utilityServices/auth.service';
     NewWaiterFormComponent,
     AdminDashboardComponent,
     AdminDashboardFirmsComponent,
-    AdminDashboardDecoratersComponent,
+    AdminDashboardDecoratorsComponent,
     AdminDashboardOwnersComponent,
     UserProfileComponent,
     OwnerDashboardComponent,

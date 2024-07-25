@@ -51,6 +51,10 @@ userRouter.route('/update_phone_number').post(
     (req, res) => new UserController().updatePhoneNumber(req, res)
 )
 
+userRouter.route('/update_status').post(
+    (req, res) => new UserController().updatePhoneNumber(req, res)
+)
+
 userRouter.route('/count/:role').get(
     (req, res) => new UserController().count_by_role(req, res)
 )

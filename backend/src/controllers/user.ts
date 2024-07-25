@@ -51,7 +51,7 @@ export class UserController {
   }
 
   updatePhoneNumber(req: express.Request, res: express.Response) {
-    this.updateField(req, res, "phone_number", req.body.phone_number);
+    this.updateField(req, res, "phone_number", req.body.phoneNumber);
   }
 
   updateUsername(req: express.Request, res: express.Response) {
@@ -63,11 +63,11 @@ export class UserController {
   }
 
   updateCreditCardNumber(req: express.Request, res: express.Response) {
-    this.updateField(req, res, "credit_card_number", req.body.credit_card_number);
+    this.updateField(req, res, "creditCardNumber", req.body.creditCardNumber);
   }
 
   updateProfilePhoto(req: express.Request, res: express.Response) {
-    this.updateField(req, res, "profile_photo", req.body.profile_photo);
+    this.updateField(req, res, "profilePhoto", req.body.profilePhoto);
   }
 
   updatePassword(req: express.Request, res: express.Response) {
@@ -75,7 +75,7 @@ export class UserController {
   }
 
   updateStatus(req: express.Request, res: express.Response) {
-    this.updateField(req, res, "status", req.body.new_status);
+    this.updateField(req, res, "status", req.body.newStatus);
   }
 
   async readByField(req: express.Request, res: express.Response, field: string) {

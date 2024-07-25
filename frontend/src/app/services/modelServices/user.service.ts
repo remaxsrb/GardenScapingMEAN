@@ -124,6 +124,20 @@ export class UserService {
       }
     );
   }
+  
+  updateStatus(username: string, newStatus: string) {
+    const data = {
+      username: username,
+      new_status: newStatus.toLowerCase(),
+    };
+    return this.http.post<any>(
+      `${this.backendUrl}/update_status/`,
+      data,
+      {
+        headers: this.headers,
+      }
+    );
+  }
 
   countOwner(): Observable<{ count: number }> {
     return this.http.get<{ count: number }>(`${this.backendUrl}/count/owner`);

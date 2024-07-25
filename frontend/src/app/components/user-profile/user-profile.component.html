@@ -1,1 +1,274 @@
-<p>user-profile works!</p>
+<div class="row">
+    <div class="col-md-6">
+        <div class="container">
+            <div class="card" style="width: 17.25rem">
+                <img src="{{ user.profile_photo }}" class="img-fluid" alt="" />
+                <div class="card-body">
+                    <form (ngSubmit)="update_photo()">
+                        <input
+                            type="file"
+                            class="form-control"
+                            id="inputGroupFile02"
+                            (change)="onFileSelected($event)"
+                        />
+                        <button
+                            type="submit"
+                            class="btn btn-dark"
+                            id="update_picture"
+                            style="white-space: nowrap"
+                        >
+                            Update photo
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <form [formGroup]="userUpdateForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="mb-3">
+                                    <span class="p-float-label">
+                                        <input
+                                            id="firstname"
+                                            type="text"
+                                            pInputText
+                                            formControlName="firstname"
+                                            placeholder=" "
+                                        />
+                                        <label for="firstname">Firstname</label>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="mb-3">
+                                    <span class="p-float-label">
+                                        <input
+                                            id="lastname"
+                                            type="text"
+                                            pInputText
+                                            formControlName="lastname"
+                                            placeholder=" "
+                                        />
+                                        <label for="lastname">Lastname</label>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="mb-3">
+                                    <span class="p-float-label">
+                                        <input
+                                            id="username"
+                                            type="text"
+                                            pInputText
+                                            formControlName="username"
+                                            placeholder="{{ user.username }}"
+                                        />
+                                        <label for="username">Username</label>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="mb-3">
+                                    <span class="p-float-label">
+                                        <input
+                                            id="email"
+                                            type="text"
+                                            pInputText
+                                            formControlName="email"
+                                            placeholder=" "
+                                        />
+                                        <label for="email">Email</label>
+                                        <small
+                                            class="p-error"
+                                            *ngIf="
+                                                email?.invalid && email?.touched
+                                            "
+                                            >E-mail needs to be valid.</small
+                                        >
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div formGroupName="address" class="row">
+                            <div class="col-md-4">
+                                <span class="p-float-label">
+                                    <input
+                                        id="street"
+                                        type="text"
+                                        pInputText
+                                        formControlName="street"
+                                        placeholder=" "
+                                    />
+                                    <label
+                                        for="street"
+                                        *ngIf="
+                                            !street?.invalid || !street?.touched
+                                        "
+                                        >Street</label
+                                    >
+                                    <small
+                                        class="p-error"
+                                        *ngIf="
+                                            street?.invalid && street?.touched
+                                        "
+                                        >Street is required and should match the
+                                        pattern.</small
+                                    >
+                                </span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="p-float-label">
+                                    <input
+                                        id="number"
+                                        type="text"
+                                        pInputText
+                                        formControlName="number"
+                                        placeholder=" "
+                                    />
+                                    <label
+                                        for="number"
+                                        *ngIf="
+                                            !number?.invalid || !number?.touched
+                                        "
+                                        >Number</label
+                                    >
+                                    <small
+                                        class="p-error"
+                                        *ngIf="
+                                            number?.invalid && number?.touched
+                                        "
+                                        >Number is required and should match the
+                                        pattern.</small
+                                    >
+                                </span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="p-float-label">
+                                    <input
+                                        id="city"
+                                        type="text"
+                                        pInputText
+                                        formControlName="city"
+                                        placeholder=" "
+                                    />
+                                    <label
+                                        for="city"
+                                        *ngIf="!city?.invalid || !city?.touched"
+                                        >City</label
+                                    >
+                                    <small
+                                        class="p-error"
+                                        *ngIf="city?.invalid && city?.touched"
+                                        >City is required.</small
+                                    >
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <span class="p-float-label">
+                                        <input
+                                            id="phoneNumber"
+                                            type="text"
+                                            pInputText
+                                            formControlName="phoneNumber"
+                                            placeholder=" "
+                                        />
+                                        <label
+                                            for="phoneNumber"
+                                            *ngIf="
+                                                !phoneNumber?.invalid ||
+                                                !phoneNumber?.touched
+                                            "
+                                            >Phone number</label
+                                        >
+                                        <small
+                                            class="p-error"
+                                            *ngIf="
+                                                phoneNumber?.invalid &&
+                                                phoneNumber?.touched
+                                            "
+                                            >Phone number should be in format
+                                            06xxxxxxxx.</small
+                                        >
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div formGroupName="creditCardNumber" class="row">
+                            <div class="col-md-1">
+                                <div class="card-icon">
+                                    <ng-container [ngSwitch]="cardType">
+                                        <div *ngSwitchCase="'MASTERCARD'">
+                                            <i class="fab fa-cc-mastercard"></i>
+                                        </div>
+                                        <div *ngSwitchCase="'VISA'">
+                                            <i class="fab fa-cc-visa"></i>
+                                        </div>
+                                        <div *ngSwitchCase="'DINERS'">
+                                            <i
+                                                class="fab fa-cc-diners-club"
+                                            ></i>
+                                        </div>
+                                        <div *ngSwitchDefault>
+                                            <i class="fas fa-credit-card"></i>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="col-md-11">
+                                <span class="p-float-label">
+                                    <!-- Credit Card Number Input -->
+                                    <input
+                                        id="cardNumber"
+                                        type="text"
+                                        pInputText
+                                        formControlName="cardNumber"
+                                        placeholder=" "
+                                    />
+                                    <label
+                                        for="cardNumber"
+                                        *ngIf="
+                                            !cardNumber?.invalid ||
+                                            !cardNumber?.touched
+                                        "
+                                    >
+                                        Credit card number
+                                    </label>
+                                    <small
+                                        class="p-error"
+                                        *ngIf="
+                                            cardNumber?.invalid &&
+                                            cardNumber?.touched
+                                        "
+                                    >
+                                        Credit card number is required.
+                                    </small>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button
+                                    pButton
+                                    type="submit"
+                                    label="Update data"
+                                    severity="contrast"
+                                    [disabled]="userUpdateForm.invalid"
+                                ></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

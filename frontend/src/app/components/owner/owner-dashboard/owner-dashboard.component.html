@@ -1,1 +1,52 @@
-<p>ownder-dashboard works!</p>
+  <body>
+    <!-- Header -->
+    <header class="bg-primary text-white py-3">
+      <h1>Garden Scaping</h1>
+    </header>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-center"
+          id="navbarNavAltMarkup"
+        >
+          <div class="navbar-nav">
+            <a routerLink="/guest/profile" class="nav-item btn btn-outline-primary ms-2">Profile</a>
+            <a routerLink="/guest/firms" class="nav-item btn btn-outline-primary ms-2">Firms</a>
+            <a routerLink="/guest/bookings" class="nav-item btn btn-outline-primary ms-2">Bookings</a>
+            <a routerLink="/guest/maintenence" class="nav-item btn btn-outline-primary ms-2">Maintenence</a>
+
+            <button
+              type="button"
+              class="btn btn-outline-primary logout-btn ms-2"
+              (click)="logout()"
+            >
+              Log out
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-3">
+      <p>&copy; 2024 Marko Jovanovic</p>
+    </footer>
+  </body>

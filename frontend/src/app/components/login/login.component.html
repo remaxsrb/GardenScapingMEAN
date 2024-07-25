@@ -1,0 +1,77 @@
+<body>
+    <!-- Header -->
+    <header class="bg-primary text-white py-3">
+      <h1>Kutak dobre hrane</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main
+      class="container d-flex flex-column justify-content-center align-items-center"
+    >
+      <div>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-12">
+              <form [formGroup]="logInForm" (ngSubmit)="onLogin()">
+                <div class="row">
+                  <div class="col-md-12">
+                    <span class="p-float-label">
+                      <input
+                        id="username"
+                        type="text"
+                        pInputText
+                        formControlName="username"
+                        placeholder=" "
+                      />
+                      <label for="username">Username</label>
+                    </span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <span class="p-float-label">
+                      <input
+                        id="password"
+                        type="password"
+                        formControlName="password"
+                        placeholder=" "
+                      />
+                      <label for="password">Password</label>
+                    </span>
+                  </div>
+                  <a href="/change_password">Change password?</a>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <button
+                      pButton
+                      type="submit"
+                      label="Login"
+                      severity="contrast"
+                      [disabled]="logInForm.invalid"
+                    ></button>
+                  </div>
+                </div>
+                <p-messages
+                *ngIf="
+                login_form_flags.invalid_password ||
+                login_form_flags.user_not_approved ||
+                login_form_flags.user_not_found ||
+                login_form_flags.general_errors
+                "
+                [(value)]="errorMessage"
+                [closable]="false"
+                severity="error"
+              />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white">
+      <p>&copy; 2024 Marko Jovanovic</p>
+    </footer>
+  </body>

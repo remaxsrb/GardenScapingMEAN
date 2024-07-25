@@ -10,7 +10,7 @@ const User = new Schema(
     password: {
       type: String,
       required: true,
-      //no regex matching because password will be hased 
+      //no regex matching because password will be hased
     },
     email: {
       type: String,
@@ -18,20 +18,29 @@ const User = new Schema(
       unique: true,
       match: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
     },
-    role: { type: String, required: true, enum: ["admin", "owner", "decorator"] },
+    role: {
+      type: String,
+      required: true,
+      enum: ["admin", "owner", "decorator"],
+    },
     firstname: { type: String },
     lastname: { type: String },
     gender: { type: String, enum: ["male", "female"] },
-    address: { type: Address},
-    phoneNumber: { type: String, match: /^06\d{7,8}$/},
+    address: { type: Address },
+    phoneNumber: { type: String, match: /^06\d{7,8}$/ },
     creditCardNumber: { type: CreditCard },
     profilePhoto: { type: String, match: /\.(png|jpg)$/i },
     status: {
       type: String,
-      enum: ["pending", "active", "blocked"],
-    }
+      enum: ["pending", "active", "banned"],
+    },
+    firm: {
+      type: Schema.Types.ObjectId,
+      ref: "Firm",
+      required: true,
+    },
   },
-  { versionKey: false }
+  { versionKey: false },
 );
 
 export default mongoose.model("User", User, "users");

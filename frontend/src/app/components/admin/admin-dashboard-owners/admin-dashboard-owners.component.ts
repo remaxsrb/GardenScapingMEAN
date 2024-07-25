@@ -21,7 +21,7 @@ export class AdminDashboardOwnersComponent implements OnInit {
 
   updateStatus(owner: Owner, index: number): void {
     this.userService
-      .updateStatus(owner.username, this.updatedOwnerStatuses[index])
+      .updateStatus(owner._id, this.updatedOwnerStatuses[index])
       .subscribe((data) => {
         this.owners = [];
 

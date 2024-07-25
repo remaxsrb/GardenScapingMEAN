@@ -33,10 +33,10 @@ userRouter.route('/update_address').post(
 userRouter.route('/update_email').post(
     (req, res) => new UserController().updateEmail(req, res)
 )
-userRouter.route('/update_credit_card_number').post(
+userRouter.route('/update_creditCardNumber').post(
     (req, res) => new UserController().updateCreditCardNumber(req, res)
 )
-userRouter.route('/update_profile_photo').post(
+userRouter.route('/update_profilePhoto').post(
     (req, res) => new UserController().updateProfilePhoto(req, res)
 )
 userRouter.route('/update_password').post(
@@ -52,7 +52,7 @@ userRouter.route('/update_phone_number').post(
 )
 
 userRouter.route('/update_status').post(
-    (req, res) => new UserController().updatePhoneNumber(req, res)
+    (req, res) => new UserController().updateStatus(req, res)
 )
 
 userRouter.route('/count/:role').get(

@@ -1,4 +1,5 @@
 import { Address } from "../interfaces/address"
+import { creditCardNumber } from "../interfaces/creditcard"
 
 export class Owner {
   _id: string = ''
@@ -9,8 +10,8 @@ export class Owner {
   lastname: string = ''
   gender: string = ''
   address: Address = {street: '', number: '', city: ''}
-  phone_number: string = ''
-  credit_card_number: string = ''
+  phoneNumber: string = ''
+  creditCardNumber: creditCardNumber = {cardNumber: ''}
   profile_photo: string = ''
   status: string = ''
 }

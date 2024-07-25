@@ -35,16 +35,16 @@ export class UserService {
   }
 
   findByEmail(email: string) {
-    return this.http.get<any>(`${this.backendUrl}/readByEmail/${email}`);
+    return this.http.get<any>(`${this.backendUrl}/read_by_email/${email}`);
   }
 
   findByRole(role: string) {
-    return this.http.get<any[]>(`${this.backendUrl}/readByRole/${role}`);
+    return this.http.get<any[]>(`${this.backendUrl}/read_by_role/${role}`);
   }
 
   changePassword(data: any) {
     return this.http.post<any>(
-      `${this.backendUrl}/updatePassword/`,
+      `${this.backendUrl}/update_password/`,
       JSON.stringify(data),
       {
         headers: this.headers,
@@ -54,7 +54,7 @@ export class UserService {
 
   updateFirstname(data: any) {
     return this.http.post<any>(
-      `${this.backendUrl}/updateFirstname/`,
+      `${this.backendUrl}/update_firstname/`,
       JSON.stringify(data),
       {
         headers: this.headers,
@@ -63,7 +63,7 @@ export class UserService {
   }
   updateLastname(data: any) {
     return this.http.post<any>(
-      `${this.backendUrl}/updateLastname/`,
+      `${this.backendUrl}/update_lastname/`,
       JSON.stringify(data),
       {
         headers: this.headers,
@@ -72,7 +72,7 @@ export class UserService {
   }
   updateUsername(data: any) {
     return this.http.post<any>(
-      `${this.backendUrl}/updateUsername/`,
+      `${this.backendUrl}/update_username/`,
       JSON.stringify(data),
       {
         headers: this.headers,
@@ -81,7 +81,7 @@ export class UserService {
   }
   updateEmail(data: any) {
     return this.http.post<any>(
-      `${this.backendUrl}/updateEmail/`,
+      `${this.backendUrl}/update_email/`,
       JSON.stringify(data),
       {
         headers: this.headers,
@@ -90,7 +90,7 @@ export class UserService {
   }
   updateAddress(data: any) {
     return this.http.post<any>(
-      `${this.backendUrl}/updateAddress/`,
+      `${this.backendUrl}/update_address/`,
       JSON.stringify(data),
       {
         headers: this.headers,
@@ -99,7 +99,7 @@ export class UserService {
   }
   updatePhoneNumber(data: any) {
     return this.http.post<any>(
-      `${this.backendUrl}/updatePhoneNumber/`,
+      `${this.backendUrl}/update_phoneNumber/`,
       JSON.stringify(data),
       {
         headers: this.headers,
@@ -108,7 +108,7 @@ export class UserService {
   }
   updateCreditCardNumber(data: any) {
     return this.http.post<any>(
-      `${this.backendUrl}/updateCreditCardNumber/`,
+      `${this.backendUrl}/update_creditCardNumber/`,
       JSON.stringify(data),
       {
         headers: this.headers,
@@ -117,7 +117,7 @@ export class UserService {
   }
   updateProfilePhoto(data: any) {
     return this.http.post<any>(
-      `${this.backendUrl}/updateProfilePhoto/`,
+      `${this.backendUrl}/update_profilePhoto/`,
       JSON.stringify(data),
       {
         headers: this.headers,
@@ -125,10 +125,10 @@ export class UserService {
     );
   }
   
-  updateStatus(username: string, newStatus: string) {
+  updateStatus(_id: string, newStatus: string) {
     const data = {
-      username: username,
-      new_status: newStatus.toLowerCase(),
+      _id: _id,
+      newStatus: newStatus.toLowerCase(),
     };
     return this.http.post<any>(
       `${this.backendUrl}/update_status/`,

@@ -56,8 +56,8 @@ export class UserProfileComponent implements OnInit {
         this.cardType = this.getCardType(value);
       });
 
-    this.jsonService.get_photo(this.user.profile_photo).subscribe((data) => {
-      this.user.profile_photo = URL.createObjectURL(data);
+    this.jsonService.get_photo(this.user.profilePhoto).subscribe((data) => {
+      this.user.profilePhoto = URL.createObjectURL(data);
     });
   }
 
@@ -251,7 +251,7 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  update_photo() {
+  updatePhoto() {
     this.update_flags.invalid_picture_dimensions = false;
 
     if (this.selectedFile) {

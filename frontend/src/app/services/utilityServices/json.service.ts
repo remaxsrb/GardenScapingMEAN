@@ -14,10 +14,10 @@ export class JsonService {
 
   constructor(private http: HttpClient) { }
 
-  get_layout(file_name:string): Observable<any> {
-    return this.http.get<any>(`${this.layoutUrl}/${file_name}`);
+  get_layout(fileName:string): Observable<any> {
+    return this.http.get<any>(`${this.layoutUrl}/${fileName}`);
   }
-  get_photo(file_name:string): Observable<Blob> {
-    return this.http.get(`${this.photoUrl}/${file_name}`, { responseType: 'blob' });
+  get_photo(fileName:string): Observable<Blob> {
+    return this.http.get(`${this.photoUrl}/${fileName}`, { responseType: 'blob' });
   }
 }

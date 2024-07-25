@@ -38,7 +38,7 @@ class UserService {
     return { token, user: user_data };
   }
 
-  async updateField(username: string, fieldToUpdate: string, updateValue: any) {
+  async updateField(_id: string, fieldToUpdate: string, updateValue: any) {
     if (fieldToUpdate === "username") {
       const existingUser = await User.findOne({ username: updateValue });
       if (existingUser) {
@@ -51,7 +51,7 @@ class UserService {
       }
     }
 
-    const updateQuery = { username };
+    const updateQuery = { _id };
     const update = { [fieldToUpdate]: updateValue };
 
     const result = await User.updateOne(updateQuery, update);

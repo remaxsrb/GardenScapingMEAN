@@ -29,7 +29,7 @@ export class UserController {
 
   async updateField(req: express.Request, res: express.Response, fieldToUpdate: string, updateValue: any) {
     try {
-      const result = await userService.updateField(req.body.username, fieldToUpdate, updateValue);
+      const result = await userService.updateField(req.body._id, fieldToUpdate, updateValue);
       return res.json(result);
     } catch (err: any) {
       const statusCode = err.status || 500;

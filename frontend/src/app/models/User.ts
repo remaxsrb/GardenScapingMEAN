@@ -9,8 +9,8 @@ export class User {
     lastname: string = ''
     gender: string = ''
     address: Address = {street: '', number: '', city: ''}
-    phone_number: string = ''
-    credit_card_number: string = ''
-    profile_photo: string = ''
+    phoneNumber: string = ''
+    creditCardNumber: string = ''
+    profilePhoto: string = ''
     status: string = ''
 }

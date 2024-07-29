@@ -1,1 +1,283 @@
-<p>admin-dashboard-decoraters works!</p>
+{{ newDecoraterForm.value | json }}
+
+<form [formGroup]="newDecoraterForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-md-6">
+            <span class="p-float-label">
+                <input
+                    id="firstName"
+                    type="text"
+                    pInputText
+                    formControlName="firstname"
+                    placeholder=" "
+                />
+                <label
+                    for="firstName"
+                    *ngIf="!firstname?.invalid || !firstname?.touched"
+                    >First name</label
+                >
+                <small
+                    class="p-error"
+                    *ngIf="firstname?.invalid && firstname?.touched"
+                    >First name is required.</small
+                >
+            </span>
+        </div>
+        <div class="col-md-6">
+            <span class="p-float-label">
+                <input
+                    id="lastName"
+                    type="text"
+                    pInputText
+                    formControlName="lastname"
+                    placeholder=" "
+                />
+                <label
+                    for="lastName"
+                    *ngIf="!lastname?.invalid || !lastname?.touched"
+                    >Last name</label
+                >
+                <small
+                    class="p-error"
+                    *ngIf="lastname?.invalid && lastname?.touched"
+                    >Last name is required.</small
+                >
+            </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <span class="p-float-label">
+                <input
+                    id="username"
+                    type="text"
+                    pInputText
+                    formControlName="username"
+                    placeholder=" "
+                />
+                <label
+                    for="username"
+                    *ngIf="!username?.invalid || !username?.touched"
+                    >Username</label
+                >
+                <small
+                    class="p-error"
+                    *ngIf="username?.invalid && username?.touched"
+                    >User name is required.</small
+                >
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <span class="p-float-label">
+                <input
+                    id="password"
+                    type="password"
+                    pPassword
+                    formControlName="password"
+                    placeholder=" "
+                />
+                <label
+                    for="password"
+                    *ngIf="!password?.invalid || !password?.touched"
+                    >Password</label
+                >
+                <small
+                    class="p-error"
+                    *ngIf="password?.invalid && password?.touched"
+                    >Password is required.</small
+                >
+            </span>
+        </div>
+    </div>
+
+    <div formGroupName="address" class="row">
+        <div class="col-md-4">
+            <span class="p-float-label">
+                <input
+                    id="street"
+                    type="text"
+                    pInputText
+                    formControlName="street"
+                    placeholder=" "
+                />
+                <label for="street" *ngIf="!street?.invalid || !street?.touched"
+                    >Street</label
+                >
+                <small
+                    class="p-error"
+                    *ngIf="street?.invalid && street?.touched"
+                    >Street is required and should match the pattern.</small
+                >
+            </span>
+        </div>
+        <div class="col-md-4">
+            <span class="p-float-label">
+                <input
+                    id="number"
+                    type="text"
+                    pInputText
+                    formControlName="number"
+                    placeholder=" "
+                />
+                <label for="number" *ngIf="!number?.invalid || !number?.touched"
+                    >Number</label
+                >
+                <small
+                    class="p-error"
+                    *ngIf="number?.invalid && number?.touched"
+                    >Number is required and should match the pattern.</small
+                >
+            </span>
+        </div>
+        <div class="col-md-4">
+            <span class="p-float-label">
+                <input
+                    id="city"
+                    type="text"
+                    pInputText
+                    formControlName="city"
+                    placeholder=" "
+                />
+                <label for="city" *ngIf="!city?.invalid || !city?.touched"
+                    >City</label
+                >
+                <small class="p-error" *ngIf="city?.invalid && city?.touched"
+                    >City is required.</small
+                >
+            </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <span class="p-float-label">
+                <input
+                    id="email"
+                    type="email"
+                    pInputText
+                    formControlName="email"
+                    placeholder=" "
+                />
+                <label for="email" *ngIf="!email?.invalid || !email?.touched"
+                    >E-mail</label
+                >
+                <small class="p-error" *ngIf="email?.invalid && email?.touched"
+                    >E-mail is required.</small
+                >
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <span class="p-float-label">
+                <input
+                    id="phoneNumber"
+                    type="text"
+                    pInputText
+                    formControlName="phoneNumber"
+                    placeholder=" "
+                />
+                <label
+                    for="phoneNumber"
+                    *ngIf="!phoneNumber?.invalid || !phoneNumber?.touched"
+                    >Phone number</label
+                >
+                <small
+                    class="p-error"
+                    *ngIf="phoneNumber?.invalid && phoneNumber?.touched"
+                    >Phone number is required.</small
+                >
+            </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <span class="p-float-label">
+                 <p-dropdown
+                     [options]="firms"
+                     formControlName="firm"
+                     placeholder="Select a Firm"
+                     optionLabel="name"
+                     optionValue="_id"
+                     inputId="float-label"
+                 ></p-dropdown>
+             </span>
+            
+        </div>
+    </div>
+
+    <!-- Gender Selection -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Gender</label>
+                <div class="d-flex align-items-center justify-content-center">
+                    <div class="mr-3">
+                        <p-radioButton
+                            name="gender"
+                            value="male"
+                            formControlName="gender"
+                            inputId="genderMale"
+                        ></p-radioButton>
+                        <label for="genderMale">Male</label>
+                    </div>
+                    <div>
+                        <p-radioButton
+                            name="gender"
+                            value="female"
+                            formControlName="gender"
+                            inputId="genderFemale"
+                        ></p-radioButton>
+                        <label for="genderFemale">Female</label>
+                    </div>
+                </div>
+                <small
+                    class="p-error"
+                    *ngIf="gender?.invalid && gender?.touched"
+                    >Gender is required.</small
+                >
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <span>
+                <label for="profilePhoto">Profile photo</label>
+                <p-fileUpload
+                    mode="basic"
+                    name="demo[]"
+                    chooseLabel="Choose"
+                    chooseIcon="pi pi-upload"
+                    url="https://www.primefaces.org/cdn/api/upload.php"
+                    accept=".png|.jpg"
+                    [maxFileSize]="1000000"
+                    (onSelect)="onFileSelected($event)"
+                ></p-fileUpload>
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button
+                pButton
+                type="submit"
+                label="Sign up"
+                severity="contrast"
+                [disabled]="newDecoraterForm.invalid"
+            ></button>
+        </div>
+    </div>
+    <p-messages
+        *ngIf="
+            signupResponseFlags.emailOrUsernameTaken ||
+            signupResponseFlags.generalErrors
+        "
+        [(value)]="errorMessage"
+        [closable]="false"
+        severity="error"
+    ></p-messages>
+</form>

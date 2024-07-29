@@ -1,1 +1,201 @@
-<p>new-firm-form works!</p>
+{{ newFirmForm.value | json }}
+<form [formGroup]="newFirmForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-md-12">
+            <span class="p-float-label">
+                <input
+                    id="name"
+                    type="text"
+                    pInputText
+                    formControlName="name"
+                    placeholder=" "
+                />
+                <label for="name" *ngIf="!name?.invalid || !name?.touched"
+                    >Name</label
+                >
+                <small class="p-error" *ngIf="name?.invalid && name?.touched"
+                    >Firm name is required.</small
+                >
+            </span>
+        </div>
+    </div>
+    <div formGroupName="address" class="row">
+        <div class="col-md-4">
+            <span class="p-float-label">
+                <input
+                    id="street"
+                    type="text"
+                    pInputText
+                    formControlName="street"
+                    placeholder=" "
+                />
+                <label for="street" *ngIf="!street?.invalid || !street?.touched"
+                    >Street</label
+                >
+                <small
+                    class="p-error"
+                    *ngIf="street?.invalid && street?.touched"
+                    >Street is required and should match the pattern.</small
+                >
+            </span>
+        </div>
+        <div class="col-md-4">
+            <span class="p-float-label">
+                <input
+                    id="number"
+                    type="text"
+                    pInputText
+                    formControlName="number"
+                    placeholder=" "
+                />
+                <label for="number" *ngIf="!number?.invalid || !number?.touched"
+                    >Number</label
+                >
+                <small
+                    class="p-error"
+                    *ngIf="number?.invalid && number?.touched"
+                    >Number is required and should match the pattern.</small
+                >
+            </span>
+        </div>
+        <div class="col-md-4">
+            <span class="p-float-label">
+                <input
+                    id="city"
+                    type="text"
+                    pInputText
+                    formControlName="city"
+                    placeholder=" "
+                />
+                <label for="city" *ngIf="!city?.invalid || !city?.touched"
+                    >City</label
+                >
+                <small class="p-error" *ngIf="city?.invalid && city?.touched"
+                    >City is required.</small
+                >
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <span class="p-float-label">
+                <input
+                    id="phoneNumber"
+                    type="text"
+                    pInputText
+                    formControlName="phoneNumber"
+                    placeholder=" "
+                />
+                <label
+                    for="phoneNumber"
+                    *ngIf="!phoneNumber?.invalid || !phoneNumber?.touched"
+                    >Phone number</label
+                >
+                <small
+                    class="p-error"
+                    *ngIf="phoneNumber?.invalid && phoneNumber?.touched"
+                    >Phone number is required and needs to start with 06.</small
+                >
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <span class="p-float-label">
+                <input
+                    id="email"
+                    type="text"
+                    pInputText
+                    formControlName="email"
+                    placeholder=" "
+                />
+                <label
+                    for="email"
+                    *ngIf="!email?.invalid || !email?.touched"
+                    >E-mail</label
+                >
+                <small
+                    class="p-error"
+                    *ngIf="email?.invalid && email?.touched"
+                    >E-mail is required.</small
+                >
+            </span>
+        </div>
+    </div>
+    <div formArrayName="services" class="row">
+        <div *ngFor="let service of servicesForms.controls; let i = index" [formGroupName]="i">
+          <div class="row">
+            <div class="col-md-4">
+              <span class="p-float-label">
+                <input
+                  id="servicename"
+                  type="text"
+                  pInputText
+                  formControlName="name"
+                  placeholder=" "
+                />
+                <label for="servicename" *ngIf="!serviceName(i)?.invalid || !serviceName(i)?.touched">Service</label>
+                <small class="p-error" *ngIf="serviceName(i)?.invalid && serviceName(i)?.touched">Service is required</small>
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="p-float-label">
+                <input
+                  id="serviceprice"
+                  type="text"
+                  pInputText
+                  formControlName="price"
+                  placeholder=" "
+                />
+                <label for="serviceprice" *ngIf="!servicePrice(i)?.invalid || !servicePrice(i)?.touched">Service Price</label>
+                <small class="p-error" *ngIf="servicePrice(i)?.invalid && servicePrice(i)?.touched">Service price is required</small>
+              </span>
+            </div>
+            <div class="col-md-4">
+                <p-button label="Remove" severity="danger" (click)="deleteService(i)"></p-button>
+            </div>
+          </div>
+        </div>
+        <p-button label="Add service" severity="primary" (click)="addService()"></p-button>
+      </div>
+    <div formGroupName="vacation" class="row">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="start">Vacation start</label>
+                <p-calendar
+                    formControlName="start"
+                    [minDate]="minDate"
+                    [readonlyInput]="true"
+                ></p-calendar>
+                <div *ngIf="start?.invalid && start?.touched">
+                    <small class="p-error">Vacation start is required.</small>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="end">Vacation end</label>
+                <p-calendar
+                    formControlName="end"
+                    [minDate]="minDate"
+                    [readonlyInput]="true"
+                ></p-calendar>
+                <div *ngIf="end?.invalid && end?.touched">
+                    <small class="p-error">Vacation end is required.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button
+                pButton
+                type="submit"
+                label="Add firm"
+                severity="contrast"
+                [disabled]="newFirmForm.invalid"
+            ></button>
+        </div>
+    </div>
+</form>
+<div class="card" *ngIf="firmCreated">
+    <p-messages [(value)]="messages!" [closable]="true"></p-messages>
+</div>

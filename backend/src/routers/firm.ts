@@ -6,12 +6,12 @@ firmRouter.route('/create').post(
     (req, res) => new FirmController().create(req, res)
 )
 
-firmRouter.route('/all/:page/:limit').get(
-    (req, res) => new FirmController().all(req, res)
+firmRouter.route('/get').get(
+    (req, res) => new FirmController().get(req, res)
 )
 
 firmRouter.route('/rate').post(
-    (req, res) => new FirmController().all(req, res)
+    (req, res) => new FirmController().rate(req, res)
 )
 
 firmRouter.route('/sort_by_name_asc').get(
@@ -30,8 +30,12 @@ firmRouter.route('/sort_by_address_desc').get(
     (req, res) => new FirmController().sort_by_address_desc(req, res)
 )
 
-firmRouter.route('/read_by_name/:name/:street/:number/:city').get(
+firmRouter.route('/read').get(
     (req, res) => new FirmController().readByFields(req, res)
+)
+
+firmRouter.route('/all').get(
+    (req, res) => new FirmController().getIdName(req, res)
 )
 
 

@@ -5,10 +5,16 @@ class FirmService {
     return await Firm.create(firmData);
   }
 
-  async all(page: number, limit: number) {
+  async getIdName() {
+    return await Firm.find({}, "_id name");
+  }
+
+  async get(page: number, limit: number) {
     const skip = (page - 1) * limit;
     return await Firm.find({}).skip(skip).limit(limit);
   }
+
+  //write specific get methods for each display view to optimie data flow
 
   async countDocuments() {
     return await Firm.countDocuments();

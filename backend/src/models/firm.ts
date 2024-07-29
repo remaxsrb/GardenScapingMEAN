@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import { Address } from "./address";
 import { Service } from "./service";
-import { ServicePricing } from "./servicePricing";
 import { Vacation } from "./vacation";
 
 const Schema = mongoose.Schema;
@@ -33,7 +32,6 @@ const Firm = new Schema(
       required: true,
     },
     services: [Service],
-    pricing: [ServicePricing],
     vacation: {
       type: Vacation,
       required: true,

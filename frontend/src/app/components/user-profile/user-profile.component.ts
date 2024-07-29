@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
-import { User } from "src/app/models/User";
+import { User } from "src/app/models/user";
 import { UserService } from "src/app/services/modelServices/user.service";
 import { JsonService } from "src/app/services/utilityServices/json.service";
 import { RegexPatterns } from "../../regexPatterns";

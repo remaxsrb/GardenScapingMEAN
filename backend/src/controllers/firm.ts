@@ -13,17 +13,26 @@ export class FirmController {
     }
   }
 
-  async all(req: express.Request, res: express.Response) {
+  async getIdName(req: express.Request, res: express.Response) {
+    try {
+      const firms = await firmService.getIdName();
+
+      return res.json(firms);
+    } catch (err: any) {
+      res.status(500).send(err);
+    }
+  }
+
+  async get(req: express.Request, res: express.Response) {
     try {
       const page = parseInt(req.query.page as string);
       const limit = parseInt(req.query.limit as string);
 
-      const firms = await firmService.all(page, limit);
+      const firms = await firmService.get(page, limit);
       const totalDocuments = await firmService.countDocuments();
 
       return res.json({
         page,
-        limit,
         totalDocuments,
         totalPages: Math.ceil(totalDocuments / limit),
         firms,

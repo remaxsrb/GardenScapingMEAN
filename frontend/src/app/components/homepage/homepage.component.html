@@ -32,8 +32,70 @@
             </div>
           </div>
         </nav>
-    <main>
-    </main>
+        <!-- Main Content -->
+            <main class="container-fluid d-flex flex-column justify-content-start">
+              <div class="container">
+                <!-- General data row -->
+                <div class="row">
+                  <div class="col-md text-center ">
+                    <p class="text-nowrap">Firms: {{number_of_firms}}</p>
+                  </div>
+                  <div class="col-md text-center ">
+                    <p class="text-nowrap">Registered owners: {{number_of_owners}}</p>
+                  </div>
+                  <div class="col-md text-center ">
+                    <p class="text-nowrap">Bookings in  past 24 hours: </p>
+                  </div>
+                  <div class="col-md text-center ">
+                    <p class="text-nowrap">Bookings in past week:</p>
+                  </div>
+                  <div class="col-md text-center ">
+                    <p class="text-nowrap">Bookings in  past month: </p>
+                  </div>
+                </div>
+                <!-- Table row -->
+                 <div class="row">
+                  <div class="col-md-12">
+                      <div class="card">
+                          <p-table
+                            [value]="firms"
+                            [paginator]="true"
+                            [rows]="limit"
+                            [totalRecords]="number_of_firms"
+                            [lazy]="true"
+                            [showCurrentPageReport]="true"
+                            [tableStyle]="{ 'min-width': '50rem' }"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            (onPage)="pageChange($event)"
+                          >
+                            <ng-template pTemplate="header">
+                              <tr>
+                                  <th pSortableColumn="Name" style="width:20%">Code <p-sortIcon field="name"></p-sortIcon></th>
+                                  <th pSortableColumn="Address" style="width:20%">Name <p-sortIcon field="address"></p-sortIcon></th>
+                              </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-firm>
+                              <tr>
+                                <td>{{ firm.name }}</td>
+                                <td>{{ firm.address.street }} {{ firm.address.number }}, {{ firm.address.city }}</td>
+                              </tr>
+                            </ng-template>
+                            <!-- <ng-template pTemplate="paginatorleft">
+                              <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+                            </ng-template>
+                            <ng-template pTemplate="paginatorright">
+                              <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+                            </ng-template> -->
+                          </p-table>
+                      </div>
+                  </div>
+                 </div>
+                 <div class="row">
+                     <div class="col-md-12">
+                     </div>
+                 </div>
+              </div>
+            </main>
     <footer class="bg-dark text-white py-3 mt-4">
         <div class="container">
             <p>&copy; 2024 Marko Jovanovic</p>

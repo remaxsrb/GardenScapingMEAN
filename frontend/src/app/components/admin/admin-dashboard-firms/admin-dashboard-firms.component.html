@@ -1,1 +1,37 @@
-<p>admin-dashboard-firms works!</p>
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <p-table
+              [value]="firms"
+              [paginator]="true"
+              [rows]="limit"
+              [totalRecords]="totalDocuments"
+              [lazy]="true"
+              [showCurrentPageReport]="true"
+              [tableStyle]="{ 'min-width': '50rem' }"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+              (onLazyLoad)="pageChange($event)"
+            >
+              <ng-template pTemplate="header">
+                <tr>
+                  <th style="width:25%">Name</th>
+                  <th style="width:25%">Address</th>
+                  <th style="width:25%">Phone Number</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-firm>
+                <tr>
+                  <td>{{ firm.name }}</td>
+                  <td>{{ firm.address.street }} {{ firm.address.number }}, {{ firm.address.city }}</td>
+                  <td>{{ firm.phoneNumber }}</td>
+                </tr>
+              </ng-template>
+             
+            </p-table>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <!-- new restaurant form -->
+              <app-new-firm-form> </app-new-firm-form>
+    </div>
+</div>

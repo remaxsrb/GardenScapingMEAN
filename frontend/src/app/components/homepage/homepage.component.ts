@@ -41,9 +41,17 @@ export class HomepageComponent implements OnInit {
   }
 
   pageChange(event: any) {
-    this.currentPage = event.page + 1; // PrimeNG is zero-indexed, so increment by 1
+    this.currentPage = event.first / event.rows + 1; // Calculate the current page
     this.limit = event.rows;
     this.loadDocuments();
+  }
+  
+  sortChange(event: any) {
+    
+    this.firmService.sortPaginated(event.field, event.order, this.currentPage, this.limit).subscribe((data) => {
+      this.firms = data
+    })
+
   }
 
   isFirstPage() {

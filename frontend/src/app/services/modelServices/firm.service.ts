@@ -39,13 +39,16 @@ export class FirmService {
       headers: this.headers,
     });
   }
-  sortNameAsc() {}
-  sortNameDesc() {}
-  sortAddressAsc() {}
-  sortAddressDesc() {}
+  
+  sortPaginated(field: string, order: number, page:number, limit:number) {
+    return this.http.get<Firm[]>(
+      `${this.backendUrl}/sort?field=${field}&order=${order}&page=${page}&limit=${limit}`,
+    );
+  }
+  
   readByFields(name: string, street: string, number: string, city: string) {
     return this.http.get(
-      `${this.apiUrl}/read?name=${name}&street=${street}&number=${number}&city=${city}`,
+      `${this.backendUrl}/read?name=${name}&street=${street}&number=${number}&city=${city}`,
     );
   }
 }

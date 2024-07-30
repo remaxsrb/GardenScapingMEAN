@@ -20,11 +20,26 @@ class FirmService {
     return await Firm.countDocuments();
   }
 
-  async sortByField(fieldToSort: string, direction: "asc" | "desc") {
+  async sortAllByField(field: string, direction: "asc" | "desc") {
     const sortOptions: { [field: string]: "asc" | "desc" | 1 | -1 } = {
-      [fieldToSort]: direction === "desc" ? -1 : 1,
+      [field]: direction === "desc" ? -1 : 1,
     };
     return await Firm.find({}).sort(sortOptions);
+  }
+
+  async sortPaginated(
+    page: number,
+    limit: number,
+    field: string,
+    order: 1 | -1,
+  ) {
+    const sortOptions: { [field: string]: 1 | -1 } = {
+      [field]: order,
+    };
+
+    const skip = (page - 1) * limit;
+
+    return await Firm.find({}).skip(skip).limit(limit).sort(sortOptions);
   }
 
   async readByFields(name: string, address: any) {

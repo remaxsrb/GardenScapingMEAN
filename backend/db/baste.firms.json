@@ -1,0 +1,264 @@
+[{
+  "_id": {
+    "$oid": "66a7a40032ceeb1fa5b6fc64"
+  },
+  "name": "Firma1",
+  "address": {
+    "street": "Praska",
+    "number": "34",
+    "city": "Beograd",
+    "_id": {
+      "$oid": "66a7a40032ceeb1fa5b6fc65"
+    }
+  },
+  "phoneNumber": "0641111111",
+  "reviewCount": 0,
+  "rating": 0,
+  "services": [
+    {
+      "name": "Servis1",
+      "price": 100,
+      "_id": {
+        "$oid": "66a7a40032ceeb1fa5b6fc66"
+      }
+    },
+    {
+      "name": "Servis2",
+      "price": 200,
+      "_id": {
+        "$oid": "66a7a40032ceeb1fa5b6fc67"
+      }
+    }
+  ],
+  "vacation": {
+    "start": {
+      "$date": "2024-07-31T22:00:00.000Z"
+    },
+    "end": {
+      "$date": "2024-08-31T22:00:00.000Z"
+    },
+    "_id": {
+      "$oid": "66a7a40032ceeb1fa5b6fc68"
+    }
+  }
+},
+{
+  "_id": {
+    "$oid": "66a7a45a32ceeb1fa5b6fc6a"
+  },
+  "name": "Firma2",
+  "address": {
+    "street": "Praska",
+    "number": "36",
+    "city": "Beograd",
+    "_id": {
+      "$oid": "66a7a45a32ceeb1fa5b6fc6b"
+    }
+  },
+  "phoneNumber": "0641111111",
+  "reviewCount": 0,
+  "rating": 0,
+  "services": [
+    {
+      "name": "Servis1",
+      "price": 100,
+      "_id": {
+        "$oid": "66a7a45a32ceeb1fa5b6fc6c"
+      }
+    },
+    {
+      "name": "Servis2",
+      "price": 200,
+      "_id": {
+        "$oid": "66a7a45a32ceeb1fa5b6fc6d"
+      }
+    }
+  ],
+  "vacation": {
+    "start": {
+      "$date": "2024-07-31T22:00:00.000Z"
+    },
+    "end": {
+      "$date": "2024-08-31T22:00:00.000Z"
+    },
+    "_id": {
+      "$oid": "66a7a45a32ceeb1fa5b6fc6e"
+    }
+  }
+},
+{
+  "_id": {
+    "$oid": "66a7a46132ceeb1fa5b6fc70"
+  },
+  "name": "Firma3",
+  "address": {
+    "street": "Praska",
+    "number": "38",
+    "city": "Beograd",
+    "_id": {
+      "$oid": "66a7a46132ceeb1fa5b6fc71"
+    }
+  },
+  "phoneNumber": "0641111111",
+  "reviewCount": 0,
+  "rating": 0,
+  "services": [
+    {
+      "name": "Servis1",
+      "price": 100,
+      "_id": {
+        "$oid": "66a7a46132ceeb1fa5b6fc72"
+      }
+    },
+    {
+      "name": "Servis2",
+      "price": 200,
+      "_id": {
+        "$oid": "66a7a46132ceeb1fa5b6fc73"
+      }
+    }
+  ],
+  "vacation": {
+    "start": {
+      "$date": "2024-07-31T22:00:00.000Z"
+    },
+    "end": {
+      "$date": "2024-08-31T22:00:00.000Z"
+    },
+    "_id": {
+      "$oid": "66a7a46132ceeb1fa5b6fc74"
+    }
+  }
+},
+{
+  "_id": {
+    "$oid": "66a7a46832ceeb1fa5b6fc76"
+  },
+  "name": "Firma4",
+  "address": {
+    "street": "Humska",
+    "number": "1",
+    "city": "Beograd",
+    "_id": {
+      "$oid": "66a7a46832ceeb1fa5b6fc77"
+    }
+  },
+  "phoneNumber": "0641111111",
+  "reviewCount": 0,
+  "rating": 0,
+  "services": [
+    {
+      "name": "Servis1",
+      "price": 100,
+      "_id": {
+        "$oid": "66a7a46832ceeb1fa5b6fc78"
+      }
+    },
+    {
+      "name": "Servis2",
+      "price": 200,
+      "_id": {
+        "$oid": "66a7a46832ceeb1fa5b6fc79"
+      }
+    }
+  ],
+  "vacation": {
+    "start": {
+      "$date": "2024-07-31T22:00:00.000Z"
+    },
+    "end": {
+      "$date": "2024-08-31T22:00:00.000Z"
+    },
+    "_id": {
+      "$oid": "66a7a46832ceeb1fa5b6fc7a"
+    }
+  }
+},
+{
+  "_id": {
+    "$oid": "66a7a46e32ceeb1fa5b6fc7c"
+  },
+  "name": "Firma5",
+  "address": {
+    "street": "Beogradskog bataljona",
+    "number": "4",
+    "city": "Beograd",
+    "_id": {
+      "$oid": "66a7a46e32ceeb1fa5b6fc7d"
+    }
+  },
+  "phoneNumber": "0641111111",
+  "reviewCount": 0,
+  "rating": 0,
+  "services": [
+    {
+      "name": "Servis1",
+      "price": 100,
+      "_id": {
+        "$oid": "66a7a46e32ceeb1fa5b6fc7e"
+      }
+    },
+    {
+      "name": "Servis2",
+      "price": 200,
+      "_id": {
+        "$oid": "66a7a46e32ceeb1fa5b6fc7f"
+      }
+    }
+  ],
+  "vacation": {
+    "start": {
+      "$date": "2024-07-31T22:00:00.000Z"
+    },
+    "end": {
+      "$date": "2024-08-31T22:00:00.000Z"
+    },
+    "_id": {
+      "$oid": "66a7a46e32ceeb1fa5b6fc80"
+    }
+  }
+},
+{
+  "_id": {
+    "$oid": "66a7a47532ceeb1fa5b6fc82"
+  },
+  "name": "Firma6",
+  "address": {
+    "street": "Pozeska",
+    "number": "118a",
+    "city": "Beograd",
+    "_id": {
+      "$oid": "66a7a47532ceeb1fa5b6fc83"
+    }
+  },
+  "phoneNumber": "0641111111",
+  "reviewCount": 0,
+  "rating": 0,
+  "services": [
+    {
+      "name": "Servis1",
+      "price": 100,
+      "_id": {
+        "$oid": "66a7a47532ceeb1fa5b6fc84"
+      }
+    },
+    {
+      "name": "Servis2",
+      "price": 200,
+      "_id": {
+        "$oid": "66a7a47532ceeb1fa5b6fc85"
+      }
+    }
+  ],
+  "vacation": {
+    "start": {
+      "$date": "2024-07-31T22:00:00.000Z"
+    },
+    "end": {
+      "$date": "2024-08-31T22:00:00.000Z"
+    },
+    "_id": {
+      "$oid": "66a7a47532ceeb1fa5b6fc86"
+    }
+  }
+}]

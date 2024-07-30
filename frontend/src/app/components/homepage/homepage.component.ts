@@ -17,6 +17,9 @@ export class HomepageComponent implements OnInit {
   number_of_firms: number = 0;
   number_of_owners: number = 0;
 
+  sortingOrder: number = 0;
+  sortingField: string = "";
+
   firms: Firm[] = [];
   currentPage: number = 1;
   limit: number = 5;
@@ -26,7 +29,6 @@ export class HomepageComponent implements OnInit {
     this.userService.countOwner().subscribe((data) => {
       this.number_of_owners = data.count;
     });
-
     this.loadDocuments();
   }
 
@@ -37,6 +39,21 @@ export class HomepageComponent implements OnInit {
         this.firms = data.firms;
         this.totalPages = data.totalPages;
         this.number_of_firms = data.totalDocuments;
+      
+      });
+  }
+
+  sortDocuments() {
+    this.currentPage = 1;
+    this.firmService
+      .sortPaginated(
+        this.sortingField,
+        this.sortingOrder,
+        this.currentPage,
+        this.limit,
+      )
+      .subscribe((data) => {
+        this.firms = data;
       });
   }
 
@@ -45,13 +62,11 @@ export class HomepageComponent implements OnInit {
     this.limit = event.rows;
     this.loadDocuments();
   }
-  
-  sortChange(event: any) {
-    
-    this.firmService.sortPaginated(event.field, event.order, this.currentPage, this.limit).subscribe((data) => {
-      this.firms = data
-    })
 
+  sortChange(event: any) {
+    this.sortingOrder = event.order;
+    this.sortingField = event.field;
+    this.sortDocuments();
   }
 
   isFirstPage() {

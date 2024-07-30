@@ -53,10 +53,10 @@ class UserService {
 
     const updateQuery = { _id };
     const update = { [fieldToUpdate]: updateValue };
-
+  
     const result = await User.updateOne(updateQuery, update);
     if (result.modifiedCount > 0) {
-      return { status: 201, message: `${fieldToUpdate} updated` };
+      return { status: 200, message: `${fieldToUpdate} updated` };
     } else {
       throw { status: 404, message: "User not found or no changes made" };
     }

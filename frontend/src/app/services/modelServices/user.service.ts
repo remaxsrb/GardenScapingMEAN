@@ -30,7 +30,7 @@ export class UserService {
 
   findByUsername(username: string) {
     return this.http.get<any>(
-      `${this.backendUrl}/readByUsername/${username}`
+      `${this.backendUrl}/read_by_username/${username}`
     );
   }
 
@@ -117,7 +117,7 @@ export class UserService {
   }
   updateProfilePhoto(data: any) {
     return this.http.post<any>(
-      `${this.backendUrl}/update_profilePhoto/`,
+      `${this.backendUrl}/update_profilePhoto`,
       JSON.stringify(data),
       {
         headers: this.headers,

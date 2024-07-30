@@ -20,16 +20,20 @@ export class FirmService {
       headers: this.headers,
     });
   }
-  
+
   getIdName() {
     return this.http.get<Firm[]>(`${this.backendUrl}/all`);
   }
 
-  getDocuments(page: number, limit: number): Observable<any> {
+  getDocuments(
+    page: number,
+    limit: number,
+  ): Observable<any> {
     return this.http.get(`${this.backendUrl}/get`, {
       params: {
         page: page.toString(),
         limit: limit.toString(),
+
       },
     });
   }
@@ -39,13 +43,13 @@ export class FirmService {
       headers: this.headers,
     });
   }
-  
-  sortPaginated(field: string, order: number, page:number, limit:number) {
+
+  sortPaginated(field: string, order: number, page: number, limit: number) {
     return this.http.get<Firm[]>(
       `${this.backendUrl}/sort?field=${field}&order=${order}&page=${page}&limit=${limit}`,
     );
   }
-  
+
   readByFields(name: string, street: string, number: string, city: string) {
     return this.http.get(
       `${this.backendUrl}/read?name=${name}&street=${street}&number=${number}&city=${city}`,

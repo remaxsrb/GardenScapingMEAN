@@ -90,6 +90,8 @@ export class UserProfileComponent implements OnInit {
       address: this.addressForm,
       phoneNumber: ["", [Validators.pattern(RegexPatterns.PHONE_NUMBER)]],
       creditCardNumber: this.ccForm,
+      profilePhoto: [""]
+
     });
   }
 
@@ -168,19 +170,12 @@ export class UserProfileComponent implements OnInit {
     return this.addressForm.get("city");
   }
 
-  validDimensions(image: File): Observable<boolean> {
-    return this.imageDim.validateImageDimensions(image);
-  }
 
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    this.selectedFile = file;
-  }
 
   onSubmit() {
     if (this.firstname!.value) {
       const data = {
-        username: this.user.username,
+        _id: this.user._id,
         firstname: this.firstname!.value,
       };
       this.userService.updateFirstname(data);
@@ -188,7 +183,7 @@ export class UserProfileComponent implements OnInit {
 
     if (this.lastname!.value) {
       const data = {
-        username: this.user.username,
+        _id: this.user._id,
         lastname: this.lastname!.value,
       };
       this.userService.updateLastname(data);
@@ -222,21 +217,21 @@ export class UserProfileComponent implements OnInit {
     }
     if (this.addressForm!.value) {
       const data = {
-        username: this.user.username,
+        _id: this.user._id,
         address: this.addressForm!.value,
       };
       this.userService.updateAddress(data);
     }
     if (this.phoneNumber!.value) {
       const data = {
-        username: this.user.username,
+        _id: this.user._id,
         phone_number: this.phoneNumber!.value,
       };
       this.userService.updatePhoneNumber(data);
     }
     if (this.cardNumber!.value) {
       const data = {
-        username: this.user.username,
+        _id: this.user._id,
         creditCardNumber: this.cardNumber!.value,
       };
       this.userService.updateCreditCardNumber(data);
@@ -250,16 +245,26 @@ export class UserProfileComponent implements OnInit {
       },
     });
   }
+  
+  validDimensions(image: File): Observable<boolean> {
+    return this.imageDim.validateImageDimensions(image);
+  }
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    this.selectedFile = file;
+  }
 
   updatePhoto() {
     this.update_flags.invalid_picture_dimensions = false;
 
     if (this.selectedFile) {
+      console.log(this.selectedFile.name)
       this.userUpdateForm.patchValue({
-        profile_photo: this.selectedFile.name, // Assign file name to plan in form
+        profilePhoto: this.selectedFile.name, // Assign file name to plan in form
       });
       const data = {
-        username: this.username!.value,
+        _id: this.user._id,
         profilePhoto: this.profilePhoto!.value,
       };
       this.userService.updateProfilePhoto(data).subscribe({

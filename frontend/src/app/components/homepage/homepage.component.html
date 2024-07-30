@@ -3,61 +3,65 @@
         <h1>GardenScaping</h1>
     </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="container-fluid">
+        <div class="container-fluid">
             <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNavAltMarkup"
-              aria-controls="navbarNavAltMarkup"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
             >
-              <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
             <div
-              class="collapse navbar-collapse justify-content-center"
-              id="navbarNavAltMarkup"
+                class="collapse navbar-collapse justify-content-center"
+                id="navbarNavAltMarkup"
             >
-              <div class="navbar-nav">
-                <a class="nav-item btn btn-outline-primary ms-2" routerLink="/login"
-                  >Log in</a
-                >
-                <a
-                  class="nav-item btn btn-outline-primary ms-2"
-                  routerLink="/signup"
-                  >Sign up</a
-                >
-              </div>
-            </div>
-          </div>
-        </nav>
-        <!-- Main Content -->
-            <main class="container-fluid d-flex flex-column justify-content-start">
-              <div class="container">
-                <!-- General data row -->
-                <div class="row">
-                  <div class="col-md text-center ">
-                    <p class="text-nowrap">Firms: {{number_of_firms}}</p>
-                  </div>
-                  <div class="col-md text-center ">
-                    <p class="text-nowrap">Registered owners: {{number_of_owners}}</p>
-                  </div>
-                  <div class="col-md text-center ">
-                    <p class="text-nowrap">Bookings in  past 24 hours: </p>
-                  </div>
-                  <div class="col-md text-center ">
-                    <p class="text-nowrap">Bookings in past week:</p>
-                  </div>
-                  <div class="col-md text-center ">
-                    <p class="text-nowrap">Bookings in  past month: </p>
-                  </div>
+                <div class="navbar-nav">
+                    <a
+                        class="nav-item btn btn-outline-primary ms-2"
+                        routerLink="/login"
+                        >Log in</a
+                    >
+                    <a
+                        class="nav-item btn btn-outline-primary ms-2"
+                        routerLink="/signup"
+                        >Sign up</a
+                    >
                 </div>
-                <!-- Table row -->
-                 <div class="row">
-                  <div class="col-md-12">
-                      <div class="card">
-                          <p-table
+            </div>
+        </div>
+    </nav>
+    <!-- Main Content -->
+    <main class="container-fluid d-flex flex-column justify-content-start">
+        <div class="container">
+            <!-- General data row -->
+            <div class="row">
+                <div class="col-md text-center">
+                    <p class="text-nowrap">Firms: {{ number_of_firms }}</p>
+                </div>
+                <div class="col-md text-center">
+                    <p class="text-nowrap">
+                        Registered owners: {{ number_of_owners }}
+                    </p>
+                </div>
+                <div class="col-md text-center">
+                    <p class="text-nowrap">Bookings in past 24 hours:</p>
+                </div>
+                <div class="col-md text-center">
+                    <p class="text-nowrap">Bookings in past week:</p>
+                </div>
+                <div class="col-md text-center">
+                    <p class="text-nowrap">Bookings in past month:</p>
+                </div>
+            </div>
+            <!-- Table row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <p-table
                             [value]="firms"
                             [paginator]="true"
                             [rows]="limit"
@@ -68,19 +72,36 @@
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                             (onPage)="pageChange($event)"
                             (onSort)="sortChange($event)"
-
-                          >
+                        >
                             <ng-template pTemplate="header">
-                              <tr>
-                                  <th pSortableColumn="name" style="width:20%">Name <p-sortIcon field="name"></p-sortIcon></th>
-                                  <th pSortableColumn="address" style="width:20%">Address <p-sortIcon field="address"></p-sortIcon></th>
-                              </tr>
+                                <tr>
+                                    <th
+                                        pSortableColumn="name"
+                                        style="width: 20%"
+                                    >
+                                        Name
+                                        <p-sortIcon field="name"></p-sortIcon>
+                                    </th>
+                                    <th
+                                        pSortableColumn="address"
+                                        style="width: 20%"
+                                    >
+                                        Address
+                                        <p-sortIcon
+                                            field="address"
+                                        ></p-sortIcon>
+                                    </th>
+                                </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-firm>
-                              <tr>
-                                <td>{{ firm.name }}</td>
-                                <td>{{ firm.address.street }} {{ firm.address.number }}, {{ firm.address.city }}</td>
-                              </tr>
+                                <tr>
+                                    <td>{{ firm.name }}</td>
+                                    <td>
+                                        {{ firm.address.street }}
+                                        {{ firm.address.number }},
+                                        {{ firm.address.city }}
+                                    </td>
+                                </tr>
                             </ng-template>
                             <!-- <ng-template pTemplate="paginatorleft">
                               <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
@@ -88,16 +109,15 @@
                             <ng-template pTemplate="paginatorright">
                               <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
                             </ng-template> -->
-                          </p-table>
-                      </div>
-                  </div>
-                 </div>
-                 <div class="row">
-                     <div class="col-md-12">
-                     </div>
-                 </div>
-              </div>
-            </main>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12"></div>
+            </div>
+        </div>
+    </main>
     <footer class="bg-dark text-white py-3 mt-4">
         <div class="container">
             <p>&copy; 2024 Marko Jovanovic</p>

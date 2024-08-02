@@ -27,8 +27,22 @@ export class FirmController {
     try {
       const page = parseInt(req.query.page as string);
       const limit = parseInt(req.query.limit as string);
-
-      const firms = await firmService.get(page, limit);
+      const field = req.query.field as string
+      const order = parseInt(req.query.order as string) === 1 ? 1 : -1;
+      
+      var firms = null;
+      
+      if(field==="")
+        firms = await firmService.getPaginated(page, limit);
+      else
+        firms = await firmService.sortPaginated(
+          page,
+          limit,
+          field,
+          order,
+        );
+      
+      //const 
       const totalDocuments = await firmService.countDocuments();
 
       return res.json({

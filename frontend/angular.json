@@ -42,6 +42,7 @@
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles.css",
               "src/app/styles/primeNGStyles.css"

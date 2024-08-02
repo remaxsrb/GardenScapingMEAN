@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Firm } from "src/app/models/firm";
+import { RegexPatterns } from "src/app/regexPatterns";
 import { FirmService } from "src/app/services/modelServices/firm.service";
 import { UserService } from "src/app/services/modelServices/user.service";
 
@@ -12,12 +14,13 @@ export class HomepageComponent implements OnInit {
   constructor(
     private firmService: FirmService,
     private userService: UserService,
+    private fb: FormBuilder,
   ) {}
 
   number_of_firms: number = 0;
   number_of_owners: number = 0;
 
-  sortingOrder: number = 0;
+  sortingOrder: number = 1; //default sorting order is ASC
   sortingField: string = "";
 
   firms: Firm[] = [];
@@ -25,37 +28,53 @@ export class HomepageComponent implements OnInit {
   limit: number = 5;
   totalPages: number = -1;
 
+  addressString: string = "street number,city";
+
+  searchForm!: FormGroup;
+
   ngOnInit(): void {
     this.userService.countOwner().subscribe((data) => {
       this.number_of_owners = data.count;
     });
+    this.initSearchForm();
     this.loadDocuments();
+  }
+
+  initSearchForm() {
+    this.searchForm = this.fb.group({
+      name: [""],
+      address:[this.addressString]
+    });
+  }
+
+  applyFilters() {
+    // this.firmService.readByFields().subscribe((data) => {
+    //   this.firms = data;
+    // })
   }
 
   loadDocuments() {
     this.firmService
-      .getDocuments(this.currentPage, this.limit)
+      .getDocuments(this.currentPage, this.limit, this.sortingField, this.sortingOrder)
       .subscribe((data) => {
         this.firms = data.firms;
         this.totalPages = data.totalPages;
         this.number_of_firms = data.totalDocuments;
-      
       });
   }
 
-  sortDocuments() {
-    this.currentPage = 1;
-    this.firmService
-      .sortPaginated(
-        this.sortingField,
-        this.sortingOrder,
-        this.currentPage,
-        this.limit,
-      )
-      .subscribe((data) => {
-        this.firms = data;
-      });
-  }
+  // sortDocuments() {
+  //   this.firmService
+  //     .sortPaginated(
+  //       this.sortingField,
+  //       this.sortingOrder,
+  //       this.currentPage,
+  //       this.limit,
+  //     )
+  //     .subscribe((data) => {
+  //       this.firms = data;
+  //     });
+  // }
 
   pageChange(event: any) {
     this.currentPage = event.first / event.rows + 1; // Calculate the current page
@@ -64,9 +83,10 @@ export class HomepageComponent implements OnInit {
   }
 
   sortChange(event: any) {
+    this.currentPage = 1;
     this.sortingOrder = event.order;
     this.sortingField = event.field;
-    this.sortDocuments();
+    this.loadDocuments();
   }
 
   isFirstPage() {

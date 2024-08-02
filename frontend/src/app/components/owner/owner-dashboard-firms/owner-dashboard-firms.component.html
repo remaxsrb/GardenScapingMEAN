@@ -1,0 +1,64 @@
+    <main class="container-fluid d-flex flex-column justify-content-start">
+
+            <!-- Table row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <p-table
+                            [value]="firms"
+                            [paginator]="true"
+                            [rows]="limit"
+                            [totalRecords]="number_of_firms"
+                            [lazy]="true"
+                            [showCurrentPageReport]="true"
+                            [tableStyle]="{ 'table-layout': 'fixed', 'min-width': '50rem' }"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            (onPage)="pageChange($event)"
+                            (onSort)="sortChange($event)"
+                        >
+                            <ng-template pTemplate="caption">
+                                <!-- Add your caption template here if needed -->
+                            </ng-template>
+                        
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="name">
+                                        Name
+                                        <p-sortIcon field="name"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="address">
+                                        Address
+                                        <p-sortIcon field="address"></p-sortIcon>
+                                    </th>
+                                    <th>
+                                        Rating
+                                    </th>
+                                </tr>
+                            </ng-template>
+                        
+                            <ng-template pTemplate="body" let-firm>
+                                <tr>
+                                    <td><a routerLink="/firmInfo" (click)="onLinkClick(firm)"> {{ firm.name }}</a></td>
+                                    <td>
+                                        {{ firm.address.street }} {{ firm.address.number }},
+                                        {{ firm.address.city }}
+                                    </td>
+                                    <td>
+                                        <p-rating
+                                            [(ngModel)]="firm.rating"
+                                            [readonly]="true"
+                                            [cancel]="false"
+                                        ></p-rating>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12"></div>
+            </div>
+    </main>

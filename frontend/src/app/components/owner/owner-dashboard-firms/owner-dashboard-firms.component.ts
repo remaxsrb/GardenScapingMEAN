@@ -9,46 +9,67 @@ import { FirmService } from "src/app/services/modelServices/firm.service";
 })
 export class OwnerDashboardFirmsComponent implements OnInit {
   constructor(private firmService: FirmService) {}
-
+ 
   firms: Firm[] = [];
   currentPage: number = 1;
   limit: number = 5;
   totalPages: number = -1;
   number_of_firms: number = 0;
 
+  sortingOrder: number = 1; //default ASC
+  sortingField: string = "";
+  
   ngOnInit(): void {
-    //this.loadDocuments();
+    this.loadDocuments();
   }
 
-  // loadDocuments() {
+  loadDocuments() {
+    this.firmService
+      .getDocuments(this.currentPage, this.limit, this.sortingField, this.sortingOrder)
+      .subscribe((data) => {
+        this.firms = data.firms;
+        this.totalPages = data.totalPages;
+        this.number_of_firms = data.totalDocuments;
+      });
+  }
+  
+  // sortDocuments() {
+  //   this.currentPage = 1;
   //   this.firmService
-  //     .getDocuments(this.currentPage, this.limit)
-  //     .subscribe((data) => {
-  //       this.firms = data.firms;
-  //       this.totalPages = data.totalPages;
-  //       this.number_of_firms = data.totalDocuments;
-  //     });
-  // }
-
-  // pageChange(event: any) {
-  //   this.currentPage = event.first / event.rows + 1; // Calculate the current page
-  //   this.limit = event.rows;
-  //   this.loadDocuments();
-  // }
-
-  // sortChange(event: any) {
-  //   this.firmService
-  //     .sortPaginated(event.field, event.order, this.currentPage, this.limit)
+  //     .sortPaginated(
+  //       this.sortingField,
+  //       this.sortingOrder,
+  //       this.currentPage,
+  //       this.limit,
+  //     )
   //     .subscribe((data) => {
   //       this.firms = data;
   //     });
   // }
 
-  // isFirstPage() {
-  //   return this.currentPage === 1;
-  // }
+  pageChange(event: any) {
+    this.currentPage = event.first / event.rows + 1; // Calculate the current page
+    this.limit = event.rows;
+    this.loadDocuments();
+  }
 
-  // isLastPage() {
-  //   return this.currentPage === this.totalPages;
-  // }
+  sortChange(event: any) {
+    this.currentPage = 1;
+    this.sortingOrder = event.order;
+    this.sortingField = event.field;
+    this.loadDocuments();
+  }
+
+  isFirstPage() {
+    return this.currentPage === 1;
+  }
+
+  isLastPage() {
+    return this.currentPage === this.totalPages;
+  }
+  
+  onLinkClick(firm: Firm) {
+    localStorage.setItem('firm', JSON.stringify(firm));
+  }
+  
 }

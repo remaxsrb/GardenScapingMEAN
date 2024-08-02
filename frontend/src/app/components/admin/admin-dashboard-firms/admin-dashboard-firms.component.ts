@@ -7,7 +7,7 @@ import { TimeService } from "src/app/services/utilityServices/time.service";
   selector: "app-admin-dashboard-firms",
   templateUrl: "./admin-dashboard-firms.component.html",
   styleUrls: ["./admin-dashboard-firms.component.css"],
-})
+}) 
 export class AdminDashboardFirmsComponent implements OnInit {
   constructor(
     private firmService: FirmService,
@@ -26,7 +26,7 @@ export class AdminDashboardFirmsComponent implements OnInit {
 
   loadDocuments() {
     this.firmService
-      .getDocuments(this.currentPage, this.limit)
+      .getDocuments(this.currentPage, this.limit, '')
       .subscribe((data) => {
         this.firms = data.firms;
         this.totalPages = data.totalPages;

@@ -73,6 +73,10 @@
                             (onPage)="pageChange($event)"
                             (onSort)="sortChange($event)"
                         >
+                            <ng-template pTemplate="caption">
+  
+                            </ng-template>
+
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th
@@ -93,6 +97,7 @@
                                     </th>
                                 </tr>
                             </ng-template>
+
                             <ng-template pTemplate="body" let-firm>
                                 <tr>
                                     <td>{{ firm.name }}</td>
@@ -103,16 +108,11 @@
                                     </td>
                                 </tr>
                             </ng-template>
-                            <!-- <ng-template pTemplate="paginatorleft">
-                              <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
-                            </ng-template>
-                            <ng-template pTemplate="paginatorright">
-                              <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
-                            </ng-template> -->
                         </p-table>
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-md-12"></div>
             </div>

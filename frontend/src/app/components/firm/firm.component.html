@@ -1,1 +1,28 @@
-<p>firm works!</p>
+<main class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div id="map" style="height: 400px; width: 100%"></div>
+                </div>
+                <div class="row">
+                    <p>{{ firm.name }}</p>
+                    <p>
+                        {{ firm.address.street }}
+                        {{ firm.address.number }}
+                    </p>
+                    <p>{{ firm.vacation.start }} - {{ firm.vacation.end }}</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- Insert a form for reservation here -->
+                <div class="row ">
+                    <div class="col-md-12">
+                        <p>Make a booking</p>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+

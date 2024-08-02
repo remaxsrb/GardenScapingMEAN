@@ -28,12 +28,15 @@ export class FirmService {
   getDocuments(
     page: number,
     limit: number,
+    field: string,
+    order: number = 1,
   ): Observable<any> {
     return this.http.get(`${this.backendUrl}/get`, {
       params: {
         page: page.toString(),
         limit: limit.toString(),
-
+        field: field,
+        order: order.toString()
       },
     });
   }
@@ -50,8 +53,13 @@ export class FirmService {
     );
   }
 
-  readByFields(name: string, street: string, number: string, city: string) {
-    return this.http.get(
+  readByFields(searchData: any) {
+    const name = searchData.name;
+    const street = searchData.address.street;
+    const number = searchData.address.number;
+    const city = searchData.address.city;
+
+    return this.http.get<Firm[]>(
       `${this.backendUrl}/read?name=${name}&street=${street}&number=${number}&city=${city}`,
     );
   }

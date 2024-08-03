@@ -1,0 +1,338 @@
+[{
+  "_id": {
+    "$oid": "66a284a3191715590e4c3b8e"
+  },
+  "username": "remaxsrb",
+  "password": "$2a$10$vNv2/Xa22LlXD9Nqz1WDEeCkxrZJWKh7BgBxU0jvH0CdRyNS.g592",
+  "email": "remaxsrb@protonmail.com",
+  "role": "owner",
+  "firstname": "Marko",
+  "lastname": "Jovanovic",
+  "gender": "male",
+  "address": {
+    "street": "Praska",
+    "number": "34",
+    "city": "Beograd",
+    "_id": {
+      "$oid": "66a284a3191715590e4c3b8f"
+    }
+  },
+  "phoneNumber": "0654340122",
+  "creditCardNumber": {
+    "cardNumber": "5555555555554444",
+    "_id": {
+      "$oid": "66a284a3191715590e4c3b90"
+    }
+  },
+  "profilePhoto": "srb_dedpul.png",
+  "status": "active"
+},
+{
+  "_id": {
+    "$oid": "668eac2d3d3ac6a898b1ada2"
+  },
+  "username": "admin",
+  "role": "admin",
+  "email": "admin@restorani.com",
+  "password": "$2a$10$uaBYDPWCdI2R2wBziCayL.4bVeKY0KAnSRghUldzEZrkJIpu5O5je"
+},
+{
+  "_id": {
+    "$oid": "66ae020b0c047e0604dba881"
+  },
+  "username": "pera123",
+  "password": "$2a$10$bQLhFIDb3YnHUZi/gJhsGuQ/r3TbNInKMYGh8MDirR7A6DRA.7hRe",
+  "email": "pera123@gmail.com",
+  "role": "decorator",
+  "firstname": "Pera",
+  "lastname": "Peric",
+  "gender": "male",
+  "address": {
+    "street": "Humska",
+    "number": "1",
+    "city": "Beograd",
+    "_id": {
+      "$oid": "66ae020b0c047e0604dba882"
+    }
+  },
+  "phoneNumber": "0641111111",
+  "profilePhoto": "default_male.png",
+  "firm": {
+    "$oid": "66a7a40032ceeb1fa5b6fc64"
+  }
+},
+{
+  "_id": {
+    "$oid": "66ae02230c047e0604dba885"
+  },
+  "username": "marko123",
+  "password": "$2a$10$aUpXLCMxNaSdYunu0FRSye1tw2t7IZl8rrlj5/tOFE/MZ6Ba1PVka",
+  "email": "marko123@gmail.com",
+  "role": "decorator",
+  "firstname": "Marko",
+  "lastname": "Markovic",
+  "gender": "male",
+  "address": {
+    "street": "Humska",
+    "number": "1",
+    "city": "Beograd",
+    "_id": {
+      "$oid": "66ae02230c047e0604dba886"
+    }
+  },
+  "phoneNumber": "0641111111",
+  "profilePhoto": "default_male.png",
+  "firm": {
+    "$oid": "66a7a40032ceeb1fa5b6fc64"
+  }
+},
+{
+  "_id": {
+    "$oid": "66ae02360c047e0604dba889"
+  },
+  "username": "ana123",
+  "password": "$2a$10$tsoibZ4DTQ/yD3e5ZAUUFeymTNp8Zh9A4nOVoIhP26P.uwLmAT5Cq",
+  "email": "ana123@gmail.com",
+  "role": "decorator",
+  "firstname": "Ana",
+  "lastname": "Anovic",
+  "gender": "female",
+  "address": {
+    "street": "Humska",
+    "number": "1",
+    "city": "Beograd",
+    "_id": {
+      "$oid": "66ae02360c047e0604dba88a"
+    }
+  },
+  "phoneNumber": "0641111111",
+  "profilePhoto": "default_female.png",
+  "firm": {
+    "$oid": "66a7a45a32ceeb1fa5b6fc6a"
+  }
+},
+{
+  "_id": {
+    "$oid": "66ae024b0c047e0604dba88d"
+  },
+  "username": "bosko123",
+  "password": "$2a$10$QlnS/f1JPP6LovqeWpVl/.k0WiKPh7mWhD5UvFP99EfaTz/vvY0Q2",
+  "email": "bosko123@gmail.com",
+  "role": "decorator",
+  "firstname": "Bosko",
+  "lastname": "Boskovic",
+  "gender": "male",
+  "address": {
+    "street": "Humska",
+    "number": "1",
+    "city": "Beograd",
+    "_id": {
+      "$oid": "66ae024b0c047e0604dba88e"
+    }
+  },
+  "phoneNumber": "0641111111",
+  "profilePhoto": "default_male.png",
+  "firm": {
+    "$oid": "66a7a45a32ceeb1fa5b6fc6a"
+  }
+},
+{
+  "_id": {
+    "$oid": "66ae025f0c047e0604dba891"
+  },
+  "username": "milica123",
+  "password": "$2a$10$OYTwEL8q6aRtij8QfbJ3wuKeqnO6ib8uCVWsYAsxrYSEcRRoFCpT2",
+  "email": "milica123@gmail.com",
+  "role": "decorator",
+  "firstname": "Milica",
+  "lastname": "Milosevic",
+  "gender": "female",
+  "address": {
+    "street": "Humska",
+    "number": "1",
+    "city": "Beograd",
+    "_id": {
+      "$oid": "66ae025f0c047e0604dba892"
+    }
+  },
+  "phoneNumber": "0641111111",
+  "profilePhoto": "default_female.png",
+  "firm": {
+    "$oid": "66a7a46132ceeb1fa5b6fc70"
+  }
+},
+{
+  "_id": {
+    "$oid": "66ae02760c047e0604dba895"
+  },
+  "username": "tea123",
+  "password": "$2a$10$GXiEIW9rIaIwqWU9sc3mJeXNN5yvEIwx9HUBL88mJsLqpDjmyxz7W",
+  "email": "tea123@gmail.com",
+  "role": "decorator",
+  "firstname": "Teodora",
+  "lastname": "Petrovic",
+  "gender": "female",
+  "address": {
+    "street": "Humska",
+    "number": "1",
+    "city": "Beograd",
+    "_id": {
+      "$oid": "66ae02760c047e0604dba896"
+    }
+  },
+  "phoneNumber": "0641111111",
+  "profilePhoto": "default_female.png",
+  "firm": {
+    "$oid": "66a7a46132ceeb1fa5b6fc70"
+  }
+},
+{
+  "_id": {
+    "$oid": "66ae028e0c047e0604dba899"
+  },
+  "username": "karadjordje123",
+  "password": "$2a$10$kTSxCsuVnKLa9OEKb0iJquo4wb/aZ19ULzDxv3DxPFUfXxePNI41G",
+  "email": "karadjordje123@gmail.com",
+  "role": "decorator",
+  "firstname": "Djordje",
+  "lastname": "Petrovic",
+  "gender": "male",
+  "address": {
+    "street": "Humska",
+    "number": "1",
+    "city": "Beograd",
+    "_id": {
+      "$oid": "66ae028e0c047e0604dba89a"
+    }
+  },
+  "phoneNumber": "0641111111",
+  "profilePhoto": "default_male.png",
+  "firm": {
+    "$oid": "66a7a46832ceeb1fa5b6fc76"
+  }
+},
+{
+  "_id": {
+    "$oid": "66ae02a80c047e0604dba89d"
+  },
+  "username": "miloso123",
+  "password": "$2a$10$335BESNaBvjvknwFZYUbD.hKe0US1OGTtVxdswW3HuJ6BIB8odXna",
+  "email": "miloso123@gmail.com",
+  "role": "decorator",
+  "firstname": "Milos",
+  "lastname": "Obrenovic",
+  "gender": "male",
+  "address": {
+    "street": "Humska",
+    "number": "1",
+    "city": "Beograd",
+    "_id": {
+      "$oid": "66ae02a80c047e0604dba89e"
+    }
+  },
+  "phoneNumber": "0641111111",
+  "profilePhoto": "default_male.png",
+  "firm": {
+    "$oid": "66a7a46832ceeb1fa5b6fc76"
+  }
+},
+{
+  "_id": {
+    "$oid": "66ae02bb0c047e0604dba8a1"
+  },
+  "username": "despot123",
+  "password": "$2a$10$Mg4s9Y5u0bv1tbX9HJ.U3eQ0WQK6XPU1TDYLdRGBuu89VJf0/ELca",
+  "email": "despot123@gmail.com",
+  "role": "decorator",
+  "firstname": "Stefan",
+  "lastname": "Lazarevic",
+  "gender": "male",
+  "address": {
+    "street": "Humska",
+    "number": "1",
+    "city": "Beograd",
+    "_id": {
+      "$oid": "66ae02bb0c047e0604dba8a2"
+    }
+  },
+  "phoneNumber": "0641111111",
+  "profilePhoto": "default_male.png",
+  "firm": {
+    "$oid": "66a7a46e32ceeb1fa5b6fc7c"
+  }
+},
+{
+  "_id": {
+    "$oid": "66ae02d10c047e0604dba8a5"
+  },
+  "username": "despot_smederevo123",
+  "password": "$2a$10$Ur7hCHdf0jv285MjGtApKu0QYlObPrubP4bH5nbT0qfCFke2DI/rq",
+  "email": "despotSmederevo123@gmail.com",
+  "role": "decorator",
+  "firstname": "Djuradj",
+  "lastname": "Brankovic",
+  "gender": "male",
+  "address": {
+    "street": "Humska",
+    "number": "1",
+    "city": "Beograd",
+    "_id": {
+      "$oid": "66ae02d10c047e0604dba8a6"
+    }
+  },
+  "phoneNumber": "0641111111",
+  "profilePhoto": "default_male.png",
+  "firm": {
+    "$oid": "66a7a46e32ceeb1fa5b6fc7c"
+  }
+},
+{
+  "_id": {
+    "$oid": "66ae02eb0c047e0604dba8a9"
+  },
+  "username": "car123",
+  "password": "$2a$10$W8NQOMQyDRJ.KI8IX0VAPu2vOyn9TGKLSMR1zfk4okVRoQe1B1rz2",
+  "email": "car123@gmail.com",
+  "role": "decorator",
+  "firstname": "Dusan",
+  "lastname": "Nemanjic",
+  "gender": "male",
+  "address": {
+    "street": "Humska",
+    "number": "1",
+    "city": "Beograd",
+    "_id": {
+      "$oid": "66ae02eb0c047e0604dba8aa"
+    }
+  },
+  "phoneNumber": "0641111111",
+  "profilePhoto": "default_male.png",
+  "firm": {
+    "$oid": "66a7a47532ceeb1fa5b6fc82"
+  }
+},
+{
+  "_id": {
+    "$oid": "66ae02fa0c047e0604dba8ad"
+  },
+  "username": "carica123",
+  "password": "$2a$10$DO44txsyD5COLbMtUDS5XObpzenkqUKR95erAZMqw4aZqu37T0VT2",
+  "email": "carica123@gmail.com",
+  "role": "decorator",
+  "firstname": "Jelena",
+  "lastname": "Nemanjic",
+  "gender": "female",
+  "address": {
+    "street": "Humska",
+    "number": "1",
+    "city": "Beograd",
+    "_id": {
+      "$oid": "66ae02fa0c047e0604dba8ae"
+    }
+  },
+  "phoneNumber": "0641111111",
+  "profilePhoto": "default_female.png",
+  "firm": {
+    "$oid": "66a7a47532ceeb1fa5b6fc82"
+  }
+}]

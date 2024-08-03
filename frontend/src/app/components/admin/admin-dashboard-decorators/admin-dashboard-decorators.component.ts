@@ -29,6 +29,7 @@ export class AdminDashboardDecoratorsComponent implements OnInit {
 
   errorMessage: Message[] = [];
   
+  
   signupResponseFlags = {
     emailOrUsernameTaken: false,
     generalErrors: false,
@@ -64,7 +65,7 @@ export class AdminDashboardDecoratorsComponent implements OnInit {
         [Validators.required, Validators.pattern(RegexPatterns.PASSWORD)],
       ],
       email: ["", [Validators.required, Validators.email]],
-      role: ["decorater"],
+      role: ["decorator"],
       firstname: ["", Validators.required],
       lastname: ["", Validators.required],
       gender: ["", Validators.required],
@@ -137,6 +138,7 @@ export class AdminDashboardDecoratorsComponent implements OnInit {
 
     this.userService.register(this.newDecoraterForm.value).subscribe({
       next: () => {
+        
       },
       error: (error) => {
         // Handle specific errors or show a general message

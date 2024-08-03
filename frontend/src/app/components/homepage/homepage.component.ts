@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Decorator } from "src/app/models/decorator";
 import { Firm } from "src/app/models/firm";
 import { RegexPatterns } from "src/app/regexPatterns";
 import { FirmService } from "src/app/services/modelServices/firm.service";
@@ -19,6 +20,8 @@ export class HomepageComponent implements OnInit {
 
   number_of_firms: number = 0;
   number_of_owners: number = 0;
+  
+  decorators: Decorator[] = []
 
   sortingOrder: number = 1; //default sorting order is ASC
   sortingField: string = "";
@@ -27,6 +30,9 @@ export class HomepageComponent implements OnInit {
   currentPage: number = 1;
   limit: number = 5;
   totalPages: number = -1;
+  
+  selectedFirm: Firm = new Firm()
+
 
   addressString: string = "street number,city";
 
@@ -36,6 +42,11 @@ export class HomepageComponent implements OnInit {
     this.userService.countOwner().subscribe((data) => {
       this.number_of_owners = data.count;
     });
+    
+    this.userService.findByRole('decorator').subscribe((data) => {
+          this.decorators = data;
+        });
+    
     this.initSearchForm();
     this.loadDocuments();
   }

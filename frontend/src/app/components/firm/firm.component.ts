@@ -1,29 +1,37 @@
 import { AfterViewInit, Component, OnInit } from "@angular/core";
 
-import * as L from 'leaflet';
-import 'leaflet-defaulticon-compatibility';
+import * as L from "leaflet";
+import "leaflet-defaulticon-compatibility";
 
 import { Firm } from "src/app/models/firm";
 import { GeocodingService } from "src/app/services/utilityServices/geo-coding.service";
 import { tileLayerOSMSrbija } from "src/app/OSMSerbia/leafletLayer";
+import { TimeService } from "src/app/services/utilityServices/time.service";
 
 @Component({
   selector: "app-firm",
   templateUrl: "./firm.component.html",
   styleUrls: ["./firm.component.css"],
 })
-export class FirmComponent implements OnInit, AfterViewInit  {
-  constructor(private geocodingService: GeocodingService) {}
+export class FirmComponent implements OnInit, AfterViewInit {
+  constructor(
+    private geocodingService: GeocodingService,
+    private timeService: TimeService,
+  ) {}
   private map!: L.Map;
   firm: Firm = new Firm();
   ngOnInit(): void {
     const firm_data = localStorage.getItem("firm");
 
-    if (firm_data)  this.firm = JSON.parse(firm_data);
-    
+    if (firm_data) this.firm = JSON.parse(firm_data);
+    this.firm.vacation.start = this.timeService.formatDateToDDMMYYYY(
+      new Date(this.firm.vacation.start )
+    );
+    this.firm.vacation.end = this.timeService.formatDateToDDMMYYYY(
+      new Date(this.firm.vacation.end )
+    );
   }
 
-  
   ngAfterViewInit(): void {
     this.initMap();
     if (this.firm.address) {
@@ -33,7 +41,7 @@ export class FirmComponent implements OnInit, AfterViewInit  {
   }
 
   private initMap(): void {
-    this.map = L.map('map').setView([44.788744, 20.459097], 75); // Example coordinates (Humska 1)
+    this.map = L.map("map").setView([44.788744, 20.459097], 75); // Example coordinates (Humska 1)
     tileLayerOSMSrbija().addTo(this.map);
   }
 
@@ -47,13 +55,12 @@ export class FirmComponent implements OnInit, AfterViewInit  {
           this.map.setView([lat, lon], 75);
           L.marker([lat, lon]).addTo(this.map);
         } else {
-          console.error('No geocoding results found for address:', address);
+          console.error("No geocoding results found for address:", address);
         }
       },
       (error) => {
-        console.error('Error geocoding address:', error);
-      }
+        console.error("Error geocoding address:", error);
+      },
     );
   }
-  
 }

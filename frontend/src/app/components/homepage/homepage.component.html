@@ -72,13 +72,14 @@
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                             (onPage)="pageChange($event)"
                             (onSort)="sortChange($event)"
+                            [(selection)]="selectedFirm"
+                            dataKey="_id"
                         >
-                            <ng-template pTemplate="caption">
-  
-                            </ng-template>
+                            <ng-template pTemplate="caption"> </ng-template>
 
                             <ng-template pTemplate="header">
                                 <tr>
+                                                <th style="width: 5%"></th>
                                     <th
                                         pSortableColumn="name"
                                         style="width: 20%"
@@ -100,6 +101,11 @@
 
                             <ng-template pTemplate="body" let-firm>
                                 <tr>
+                                    <td>
+                                        <p-tableRadioButton
+                                            [value]="firm"
+                                        ></p-tableRadioButton>
+                                    </td>
                                     <td>{{ firm.name }}</td>
                                     <td>
                                         {{ firm.address.street }}
@@ -107,6 +113,19 @@
                                         {{ firm.address.city }}
                                     </td>
                                 </tr>
+                                <tr *ngIf="selectedFirm._id === firm._id">
+                                      <td colspan="2">
+                                        <div *ngFor="let decorator of decorators">
+                                          <div *ngIf="firm._id === decorator.firm">
+                                            <ul class="list-group">
+                                              <li class="list-group-item">
+                                                {{ decorator.firstname }} {{ decorator.lastname }}
+                                              </li>
+                                            </ul>
+                                          </div>
+                                        </div>
+                                      </td>
+                                    </tr>
                             </ng-template>
                         </p-table>
                     </div>

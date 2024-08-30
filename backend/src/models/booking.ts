@@ -3,7 +3,7 @@ import { Garden } from "./garden";
 
 const Schema = mongoose.Schema;
 export const Booking = new Schema({
-  username: {
+  owner: {
     type: Schema.Types.ObjectId,
     ref: "User", 
     required: true,

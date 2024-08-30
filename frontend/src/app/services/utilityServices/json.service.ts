@@ -17,6 +17,12 @@ export class JsonService {
   get_layout(fileName:string): Observable<any> {
     return this.http.get<any>(`${this.layoutUrl}/${fileName}`);
   }
+
+  saveLayout(fileName: string, data: any): Observable<any> {
+    const url = `${this.layoutUrl}/${fileName}`;
+    return this.http.post(url, data, { responseType: 'text' });
+  }
+
   get_photo(fileName:string): Observable<Blob> {
     return this.http.get(`${this.photoUrl}/${fileName}`, { responseType: 'blob' });
   }

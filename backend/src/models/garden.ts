@@ -17,7 +17,7 @@ export const Garden = new Schema({
     required: true,
     enum: ["private", "restaurant"],
   },
-  poolArea: {
+  waterArea: {
     type: Number,
     min:1
   },

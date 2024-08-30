@@ -35,6 +35,11 @@
                 "glob": "*.png",
                 "input": "src/app/photos",
                 "output": "./assets/photos/"
+              },
+              {
+                "glob": "*.jpeg",
+                "input": "src/app/photos/canvas-shapes",
+                "output": "./assets/photos/"
               }
             ],
             "styles": [
@@ -110,5 +115,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

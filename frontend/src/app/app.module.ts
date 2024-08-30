@@ -16,6 +16,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { RatingModule } from 'primeng/rating';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { TableModule } from 'primeng/table';
+import { StepsModule } from 'primeng/steps';
 
 // Third-party Modules
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
@@ -90,6 +91,7 @@ import { AuthService } from './services/utilityServices/auth.service';
       MessagesModule,
       PasswordModule,
       SelectButtonModule,
+      StepsModule,
       JwtModule.forRoot({
         config: {
           tokenGetter: () => localStorage.getItem('access_token'),

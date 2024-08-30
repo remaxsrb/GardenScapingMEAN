@@ -1,28 +1,278 @@
 <main class="content">
-        <div class="row" style="width: 100%">
-            <div class="col-md-6">
-                <div class="row">
-                    <div id="map" style="height: 400px; width: 100%"></div>
-                </div>
-                <div class="row">
-                    <p>{{ firm.name }}</p>
-                    <p> Address:
-                        {{ firm.address.street }}
-                        {{ firm.address.number }}
-                    </p>
-                    <p> Vacation period: {{ firm.vacation.start }} - {{ firm.vacation.end }}</p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <!-- Insert a form for reservation here -->
-                <div class="row ">
-                    <div class="col-md-12">
-                        <p>Make a booking</p>
-
-                    </div>
-                </div>
-
-            </div>
+  <div class="row" style="width: 100%">
+    <div class="col-md-6">
+      <div class="row">
+        <div id="map" style="height: 400px; width: 100%"></div>
+      </div>
+      <div class="row">
+        <p>{{ firm.name }}</p>
+        <p>
+          Address:
+          {{ firm.address.street }}
+          {{ firm.address.number }}
+        </p>
+        <p>
+          Vacation period: {{ firm.vacation.start }} -
+          {{ firm.vacation.end }}
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <p-table
+            [value]="firm.services"
+            [tableStyle]="{ 'min-width': '50rem' }"
+          >
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Service</th>
+                <th>Cost</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-service let-rowIndex="rowIndex">
+              <tr>
+                <td>{{ service.name }}</td>
+                <td>{{ service.price }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
         </div>
-    </main>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <!-- Insert a form for reservation here -->
+      <div class="row">
+        <div class="col-md-12">
+          <p>Make a booking</p>
+          {{ newBookingForm.value | json }}
+          <div class="row">
+            <div class="col-md-12">
+              <p-steps
+                [(activeIndex)]="activeIndex"
+                [model]="stepsItems"
+              ></p-steps>
 
+              <div [ngSwitch]="activeIndex">
+                <!-- Step 1: Garden Details -->
+                <div *ngSwitchCase="0">
+                  <form [formGroup]="newBookingForm">
+                    <div>
+                      <p-calendar
+                        formControlName="startDate"
+                        [showTime]="true"
+                        [hourFormat]="'24'"
+                      ></p-calendar>
+                      <p-messages
+                        *ngIf="!startDate?.valid || startDate?.dirty"
+                        severity="error"
+                      >
+                        <p-message
+                          severity="error"
+                          text="Start date is required."
+                        ></p-message>
+                      </p-messages>
+                    </div>
+
+                    <div [formGroupName]="'garden'">
+                      <input
+                        formControlName="width"
+                        type="number"
+                        pInputText
+                        placeholder="Garden Width"
+                      />
+                      <p-messages
+                        *ngIf="!width?.valid || width?.dirty"
+                        severity="error"
+                      >
+                        <p-message
+                          severity="error"
+                          text="Garden width is required."
+                        ></p-message>
+                      </p-messages>
+                    </div>
+
+                    <div [formGroupName]="'garden'">
+                      <input
+                        formControlName="height"
+                        type="number"
+                        pInputText
+                        placeholder="Garden Height"
+                      />
+                      <p-messages
+                        *ngIf="!height?.valid || height?.dirty"
+                        severity="error"
+                      >
+                        <p-message
+                          severity="error"
+                          text="Garden height is required."
+                        ></p-message>
+                      </p-messages>
+                    </div>
+
+                    <div [formGroupName]="'garden'">
+                      <p-dropdown
+                        formControlName="type"
+                        [options]="gardenTypes"
+                        placeholder="Select Garden Type"
+                      ></p-dropdown>
+                      <p-messages
+                        *ngIf="!type?.valid || type?.dirty"
+                        severity="error"
+                      >
+                        <p-message
+                          severity="error"
+                          text="Garden type is required."
+                        ></p-message>
+                      </p-messages>
+                    </div>
+                  </form>
+                </div>
+
+                <!-- Step 2: Areas & Canvas -->
+                <div *ngSwitchCase="1">
+                  <form [formGroup]="gardenForm">
+                    <div>
+                      <input
+                        formControlName="waterArea"
+                        type="number"
+                        pInputText
+                        placeholder="Water Area"
+                      />
+                      <p-messages
+                        *ngIf="!waterArea?.valid || waterArea?.dirty"
+                        severity="error"
+                      >
+                        <p-message
+                          severity="error"
+                          text="Water area is required."
+                        ></p-message>
+                      </p-messages>
+                    </div>
+
+                    <div>
+                      <input
+                        formControlName="greenArea"
+                        type="number"
+                        pInputText
+                        placeholder="Green Area"
+                      />
+                      <p-messages
+                        *ngIf="!greenArea?.valid || greenArea?.dirty"
+                        severity="error"
+                      >
+                        <p-message
+                          severity="error"
+                          text="Green area is required."
+                        ></p-message>
+                      </p-messages>
+                    </div>
+
+                    <!-- Radio Buttons for Canvas or File Upload -->
+                    <div>
+                      <label>
+                        <input
+                          type="radio"
+                          name="uploadOption"
+                          (change)="onOptionChange('canvas')"
+                          [checked]="uploadOption === 'canvas'"
+                        />
+                        Canvas
+                      </label>
+                      <label>
+                        <input
+                          type="radio"
+                          name="uploadOption"
+                          (change)="onOptionChange('file')"
+                          [checked]="uploadOption === 'file'"
+                        />
+                        File Upload
+                      </label>
+                    </div>
+
+                    <!-- Conditional Display Based on Radio Selection -->
+                    <div *ngIf="uploadOption === 'canvas'">
+                      <canvas
+                        #gardenCanvas
+                        id="gardenCanvas"
+                        width="500"
+                        height="400"
+                        style="border: 3px solid #000000"
+                        (drop)="onDrop($event)" 
+                        (dragover)="onDragOver($event)"
+                      ></canvas>
+
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <img src="assets/photos/green-square.jpeg" 
+                          id="draggableImage" 
+                          class="draggable-image" 
+                          draggable="true" 
+                          (dragstart)="onDragStart($event)"
+     a                    lt="Drag Me">
+                        </div>
+                        <div class="col-sm-3">
+                          <img src="assets/photos/brown-circle.jpeg" 
+                          id="draggableImage" 
+                          class="draggable-image" 
+                          draggable="true" 
+                          (dragstart)="onDragStart($event)"
+     a                    lt="Drag Me">
+                        </div>
+                        <div class="col-sm-3">
+                          <img src="assets/photos/tall-gray-rectangle.jpeg" 
+                          id="draggableImage" 
+                          class="draggable-image" 
+                          draggable="true" 
+                          (dragstart)="onDragStart($event)"
+     a                    lt="Drag Me">
+                        </div>
+                        <div class="col-sm-3">
+                          
+                        </div>
+                      </div>
+                    </div>
+
+                    <div *ngIf="uploadOption === 'file'">
+                      <input
+                        type="file"
+                        (change)="onFileChange($event)"
+                        accept=".json"
+                      />
+                      <p-messages *ngIf="fileError" severity="error">
+                        <p-message
+                          severity="error"
+                          text="Please select a valid JSON file."
+                        ></p-message>
+                      </p-messages>
+                    </div>
+                  </form>
+                </div>
+
+                <!-- Step 3: Additional Requests -->
+                <div *ngSwitchCase="2">
+                  <form [formGroup]="newBookingForm">
+                    <textarea
+                      formControlName="requests"
+                      pInputTextarea
+                      placeholder="Additional Requests"
+                    ></textarea>
+                  </form>
+                </div>
+              </div>
+
+              <p-button
+                label="Previous"
+                (click)="prevStep()"
+                [disabled]="activeIndex === 0"
+              ></p-button>
+              <p-button
+                label="Next"
+                (click)="nextStep()"
+                [disabled]="!isCurrentStepValid()"
+              ></p-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { Garden } from "./garden";
+import { Service } from "./service";
 
 const Schema = mongoose.Schema;
 export const Booking = new Schema({
@@ -27,6 +28,7 @@ export const Booking = new Schema({
   photo: {
     type: String
   },
+  services: [Service],
   requests: {
     type: String
   }

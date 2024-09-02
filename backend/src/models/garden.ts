@@ -25,12 +25,9 @@ export const Garden = new Schema({
     type: Number,
     min: 1
   },
-  tables: {
-    type: Number,
-    min:1
-  },
-  chairs: {
+  sittingArea: {
     type: Number,
     min: 1
   }
+
 });

@@ -17,6 +17,7 @@ import { RatingModule } from 'primeng/rating';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { TableModule } from 'primeng/table';
 import { StepsModule } from 'primeng/steps';
+import { CheckboxModule } from 'primeng/checkbox';
 
 // Third-party Modules
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
@@ -92,6 +93,7 @@ import { AuthService } from './services/utilityServices/auth.service';
       PasswordModule,
       SelectButtonModule,
       StepsModule,
+      CheckboxModule,
       JwtModule.forRoot({
         config: {
           tokenGetter: () => localStorage.getItem('access_token'),

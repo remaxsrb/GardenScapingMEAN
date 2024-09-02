@@ -13,7 +13,14 @@ import { Firm } from 'src/app/models/firm';
 import { GeocodingService } from 'src/app/services/utilityServices/geo-coding.service';
 import { tileLayerOSMSrbija } from 'src/app/OSMSerbia/leafletLayer';
 import { TimeService } from 'src/app/services/utilityServices/time.service';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Owner } from 'src/app/models/owner';
 import { Service } from 'src/app/interfaces/service';
 import { SelectItem } from 'primeng/api/selectitem';
@@ -25,25 +32,22 @@ import { Shape } from '../../interfaces/shape';
   styleUrls: ['./firm.component.css'],
 })
 export class FirmComponent implements OnInit, AfterViewInit {
-  
   constructor(
     private geocodingService: GeocodingService,
     private timeService: TimeService,
-    private fb: FormBuilder,
-    private cdr: ChangeDetectorRef
+    private fb: FormBuilder
   ) {}
 
   private map!: L.Map;
   firm: Firm = new Firm();
   owner: Owner = new Owner();
-  servicesArray!: FormArray;
   gardenForm!: FormGroup;
   newBookingForm!: FormGroup;
-
+  selectedServicesArray: Service[] = [];
   uploadOption: 'canvas' | 'file' = 'canvas'; // Default to canvas
-  shapes: Shape[] = []; 
+  shapes: Shape[] = [];
 
-  activeIndex: number = 1;
+  activeIndex: number = 0;
   stepsItems: SelectItem[] = [];
   gardenTypes: SelectItem[] = [];
 
@@ -74,7 +78,6 @@ export class FirmComponent implements OnInit, AfterViewInit {
       { label: 'Restaurant', value: 'restaurant' },
     ];
 
-    this.initServicesArray();
     this.initGardenForm();
     this.initNewBookingForm();
   }
@@ -91,7 +94,6 @@ export class FirmComponent implements OnInit, AfterViewInit {
     this.activeIndex--;
   }
 
-
   initGardenForm() {
     this.gardenForm = this.fb.group({
       width: ['', Validators.required],
@@ -99,13 +101,8 @@ export class FirmComponent implements OnInit, AfterViewInit {
       type: ['', Validators.required],
       waterArea: [0],
       greenArea: [0],
-      tables: [0],
-      chairs: [0],
+      sittingArea: [0],
     });
-  }
-
-  initServicesArray() {
-    this.servicesArray = this.fb.array([], Validators.required);
   }
 
   initNewBookingForm() {
@@ -115,6 +112,7 @@ export class FirmComponent implements OnInit, AfterViewInit {
       startDate: [new Date(), [Validators.required]],
       garden: this.gardenForm,
       photo: [''],
+      services: JSON.stringify(this.selectedServicesArray),
       requests: [''],
     });
   }
@@ -132,7 +130,7 @@ export class FirmComponent implements OnInit, AfterViewInit {
   }
 
   get type() {
-    return this.gardenForm.get('type');
+    return this.gardenForm.get('type')?.value || null;
   }
 
   get waterArea() {
@@ -143,8 +141,16 @@ export class FirmComponent implements OnInit, AfterViewInit {
     return this.gardenForm.get('greenArea');
   }
 
+  get sittingArea() {
+    return this.gardenForm.get('sittingArea');
+  }
+
   get requests() {
     return this.newBookingForm.get('requests');
+  }
+
+  get services() {
+    return this.newBookingForm.get('services');
   }
 
   prevStep() {
@@ -158,15 +164,23 @@ export class FirmComponent implements OnInit, AfterViewInit {
         this.stepsItems.length - 1
       );
   }
-
   isCurrentStepValid() {
     switch (this.activeIndex) {
       case 0:
+        const startDate = new Date(this.startDate?.value);
+        const vacationStart = new Date(this.firm.vacation.start);
+        const vacationEnd = new Date(this.firm.vacation.end);
+
+        // Check if the start date is before vacation.start or after vacation.end
+        const isStartDateValid =
+          this.startDate?.valid &&
+          (startDate < vacationStart || startDate > vacationEnd);
+
         return (
-          this.startDate!.valid &&
+          isStartDateValid &&
           this.width!.valid &&
           this.height!.valid &&
-          this.type!.valid
+          this.type
         );
       case 1:
         return this.waterArea!.valid && this.greenArea!.valid;
@@ -209,7 +223,10 @@ export class FirmComponent implements OnInit, AfterViewInit {
 
   onDragStart(event: DragEvent) {
     if (event.dataTransfer) {
-      event.dataTransfer.setData('text/plain', (event.target as HTMLImageElement).src);
+      event.dataTransfer.setData(
+        'text/plain',
+        (event.target as HTMLImageElement).src
+      );
     }
   }
 
@@ -217,9 +234,9 @@ export class FirmComponent implements OnInit, AfterViewInit {
     event.preventDefault(); // Allow drop
   }
 
-onDrop(event: DragEvent) {
+  onDrop(event: DragEvent) {
     event.preventDefault();
-    
+
     const canvas = document.getElementById('gardenCanvas') as HTMLCanvasElement;
     const ctx = canvas.getContext('2d');
     if (!ctx || !event.dataTransfer) return;
@@ -236,11 +253,12 @@ onDrop(event: DragEvent) {
       const shapeHeight = img.naturalHeight; // Use the image's natural height
 
       // Check if the new shape will overlap with any existing shape
-      const isOverlapping = this.shapes.some(shape => 
-        dropX < shape.x + shape.width &&
-        dropX + shapeWidth > shape.x &&
-        dropY < shape.y + shape.height &&
-        dropY + shapeHeight > shape.y
+      const isOverlapping = this.shapes.some(
+        (shape) =>
+          dropX < shape.x + shape.width &&
+          dropX + shapeWidth > shape.x &&
+          dropY < shape.y + shape.height &&
+          dropY + shapeHeight > shape.y
       );
 
       if (isOverlapping) {
@@ -257,8 +275,21 @@ onDrop(event: DragEvent) {
         y: dropY,
         width: shapeWidth,
         height: shapeHeight,
-        imageSrc: imageSrc
+        imageSrc: imageSrc,
       });
     };
   }
+
+  toggleService(event: any, service: Service, index: number) {
+    if (!this.selectedServicesArray.some(s => s.name === service.name)) {
+      this.selectedServicesArray.push(service);
+    } else {
+      this.selectedServicesArray = this.selectedServicesArray.filter(
+        (s) => s.name !== service.name
+      );
+    }
+    this.newBookingForm.patchValue({ services: this.selectedServicesArray });
+  }
+
+  onSubmit() {}
 }

@@ -6,12 +6,16 @@ bookingRouter.route('/create').post(
     (req, res) => new BookingController().create(req, res)
 )
 
-bookingRouter.route('/all/:page/:limit').get(
-    (req, res) => new BookingController().all(req, res)
+bookingRouter.route('/get_active_start_desc').get(
+    (req, res) => new BookingController().getActiveStartDesc(req, res)
+)
+
+bookingRouter.route('/get_archived_start_desc').get(
+    (req, res) => new BookingController().getArchivedStartDesc(req, res)
 )
 
 bookingRouter.route('/finishJob').post(
-    (req, res) => new BookingController().all(req, res)
+    (req, res) => new BookingController().finishJob(req, res)
 )
 
 

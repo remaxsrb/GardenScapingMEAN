@@ -31,7 +31,17 @@ export const Booking = new Schema({
   services: [Service],
   requests: {
     type: String
+  },
+  status: {
+    enum: ["active", "archived"]
+  },
+  rating: {
+    type: Number,
+    min:1,
+    max:5,
+    default: 0
   }
+
 },
 { versionKey: false });
 

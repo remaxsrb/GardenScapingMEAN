@@ -13,12 +13,32 @@ export class BookingController {
     }
   }
 
-  async all(req: express.Request, res: express.Response) {
+  async getActiveStartDesc(req: express.Request, res: express.Response) {
     try {
       const page = parseInt(req.query.page as string);
       const limit = parseInt(req.query.limit as string);
 
-      const firms = await bookingService.all(page, limit);
+      const firms = await bookingService.sortActiveByDateDesc(page, limit);
+      const totalDocuments = await bookingService.countDocuments();
+
+      return res.json({
+        page,
+        limit,
+        totalDocuments,
+        totalPages: Math.ceil(totalDocuments / limit),
+        firms,
+      });
+    } catch (err: any) {
+      res.status(500).send(err);
+    }
+  }
+
+  async getArchivedStartDesc(req: express.Request, res: express.Response) {
+    try {
+      const page = parseInt(req.query.page as string);
+      const limit = parseInt(req.query.limit as string);
+
+      const firms = await bookingService.sortArchivedByDateDesc(page, limit);
       const totalDocuments = await bookingService.countDocuments();
 
       return res.json({

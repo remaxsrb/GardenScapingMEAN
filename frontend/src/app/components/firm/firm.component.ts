@@ -121,6 +121,7 @@ export class FirmComponent implements OnInit, AfterViewInit {
       photo: [''],
       services: JSON.stringify(this.selectedServicesArray),
       requests: [''],
+      status: 'active'
     });
   }
 

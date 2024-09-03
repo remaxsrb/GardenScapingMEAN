@@ -25,6 +25,9 @@ import { Owner } from 'src/app/models/owner';
 import { Service } from 'src/app/interfaces/service';
 import { SelectItem } from 'primeng/api/selectitem';
 import { Shape } from '../../interfaces/shape';
+import { JsonService } from 'src/app/services/utilityServices/json.service';
+import { DrawShapesService } from 'src/app/services/utilityServices/draw-shapes.service';
+import { BookingService } from 'src/app/services/modelServices/booking.service';
 
 @Component({
   selector: 'app-firm',
@@ -35,7 +38,10 @@ export class FirmComponent implements OnInit, AfterViewInit {
   constructor(
     private geocodingService: GeocodingService,
     private timeService: TimeService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private jsonService: JsonService,
+    private drawShapesService: DrawShapesService,
+    private bookingService: BookingService
   ) {}
 
   private map!: L.Map;
@@ -45,6 +51,7 @@ export class FirmComponent implements OnInit, AfterViewInit {
   newBookingForm!: FormGroup;
   selectedServicesArray: Service[] = [];
   uploadOption: 'canvas' | 'file' = 'canvas'; // Default to canvas
+  selectedFile: File | null = null;
   shapes: Shape[] = [];
 
   activeIndex: number = 0;
@@ -219,7 +226,10 @@ export class FirmComponent implements OnInit, AfterViewInit {
     this.uploadOption = option;
   }
 
-  onFileChange(event: any) {}
+  onFileChange(event: any) {
+    const file: File = event.target.files[0];
+    this.selectedFile = file;
+  }
 
   onDragStart(event: DragEvent) {
     if (event.dataTransfer) {
@@ -237,50 +247,10 @@ export class FirmComponent implements OnInit, AfterViewInit {
   onDrop(event: DragEvent) {
     event.preventDefault();
 
-    const canvas = document.getElementById('gardenCanvas') as HTMLCanvasElement;
-    const ctx = canvas.getContext('2d');
-    if (!ctx || !event.dataTransfer) return;
-
-    const imageSrc = event.dataTransfer.getData('text/plain');
-    const img = new Image();
-    img.src = imageSrc;
-
-    const dropX = event.offsetX;
-    const dropY = event.offsetY;
-
-    img.onload = () => {
-      const shapeWidth = img.naturalWidth; // Use the image's natural width
-      const shapeHeight = img.naturalHeight; // Use the image's natural height
-
-      // Check if the new shape will overlap with any existing shape
-      const isOverlapping = this.shapes.some(
-        (shape) =>
-          dropX < shape.x + shape.width &&
-          dropX + shapeWidth > shape.x &&
-          dropY < shape.y + shape.height &&
-          dropY + shapeHeight > shape.y
-      );
-
-      if (isOverlapping) {
-        alert('Shape cannot overlap with another shape!');
-        return; // Prevent the shape from being drawn
-      }
-
-      // Draw the image if it does not overlap
-      ctx.drawImage(img, dropX, dropY, shapeWidth, shapeHeight);
-
-      // Add the new shape to the shapes array
-      this.shapes.push({
-        x: dropX,
-        y: dropY,
-        width: shapeWidth,
-        height: shapeHeight,
-        imageSrc: imageSrc,
-      });
-    };
+    this.shapes = this.drawShapesService.drawShape(event, this.shapes);
   }
 
-  toggleService(event: any, service: Service, index: number) {
+  toggleService(service: Service, index: number) {
     if (!this.selectedServicesArray.some(s => s.name === service.name)) {
       this.selectedServicesArray.push(service);
     } else {
@@ -291,5 +261,11 @@ export class FirmComponent implements OnInit, AfterViewInit {
     this.newBookingForm.patchValue({ services: this.selectedServicesArray });
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this.bookingService.create(this.newBookingForm.value).subscribe(
+      data => {
+        
+      }
+    )
+  }
 }

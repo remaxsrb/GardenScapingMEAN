@@ -3,7 +3,7 @@ import Firm from "../models/firm";
 
 class BookingService {
   async create(bookingData: any) {
-    const firm = await Firm.findOne(bookingData.firm);
+    const firm = await Firm.findById(bookingData.firm);
 
     if (
       firm!.vacation.start <= bookingData.startDate &&

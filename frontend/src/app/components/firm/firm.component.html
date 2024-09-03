@@ -302,7 +302,7 @@
                     <p-checkbox
                       [inputId]="service.name"
                       [value]="service"
-                      (onChange)="toggleService($event, service, i)"
+                      (onChange)="toggleService( service, i)"
                     >
                     </p-checkbox>
                     <label [for]="service.name">{{ service.name }}</label>

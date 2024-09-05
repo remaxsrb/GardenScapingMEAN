@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/utilityServices/auth.service';
 
 @Component({
   selector: 'app-decorater-dashboard',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class DecoraterDashboardComponent {
 
+  constructor(private auth_service: AuthService) {}
+
+  logout() {
+    localStorage.removeItem("user");
+    this.auth_service.logout();
+  }
 }

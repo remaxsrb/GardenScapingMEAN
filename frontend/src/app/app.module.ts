@@ -21,6 +21,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 
 // Third-party Modules
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { NgHcaptchaModule } from 'ng-hcaptcha';
 
 // My Components and services
 import { AppRoutingModule } from './app-routing.module';
@@ -94,6 +95,7 @@ import { AuthService } from './services/utilityServices/auth.service';
       SelectButtonModule,
       StepsModule,
       CheckboxModule,
+      NgHcaptchaModule,
       JwtModule.forRoot({
         config: {
           tokenGetter: () => localStorage.getItem('access_token'),

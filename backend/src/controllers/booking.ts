@@ -13,15 +13,18 @@ export class BookingController {
     }
   }
 
-  async getActiveStartDesc(req: express.Request, res: express.Response) {
+
+  async handleGetBookings(req: express.Request, res: express.Response, status: string) {
     try {
-      const _id = req.query.id as string
+      const _id = req.query.id as string;
       const page = parseInt(req.query.page as string);
       const limit = parseInt(req.query.limit as string);
+  
+      let bookings = await bookingService.sortByDateDesc(_id, status, page, limit);
 
-      const bookings = await bookingService.sortActiveByDateDesc(_id, page, limit);
+      
       const totalDocuments = await bookingService.countDocuments();
-
+  
       return res.json({
         page,
         limit,
@@ -33,26 +36,13 @@ export class BookingController {
       res.status(500).send(err);
     }
   }
-
+  
+  async getActiveStartDesc(req: express.Request, res: express.Response) {
+    return this.handleGetBookings(req, res, "active");
+  }
+  
   async getArchivedStartDesc(req: express.Request, res: express.Response) {
-    try {
-      const _id = req.query.id as string
-      const page = parseInt(req.query.page as string);
-      const limit = parseInt(req.query.limit as string);
-
-      const bookings = await bookingService.sortArchivedByDateDesc(_id, page, limit);
-      const totalDocuments = await bookingService.countDocuments();
-
-      return res.json({
-        page,
-        limit,
-        totalDocuments,
-        totalPages: Math.ceil(totalDocuments / limit),
-        bookings,
-      });
-    } catch (err: any) {
-      res.status(500).send(err);
-    }
+    return this.handleGetBookings(req, res, "archived");
   }
   
   async finishJob(req: express.Request, res: express.Response) {
@@ -70,5 +60,6 @@ export class BookingController {
   }
   
 }
+
 export default new BookingController();
  

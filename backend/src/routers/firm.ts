@@ -18,6 +18,10 @@ firmRouter.route('/sort').get(
     (req, res) => new FirmController().sortPaginated(req, res)
 )
 
+firmRouter.route('/getname').get(
+    (req, res) => new FirmController().getName(req, res)
+)
+
 
 // firmRouter.route('/sort_by_name_asc').get(
 //     (req, res) => new FirmController().sort_by_name_asc(req, res)

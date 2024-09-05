@@ -9,6 +9,10 @@ class FirmService {
     return await Firm.find({}, "_id name");
   }
 
+  async getName(_id: string) {
+    await Firm.findById(_id, "name");
+  }
+
   async getPaginated(page: number, limit: number) {
     const skip = (page - 1) * limit;
     return await Firm.find({}).skip(skip).limit(limit);

@@ -18,6 +18,9 @@ import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { OwnerDashboardComponent } from './components/owner/owner-dashboard/owner-dashboard.component';
+import { DecoraterDashboardStatisticsComponent } from './components/decorater/decorater-dashboard-statistics/decorater-dashboard-statistics.component';
+import { DecoraterDashboardBookingsComponent } from './components/decorater/decorater-dashboard-bookings/decorater-dashboard-bookings.component';
+import { DecoraterDashboardMaintenenceComponent } from './components/decorater/decorater-dashboard-maintenence/decorater-dashboard-maintenence.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -40,10 +43,17 @@ const routes: Routes = [
   { path: 'firmInfo', component: FirmComponent},
 
   {
-    path: 'decorater',
+    path: 'decorator',
     component: DecoraterDashboardComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { expected_role: 'decorater' },
+    data: { expected_role: 'decorator' },
+    children: [
+      { path: 'statistics', component: DecoraterDashboardStatisticsComponent},
+      { path: 'bookings', component: DecoraterDashboardBookingsComponent },
+      { path: 'maintenence', component: DecoraterDashboardMaintenenceComponent },
+      { path: 'profile', component: UserProfileComponent },
+      { path: '', redirectTo: 'profile', pathMatch: 'full' }, 
+    ]
   },
   {
     path: 'admin',
@@ -61,10 +71,10 @@ const routes: Routes = [
   { path: 'change_password', component: ChangePasswordComponent },
   
   {
-    path: 'ownder/firmInfo',
+    path: 'owner/firmInfo',
     component: FirmComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { expected_role: 'ownner' },
+    data: { expected_role: 'owner' },
   },
   { path: '**', redirectTo: '404', pathMatch: 'full' }, //Error route
 ];

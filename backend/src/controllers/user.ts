@@ -70,8 +70,15 @@ export class UserController {
     this.updateField(req, res, "profilePhoto", req.body.profilePhoto);
   }
 
-  updatePassword(req: express.Request, res: express.Response) {
-    this.updateField(req, res, "password", req.body.password);
+  async changePassword(req: express.Request, res: express.Response) {
+    try {
+      const result = await userService.changePassword(req.body.username, req.body.newPassword);
+      return res.json(result);
+    } catch (err: any) {
+      const statusCode = err.status || 500;
+      const message = err.message || "Error updating user password";
+      return res.status(statusCode).json({ message });
+    }
   }
 
   updateStatus(req: express.Request, res: express.Response) {

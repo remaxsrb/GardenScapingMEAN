@@ -80,6 +80,16 @@ class UserService {
     const count = await User.countDocuments({ [field]: value });
     return { count };
   }
+
+  async changePassword(username:string, password:string) {
+
+    const salt = bcrypt.genSaltSync(10);
+    const hashed_password = bcrypt.hashSync(password, salt);
+
+    return User.findOneAndUpdate({username:username},{password:hashed_password})
+    
+  }
+
 }
 
 export default new UserService();

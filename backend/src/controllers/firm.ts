@@ -23,6 +23,16 @@ export class FirmController {
     }
   }
 
+  async getName(req: express.Request, res: express.Response) {
+    try {
+      const firms = await firmService.getName(req.params.id);
+
+      return res.json(firms);
+    } catch (err: any) {
+      res.status(500).send(err);
+    }
+  }
+
   async get(req: express.Request, res: express.Response) {
     try {
       const page = parseInt(req.query.page as string);

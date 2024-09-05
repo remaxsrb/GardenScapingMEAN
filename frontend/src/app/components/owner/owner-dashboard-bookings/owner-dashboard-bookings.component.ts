@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Booking } from 'src/app/models/booking';
 import { User } from 'src/app/models/user';
 import { BookingService } from 'src/app/services/modelServices/booking.service';
+import { FirmService } from 'src/app/services/modelServices/firm.service';
 import { TimeService } from 'src/app/services/utilityServices/time.service';
 
 @Component({
@@ -12,7 +13,8 @@ import { TimeService } from 'src/app/services/utilityServices/time.service';
 export class OwnerDashboardBookingsComponent implements OnInit {
   constructor(
     private bookingService: BookingService,
-    private timeService: TimeService
+    private timeService: TimeService,
+
   ) {}
 
   owner = new User();
@@ -35,8 +37,6 @@ export class OwnerDashboardBookingsComponent implements OnInit {
 
     this.loadDocuments('active');
     this.loadDocuments('archived');
-
-    
   }
 
   loadDocuments(type: 'active' | 'archived') {
@@ -53,8 +53,7 @@ export class OwnerDashboardBookingsComponent implements OnInit {
           this.activeBooking_number_of_bookings = data.totalDocuments;
           this.activeBooking_totalPages = data.totalPages;
 
-          this.formatDate("active")
-
+          this.prepareData('active');
         });
     } else {
       this.bookingService
@@ -68,8 +67,7 @@ export class OwnerDashboardBookingsComponent implements OnInit {
           this.archivedBooking_currentPage = data.page;
           this.archivedBooking_number_of_bookings = data.totalDocuments;
           this.archivedBooking_totalPages = data.totalPages;
-          this.formatDate("archived")
-
+          this.prepareData('archived');
         });
     }
   }
@@ -104,25 +102,22 @@ export class OwnerDashboardBookingsComponent implements OnInit {
     }
   }
 
-  formatDate(type: "active" | "archived") {
+  //Inside this function fetch firm name based on ID ====> NAIVE SOLUTION
 
-    if(type === "active") {
+  prepareData(type: 'active' | 'archived') {
+    if (type === 'active') {
       this.active_bookings.forEach((booking) => {
         booking.startDate = this.timeService.formatDateToDDMMYYYY(
           new Date(booking.startDate)
         );
-      });
-    }
 
-    else {
+      });
+    } else {
       this.archived_bookings.forEach((booking) => {
         booking.startDate = this.timeService.formatDateToDDMMYYYY(
           new Date(booking.startDate)
         );
       });
     }
-
-
   }
-
 }

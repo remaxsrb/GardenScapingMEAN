@@ -44,8 +44,8 @@ export class UserService {
 
   changePassword(data: any) {
     return this.http.post<any>(
-      `${this.backendUrl}/update_password/`,
-      JSON.stringify(data),
+      `${this.backendUrl}/update_password`,
+      data,
       {
         headers: this.headers,
       }

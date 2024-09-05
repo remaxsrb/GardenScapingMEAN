@@ -21,18 +21,11 @@ class BookingService {
     return await Booking.find({}).skip(skip).limit(limit);
   }
 
-
-  async sortActiveByDateDesc(_id:string, page: number, limit: number) {
+  async sortByDateDesc(_idUser:string, status: string, page: number, limit: number) {
     const skip = (page - 1) * limit;
-    const status = 'active'
-    return await Booking.find({ $or: [{ _id }, { status }] }).sort({startDate: -1}).skip(skip).limit(limit);
+    return await Booking.find({ $and: [{ _idUser }, { status }] }).sort({startDate: -1}).skip(skip).limit(limit);
   }
 
-  async sortArchivedByDateDesc(_id:string,page: number, limit: number) {
-    const skip = (page - 1) * limit;
-    const status = 'archived';
-    return await Booking.find({ $or: [{ _id }, { status }] }).sort({startDate: -1}).skip(skip).limit(limit);
-  }
   
   async countDocuments() {
     return await Booking.countDocuments();

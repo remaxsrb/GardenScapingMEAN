@@ -40,7 +40,7 @@ userRouter.route('/update_profilePhoto').post(
     (req, res) => new UserController().updateProfilePhoto(req, res)
 )
 userRouter.route('/update_password').post(
-    (req, res) => new UserController().updatePassword(req, res)
+    (req, res) => new UserController().changePassword(req, res)
 )
 
 userRouter.route('/update_username').post(

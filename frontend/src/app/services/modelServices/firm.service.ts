@@ -25,6 +25,9 @@ export class FirmService {
     return this.http.get<Firm[]>(`${this.backendUrl}/all`);
   }
 
+  getName() {
+    return this.http.get<String>(`${this.backendUrl}/getname`);
+  }
   getDocuments(
     page: number,
     limit: number,

@@ -76,8 +76,8 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('user', JSON.stringify(data.user));
           if (data.user.role === 'owner') {
             this.router.navigate(['owner']);
-          } else if (data.user.role === 'waiter') {
-            this.router.navigate(['waiter']);
+          } else if (data.user.role === 'decorator') {
+            this.router.navigate(['decorator']);
           } else if (data.user.role === 'admin') {
             //this.router.navigate(['admin']);
 

@@ -33,11 +33,13 @@ export const Booking = new Schema({
     type: String
   },
   status: {
-    enum: ["active", "archived"]
+    type: String,
+    enum: ["active", "archived"],
+    default: "active"
   },
   rating: {
     type: Number,
-    min:1,
+    min:0,
     max:5,
     default: 0
   }

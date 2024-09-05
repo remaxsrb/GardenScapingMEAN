@@ -18,23 +18,24 @@ class BookingService {
   
   async all(page: number, limit: number) {
     const skip = (page - 1) * limit;
-    return await Firm.find({}).skip(skip).limit(limit);
+    return await Booking.find({}).skip(skip).limit(limit);
   }
 
-  //TO-DO add for which user you are getting the bookings
 
-  async sortActiveByDateDesc(page: number, limit: number) {
+  async sortActiveByDateDesc(_id:string, page: number, limit: number) {
     const skip = (page - 1) * limit;
-    return await Firm.find({status: "active"}).sort({startDate: -1}).skip(skip).limit(limit);
+    const status = 'active'
+    return await Booking.find({ $or: [{ _id }, { status }] }).sort({startDate: -1}).skip(skip).limit(limit);
   }
 
-  async sortArchivedByDateDesc(page: number, limit: number) {
+  async sortArchivedByDateDesc(_id:string,page: number, limit: number) {
     const skip = (page - 1) * limit;
-    return await Firm.find({status:"archived"}).sort({startDate: -1}).skip(skip).limit(limit);
+    const status = 'archived';
+    return await Booking.find({ $or: [{ _id }, { status }] }).sort({startDate: -1}).skip(skip).limit(limit);
   }
   
   async countDocuments() {
-    return await Firm.countDocuments();
+    return await Booking.countDocuments();
   }
   
   async finishJob(_id: string, finishDate: Date, jobPhoto: string) {

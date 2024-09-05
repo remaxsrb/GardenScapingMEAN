@@ -21,17 +21,37 @@ export class BookingService {
     });
   }
 
-  getDocuments(
+  getActiveBookings(
+    id:string,
     page: number,
     limit: number,
 
   ): Observable<any> {
-    return this.http.get(`${this.backendUrl}/get_start_asc`, {
+    return this.http.get(`${this.backendUrl}/get_active_start_desc`, {
       params: {
+        id: id,
         page: page.toString(),
         limit: limit.toString(),
 
       },
     });
   }
+
+  getArchivedBookings(
+    id:string,
+    page: number,
+    limit: number,
+
+  ): Observable<any> {
+    return this.http.get(`${this.backendUrl}/get_archived_start_desc`, {
+      params: {
+        id: id,
+        page: page.toString(),
+        limit: limit.toString(),
+
+      },
+    });
+  }
+
+
 }

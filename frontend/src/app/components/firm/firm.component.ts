@@ -28,6 +28,7 @@ import { Shape } from '../../interfaces/shape';
 import { JsonService } from 'src/app/services/utilityServices/json.service';
 import { DrawShapesService } from 'src/app/services/utilityServices/draw-shapes.service';
 import { BookingService } from 'src/app/services/modelServices/booking.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-firm',
@@ -41,7 +42,8 @@ export class FirmComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private jsonService: JsonService,
     private drawShapesService: DrawShapesService,
-    private bookingService: BookingService
+    private bookingService: BookingService,
+    private router: Router
   ) {}
 
   private map!: L.Map;
@@ -62,6 +64,7 @@ export class FirmComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     const firm_data = localStorage.getItem('firm');
+    //localStorage.removeItem('firm');
 
     if (firm_data) this.firm = JSON.parse(firm_data);
     this.firm.vacation.start = this.timeService.formatDateToDDMMYYYY(
@@ -265,7 +268,7 @@ export class FirmComponent implements OnInit, AfterViewInit {
   onSubmit() {
     this.bookingService.create(this.newBookingForm.value).subscribe(
       data => {
-        
+        this.newBookingForm.reset()
       }
     )
   }

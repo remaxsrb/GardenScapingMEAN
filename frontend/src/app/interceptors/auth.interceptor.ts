@@ -18,7 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const isRoleRequest =
       url.startsWith('/admin') ||
       url.startsWith('/owner') ||
-      url.startsWith('/decorater');
+      url.startsWith('/decorator');
 
     if (token && isRoleRequest) {
       const cloned = req.clone({

@@ -102,7 +102,7 @@ export class OwnerDashboardBookingsComponent implements OnInit {
     }
   }
 
-  //Inside this function fetch firm name based on ID ====> NAIVE SOLUTION
+  //?Inside this function fetch firm name based on ID ====> NAIVE SOLUTION
 
   prepareData(type: 'active' | 'archived') {
     if (type === 'active') {

@@ -20,8 +20,9 @@ export class BookingController {
       const page = parseInt(req.query.page as string);
       const limit = parseInt(req.query.limit as string);
   
-      let bookings = await bookingService.sortByDateDesc(_id, status, page, limit);
+      const bookings = await bookingService.sortByDateDesc(_id, status, page, limit);
 
+      //? za ovo pitaj drazena ili jelicu, da vratis ime firme a ne njen ID
       
       const totalDocuments = await bookingService.countDocuments();
   

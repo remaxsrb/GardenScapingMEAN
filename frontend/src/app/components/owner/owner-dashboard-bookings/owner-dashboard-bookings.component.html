@@ -12,6 +12,8 @@
               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
               (onLazyLoad)="pageChange($event, 'active')"
             >
+            <ng-template pTemplate="caption"> Active bookings</ng-template>
+
               <ng-template pTemplate="header">
                 <tr>
                   <th style="width:25%">Date</th>
@@ -42,6 +44,8 @@
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
           (onLazyLoad)="pageChange($event, 'archived')"
         >
+        <ng-template pTemplate="caption"> Archived bookings</ng-template>
+
           <ng-template pTemplate="header">
             <tr>
               <th style="width:25%">Date</th>

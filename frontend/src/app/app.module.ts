@@ -18,6 +18,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { TableModule } from 'primeng/table';
 import { StepsModule } from 'primeng/steps';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ChartModule } from 'primeng/chart';
 
 // Third-party Modules
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
@@ -49,6 +50,8 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthService } from './services/utilityServices/auth.service';
+import { enviroment } from './env';
+
 
 @NgModule({
   declarations: [
@@ -95,7 +98,10 @@ import { AuthService } from './services/utilityServices/auth.service';
       SelectButtonModule,
       StepsModule,
       CheckboxModule,
-      NgHcaptchaModule,
+      ChartModule,
+      NgHcaptchaModule.forRoot({
+        siteKey: enviroment.HCAPTCHAKEY, 
+      }),
       JwtModule.forRoot({
         config: {
           tokenGetter: () => localStorage.getItem('access_token'),

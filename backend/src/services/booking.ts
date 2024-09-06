@@ -21,9 +21,9 @@ class BookingService {
     return await Booking.find({}).skip(skip).limit(limit);
   }
 
-  async sortByDateDesc(_idUser:string, status: string, page: number, limit: number) {
+  async sortByDateDesc(owner:string, status: string, page: number, limit: number) {
     const skip = (page - 1) * limit;
-    return await Booking.find({ $and: [{ _idUser }, { status }] }).sort({startDate: -1}).skip(skip).limit(limit);
+    return await Booking.find({ $and: [{ owner }, { status }] }).sort({startDate: -1}).skip(skip).limit(limit);
   }
 
   

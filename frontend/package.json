@@ -22,6 +22,7 @@
     "@auth0/angular-jwt": "^5.2.0",
     "@fortawesome/fontawesome-free": "^6.6.0",
     "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.4",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",
     "leaflet-providers": "^2.0.0",

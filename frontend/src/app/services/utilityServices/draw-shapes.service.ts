@@ -24,8 +24,8 @@ export class DrawShapesService {
     const dropY = event.offsetY;
 
     img.onload = () => {
-      const shapeWidth = img.naturalWidth; // Use the image's natural width
-      const shapeHeight = img.naturalHeight; // Use the image's natural height
+      const shapeWidth = img.naturalWidth; 
+      const shapeHeight = img.naturalHeight; 
 
       // Use isOverlapping method to check if there is an overlap
       const isOverlapping = this.isOverlapping(dropX, dropY, shapeWidth, shapeHeight, shapes);

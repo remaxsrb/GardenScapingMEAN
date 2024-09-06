@@ -12,6 +12,7 @@ import {
 } from "@angular/forms";
 import { Message } from "primeng/api/message";
 import { ImageValidationService } from "src/app/services/utilityServices/image-validation-service.service";
+import { enviroment } from "src/app/env";
 
 type CardType = "MASTERCARD" | "VISA" | "DINERS" | "UNKNOWN";
 
@@ -28,6 +29,9 @@ export class SignUpComponent implements OnInit {
   cardType: string = "unknown"; // Default to unknown or adjust as necessary
 
   errorMessage: Message[] = [];
+
+  captchaResponse: string | null = null;
+  captchakey: string = enviroment.HCAPTCHAKEY;
 
   constructor(
     private userService: UserService,
@@ -88,6 +92,7 @@ export class SignUpComponent implements OnInit {
       creditCardNumber: this.ccForm,
       profilePhoto: [""],
       status: ["pending"],
+      captcha: ['', Validators.required]
     });
   }
 
@@ -198,6 +203,10 @@ export class SignUpComponent implements OnInit {
       });
     }
 
+    this.signUpForm.removeControl('captcha');
+    
+    //?Is backend captcha check necessary?
+
     this.userService.register(this.signUpForm.value).subscribe({
       next: () => {
         this.router.navigate(["/"]);
@@ -232,4 +241,21 @@ export class SignUpComponent implements OnInit {
     this.signupResponseFlags.generalErrors = false;
     this.errorMessage = [];
   }
+
+  onCaptchaSuccess(response: any): void {
+    this.captchaResponse = response.token; 
+    this.signUpForm.controls['captcha'].setValue(this.captchaResponse);
+  }
+
+  onCaptchaError(error: any): void {
+    this.captchaResponse = null;
+    this.signUpForm.controls['captcha'].setErrors({ 'captchaError': true });
+  }
+
+  onCaptchaExpired(): void {
+    this.captchaResponse = null;
+    this.signUpForm.controls['captcha'].setValue(null);
+  }
+
+
 }

@@ -4,3 +4,4 @@ frontend/README.md
 .vscode/
 .editorconfig
 .angular/
+frontend/src/app/env.ts

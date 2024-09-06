@@ -18,18 +18,12 @@ export class AuthService {
   ) {}
 
   login(signInData: any) {
-    return this.userService.login(signInData)
+    return this.userService.login(signInData);
   }
 
   logout() {
-    if (this.get_role() === 'admin') {
-      localStorage.removeItem(this.TOKEN_KEY);
-      this.router.navigate(['/admin_login']);
-    } else {
-      localStorage.removeItem(this.TOKEN_KEY);
-
-      this.router.navigate(['/login']);
-    }
+    localStorage.removeItem(this.TOKEN_KEY);
+    this.router.navigate(['']);
   }
 
   is_LoggedIn(): boolean {

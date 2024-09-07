@@ -91,12 +91,18 @@ export class DecoraterDashboardBookingsComponent implements OnInit {
     this.bookingService
       .acceptJob(this.acceptJobForm.value)
       .subscribe((data) => {
-        if(data)
           window.location.reload();
       });
   }
 
-  rejectJob(index: number) {}
+  rejectJob(index: number) {
+    this.rejectJobForm.patchValue({ booking: this.jobsToStart.at(index)?._id });
+    this.commentService
+      .create(this.rejectJobForm.value)
+      .subscribe((data) => {
+          window.location.reload();
+      });
+  }
 
   loadDocuments(type: 'start' | 'end') {
     if (type === 'start') {

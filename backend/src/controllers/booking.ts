@@ -146,6 +146,19 @@ export class BookingController {
       res.status(500).send(err);
     }
   }
+
+  async rate(req: express.Request, res: express.Response) {
+    try {
+      const { _id } = req.body;
+      const { rating } = req.body;
+
+      await bookingService.rate(_id, rating);
+      return res.status(200);
+    } catch (err: any) {
+      res.status(500).send(err);
+    }
+  }
+
 }
 
 export default new BookingController();

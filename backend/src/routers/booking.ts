@@ -49,4 +49,8 @@ bookingRouter
   .route("/finish_job")
   .post((req, res) => new BookingController().finishJob(req, res));
 
+bookingRouter
+  .route("/rate")
+  .post((req, res) => new BookingController().rate(req, res));
+
 export default bookingRouter;

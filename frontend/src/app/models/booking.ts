@@ -14,4 +14,5 @@ export class Booking {
   services: Service[] = [];
   requests: string = '';
   status: string = 'active';
+  rating: number = 0;
 }

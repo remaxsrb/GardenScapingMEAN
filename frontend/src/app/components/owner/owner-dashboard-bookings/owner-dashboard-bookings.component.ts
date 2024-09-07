@@ -119,6 +119,10 @@ export class OwnerDashboardBookingsComponent implements OnInit {
         booking.bookingDate = this.timeService.formatDateToDDMMYYYY(
           new Date(booking.bookingDate)
         );
+        if (booking.finishDate !== null)
+          booking.finishDate = this.timeService.formatDateToDDMMYYYY(
+            new Date(booking.finishDate)
+          );
       });
     }
   }
@@ -143,4 +147,28 @@ export class OwnerDashboardBookingsComponent implements OnInit {
         window.location.reload();
       });
   }
+
+  canComment(index: number) {
+  }
+  canRate(index: number) {
+    let rating = this.archived_bookings.at(index)?.rating!;
+    console.log(rating)
+    if (rating > 0) return false;
+    console.log(rating > 0)
+    return true;
+  }
+
+  handleRatingClick(event: any, index: number): void {
+    const data = {
+      _id: this.archived_bookings.at(index)?._id,
+      rating: event.value
+    }
+
+    this.bookingService.rate(JSON.stringify(data)).subscribe(data=> {
+      window.location.reload()
+    })
+
+  }
+
+
 }

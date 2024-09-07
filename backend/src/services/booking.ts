@@ -113,7 +113,7 @@ class BookingService {
   async finishJob(_id: string, finishDate: Date, jobPhoto: string) {
     let update = {};
 
-    if ((jobPhoto === '')) {
+    if (jobPhoto === "") {
       update = {
         finishDate: finishDate,
         status: "archived",
@@ -128,6 +128,12 @@ class BookingService {
 
     return await Booking.findByIdAndUpdate(_id, update);
   }
+
+
+  async rate (_id:string, rating:number) {
+    return await Booking.findByIdAndUpdate(_id, {rating})
+  }
+
 }
 
 export default new BookingService();

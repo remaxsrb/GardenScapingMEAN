@@ -5,7 +5,7 @@
         [value]="active_bookings"
         [paginator]="true"
         [rows]="activeBooking_limit"
-        [totalRecords]="activeBooking_totalPages"
+        [totalRecords]="activeBooking_number_of_bookings"
         [lazy]="true"
         [showCurrentPageReport]="true"
         [tableStyle]="{ 'min-width': '50rem' }"
@@ -37,7 +37,7 @@
                 pButton
                 label="Cancel booking"
                 class="p-button-danger mt-2"
-                style="text-wrap: nowrap;"
+                style="text-wrap: nowrap"
                 (click)="cancelBooking(i)"
               ></button>
             </td>
@@ -52,7 +52,7 @@
         [value]="archived_bookings"
         [paginator]="true"
         [rows]="archivedBooking_limit"
-        [totalRecords]="archivedBooking_totalPages"
+        [totalRecords]="archivedBooking_number_of_bookings"
         [lazy]="true"
         [showCurrentPageReport]="true"
         [tableStyle]="{ 'min-width': '50rem' }"
@@ -69,12 +69,20 @@
             <th style="width: 25%">Rating</th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-archivedBooking>
+        <ng-template pTemplate="body" let-archivedBooking let-i="rowIndex">
           <tr>
-            <td>{{ archivedBooking.endDate }}</td>
+            <td>{{ archivedBooking.finishDate }}</td>
             <td>{{ archivedBooking.firm }}</td>
             <td>{{ archivedBooking.comment }}</td>
-            <td>{{ archivedBooking.rating }}</td>
+            <td>
+              <p-rating
+                [(ngModel)]="archivedBooking.rating"
+                [disabled]="!canRate(i)"
+                [cancel]="false"
+                (onRate)="handleRatingClick($event, i)">
+              >
+              </p-rating>
+            </td>
           </tr>
         </ng-template>
       </p-table>

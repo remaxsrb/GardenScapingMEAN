@@ -17,7 +17,34 @@ class BookingService {
   }
 
   async delete(_id: string) {
-    return await Booking.findOneAndDelete({_id});
+    return await Booking.findOneAndDelete({ _id });
+  }
+
+  async getPastDayCount() {
+    const past24Hours = new Date();
+    past24Hours.setDate(past24Hours.getDate() - 1);
+
+    return await Booking.countDocuments({
+      bookingDate: { $gte: past24Hours },
+    });
+  }
+
+  async getPastWeekCount() {
+    const pastDay = new Date();
+    pastDay.setDate(pastDay.getDate() - 7);
+
+    return await Booking.countDocuments({
+      bookingDate: { $gte: pastDay },
+    });
+  }
+
+  async getPastMonthCount() {
+    const pastMonth = new Date();
+    pastMonth.setMonth(pastMonth.getMonth() - 1);
+
+    return await Booking.countDocuments({
+      bookingDate: { $gte: pastMonth },
+    });
   }
 
   async all(page: number, limit: number) {
@@ -41,7 +68,6 @@ class BookingService {
           .skip(skip)
           .limit(limit);
       case "firmNotStarted":
-        
         return await Booking.find({
           $and: [{ firm: entity }, { status: "active" }, { decorator: null }],
         })
@@ -80,11 +106,9 @@ class BookingService {
     }
   }
 
-
   async acceptJob(_id: string, decorator: string, startDate: Date) {
-    return await Booking.findByIdAndUpdate(_id, {decorator, startDate });
+    return await Booking.findByIdAndUpdate(_id, { decorator, startDate });
   }
-
 
   async finishJob(_id: string, finishDate: Date, jobPhoto: string) {
     const booking = await Booking.findOne({ _id });

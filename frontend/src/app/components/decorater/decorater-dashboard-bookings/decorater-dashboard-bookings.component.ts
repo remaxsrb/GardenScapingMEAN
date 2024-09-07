@@ -24,13 +24,13 @@ export class DecoraterDashboardBookingsComponent implements OnInit {
 
   jobsToStart: Booking[] = [];
   jobsToStart_currentPage: number = 1;
-  jobsToStart_limit: number = 5;
+  jobsToStart_limit: number = 2;
   jobsToStart_totalPages: number = -1;
   jobsToStartNumber: number = 0;
 
   jobsToEnd: Booking[] = [];
   jobsToEnd_currentPage: number = 1;
-  jobsToEnd_limit: number = 5;
+  jobsToEnd_limit: number = 2;
   jobsToEnd_totalPages: number = -1;
   jobsToEndNumber: number = 0;
 

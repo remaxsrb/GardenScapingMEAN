@@ -14,6 +14,36 @@ export class BookingController {
     }
   }
 
+  async getPastDayCount(req: express.Request, res: express.Response) {
+
+    try {
+      const count = await bookingService.getPastDayCount();
+
+      return res.json(count);
+    } catch (err: any) {
+      res.status(500).send(err);
+    }
+  }
+  async getPastWeekCount(req: express.Request, res: express.Response) {
+    try {
+      const count = await bookingService.getPastWeekCount();
+
+      return res.json(count);
+    } catch (err: any) {
+      res.status(500).send(err);
+    }
+  }
+  async getPastMonthCount(req: express.Request, res: express.Response) {
+    try {
+      const count = await bookingService.getPastMonthCount();
+
+      return res.json(count);
+    } catch (err: any) {
+      res.status(500).send(err);
+    }
+  }
+
+
   async handleGetBookings(
     req: express.Request,
     res: express.Response,

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Decorator } from "src/app/models/decorator";
 import { Firm } from "src/app/models/firm";
 import { RegexPatterns } from "src/app/regexPatterns";
+import { BookingService } from "src/app/services/modelServices/booking.service";
 import { FirmService } from "src/app/services/modelServices/firm.service";
 import { UserService } from "src/app/services/modelServices/user.service";
 
@@ -15,11 +16,16 @@ export class HomepageComponent implements OnInit {
   constructor(
     private firmService: FirmService,
     private userService: UserService,
+    private bookingService: BookingService,
     private fb: FormBuilder,
   ) {}
 
   number_of_firms: number = 0;
   number_of_owners: number = 0;
+  pastDayCount: number = 0;
+  pastWeekCount: number = 0;
+  pastMonthCount: number = 0;
+
   
   decorators: Decorator[] = []
 
@@ -43,9 +49,22 @@ export class HomepageComponent implements OnInit {
       this.number_of_owners = data.count;
     });
     
+    
     this.userService.findByRole('decorator').subscribe((data) => {
           this.decorators = data;
         });
+
+    this.bookingService.getPastDayCount().subscribe(data=> {
+      this.pastDayCount = data;
+    })
+
+    this.bookingService.getPastWeekCount().subscribe(data=> {
+      this.pastWeekCount = data;
+    })
+
+    this.bookingService.getPastMonthCount().subscribe(data=> {
+      this.pastMonthCount = data;
+    })
     
     this.initSearchForm();
     this.loadDocuments();

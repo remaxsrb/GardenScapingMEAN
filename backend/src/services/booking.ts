@@ -23,12 +23,12 @@ class BookingService {
 
   async sortByDateDesc(owner:string, status: string, page: number, limit: number) {
     const skip = (page - 1) * limit;
-    return await Booking.find({ $and: [{ owner }, { status }] }).sort({startDate: -1}).skip(skip).limit(limit);
+    return await Booking.find({ $and: [{ owner }, { status }] }).sort({bookingDate: -1}).skip(skip).limit(limit);
   }
 
   
-  async countDocuments() {
-    return await Booking.countDocuments();
+  async countDocuments(owner:string, status: string) {
+    return await Booking.countDocuments({ $and: [{ owner }, { status }] });
   }
   
   async finishJob(_id: string, finishDate: Date, jobPhoto: string) {
@@ -40,7 +40,7 @@ class BookingService {
       photo: jobPhoto
     };
 
-    return await Firm.updateOne(updateQuery, update);
+    return await Booking.updateOne(updateQuery, update);
   }
   
 }

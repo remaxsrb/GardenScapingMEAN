@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import Firm from "../models/firm";
 
 class FirmService {
@@ -10,7 +11,8 @@ class FirmService {
   }
 
   async getName(_id: string) {
-    await Firm.findById(_id, "name");
+    const firm = await Firm.findById(_id);
+    return firm ? firm.name : null 
   }
 
   async getPaginated(page: number, limit: number) {

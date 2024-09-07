@@ -19,6 +19,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { Owner } from 'src/app/models/owner';
@@ -119,17 +120,19 @@ export class FirmComponent implements OnInit, AfterViewInit {
     this.newBookingForm = this.fb.group({
       owner: this.owner._id,
       firm: this.firm._id,
-      startDate: [new Date(), [Validators.required]],
+      bookingDate: [new Date(), [Validators.required]],
       garden: this.gardenForm,
       photo: [''],
-      services: JSON.stringify(this.selectedServicesArray),
+      services: [, [Validators.required]],
       requests: [''],
       status: 'active'
     });
   }
 
-  get startDate() {
-    return this.newBookingForm.get('startDate');
+  
+
+  get bookingDate() {
+    return this.newBookingForm.get('bookingDate');
   }
 
   get width() {
@@ -178,13 +181,13 @@ export class FirmComponent implements OnInit, AfterViewInit {
   isCurrentStepValid() {
     switch (this.activeIndex) {
       case 0:
-        const startDate = new Date(this.startDate?.value);
+        const startDate = new Date(this.bookingDate?.value);
         const vacationStart = new Date(this.firm.vacation.start);
         const vacationEnd = new Date(this.firm.vacation.end);
 
         // Check if the start date is before vacation.start or after vacation.end
         const isStartDateValid =
-          this.startDate?.valid &&
+          this.bookingDate?.valid &&
           (startDate < vacationStart || startDate > vacationEnd);
 
         return (
@@ -266,9 +269,11 @@ export class FirmComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
+
     this.bookingService.create(this.newBookingForm.value).subscribe(
       data => {
         this.newBookingForm.reset()
+        window.location.reload()
       }
     )
   }

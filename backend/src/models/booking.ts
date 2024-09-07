@@ -14,12 +14,17 @@ export const Booking = new Schema({
     ref: "Firm",
     required: true,
   },
-  startDate: {
+  bookingDate: {
     type: Date,
     required: true,
   },
+  startDate: {
+    type: Date,
+    default: null
+  },
   finishDate: {
-    type: Date
+    type: Date,
+    default: null
   },
   garden: {
     type: Garden,

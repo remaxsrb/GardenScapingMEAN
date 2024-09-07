@@ -1,9 +1,0 @@
-[{
-  "_id": {
-    "$oid": "668eac2d3d3ac6a898b1ada2"
-  },
-  "username": "admin",
-  "role": "admin",
-  "email": "admin@restorani.com",
-  "password": "$2a$10$uaBYDPWCdI2R2wBziCayL.4bVeKY0KAnSRghUldzEZrkJIpu5O5je"
-}]

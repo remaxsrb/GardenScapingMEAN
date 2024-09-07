@@ -13,8 +13,7 @@ import { TimeService } from 'src/app/services/utilityServices/time.service';
 export class OwnerDashboardBookingsComponent implements OnInit {
   constructor(
     private bookingService: BookingService,
-    private timeService: TimeService,
-
+    private timeService: TimeService
   ) {}
 
   owner = new User();
@@ -107,17 +106,18 @@ export class OwnerDashboardBookingsComponent implements OnInit {
   prepareData(type: 'active' | 'archived') {
     if (type === 'active') {
       this.active_bookings.forEach((booking) => {
-        booking.startDate = this.timeService.formatDateToDDMMYYYY(
-          new Date(booking.startDate)
+        booking.bookingDate = this.timeService.formatDateToDDMMYYYY(
+          new Date(booking.bookingDate)
         );
-
       });
     } else {
       this.archived_bookings.forEach((booking) => {
-        booking.startDate = this.timeService.formatDateToDDMMYYYY(
-          new Date(booking.startDate)
+        booking.bookingDate = this.timeService.formatDateToDDMMYYYY(
+          new Date(booking.bookingDate)
         );
       });
     }
   }
+
+  
 }

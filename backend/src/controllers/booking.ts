@@ -1,5 +1,6 @@
 import express from "express";
 import bookingService from "../services/booking";
+import firmService from "../services/firm";
 
 export class BookingController {
   async create(req: express.Request, res: express.Response) {
@@ -13,54 +14,71 @@ export class BookingController {
     }
   }
 
-
-  async handleGetBookings(req: express.Request, res: express.Response, status: string) {
+  async handleGetBookings(
+    req: express.Request,
+    res: express.Response,
+    status: string
+  ) {
     try {
       const _id = req.query.id as string;
       const page = parseInt(req.query.page as string);
       const limit = parseInt(req.query.limit as string);
-  
-      const bookings = await bookingService.sortByDateDesc(_id, status, page, limit);
 
-      //? za ovo pitaj drazena ili jelicu, da vratis ime firme a ne njen ID
-      
-      const totalDocuments = await bookingService.countDocuments();
-  
+      const bookings = await bookingService.sortByDateDesc(
+        _id,
+        status,
+        page,
+        limit
+      );
+
+      //? dohvata ime firme kad se sorita umesto ID-a
+
+      let updatedBookings = null;
+      if (bookings) {
+        updatedBookings = await Promise.all(
+          bookings.map(async (booking) => {
+            return {
+              ...booking.toObject(),
+              firm: await firmService.getName(booking.firm.toString()),
+            };
+          })
+        );
+      }
+
+      const totalDocuments = await bookingService.countDocuments(_id, status);
+
       return res.json({
         page,
         limit,
         totalDocuments,
         totalPages: Math.ceil(totalDocuments / limit),
-        bookings,
+        bookings: updatedBookings,
       });
     } catch (err: any) {
       res.status(500).send(err);
     }
   }
-  
-  async getActiveStartDesc(req: express.Request, res: express.Response) {
+
+  async getActiveBookingDesc(req: express.Request, res: express.Response) {
     return this.handleGetBookings(req, res, "active");
   }
-  
-  async getArchivedStartDesc(req: express.Request, res: express.Response) {
+
+  async getArchivedBookingDesc(req: express.Request, res: express.Response) {
     return this.handleGetBookings(req, res, "archived");
   }
-  
+
   async finishJob(req: express.Request, res: express.Response) {
     try {
       const { _id } = req.body;
       const { finishDate } = req.body;
       const { jobPhoto } = req.body;
-      
+
       await bookingService.finishJob(_id, finishDate, jobPhoto);
       return res.status(200);
-
     } catch (err: any) {
       res.status(500).send(err);
     }
   }
-  
 }
 
 export default new BookingController();
- 

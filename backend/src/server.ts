@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import bookingRouter from './routers/booking';
 import firmRouter from './routers/firm';
 import userRouter from './routers/user';
+import commentRouter from './routers/comment';
 
 const app = express();
 
@@ -29,6 +30,8 @@ const router = express.Router();
 router.use("/user", userRouter);
 router.use("/firm", firmRouter);
 router.use("/booking", bookingRouter);
+router.use("/comment", commentRouter);
+
 
 // Main route
 app.use("/", router);

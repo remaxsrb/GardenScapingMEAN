@@ -1,64 +1,78 @@
 <div class="row">
-    <div class="col-md-6">
-        <div class="card">
-            <p-table
-              [value]="active_bookings"
-              [paginator]="true"
-              [rows]="activeBooking_limit"
-              [totalRecords]="activeBooking_totalPages"
-              [lazy]="true"
-              [showCurrentPageReport]="true"
-              [tableStyle]="{ 'min-width': '50rem' }"
-              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-              (onLazyLoad)="pageChange($event, 'active')"
-            >
-            <ng-template pTemplate="caption"> Active bookings</ng-template>
+  <div class="col-md-6">
+    <div class="card">
+      <p-table
+        [value]="active_bookings"
+        [paginator]="true"
+        [rows]="activeBooking_limit"
+        [totalRecords]="activeBooking_totalPages"
+        [lazy]="true"
+        [showCurrentPageReport]="true"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        (onLazyLoad)="pageChange($event, 'active')"
+      >
+        <ng-template pTemplate="caption"> Active bookings</ng-template>
 
-              <ng-template pTemplate="header">
-                <tr>
-                  <th style="width:25%">Date</th>
-                  <th style="width:25%">Firm</th>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-activeBooking>
-                <tr>
-                  <td>{{ activeBooking.startDate }}</td>
-                  <td>{{ activeBooking.firm }}</td>
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 25%">Booking Date</th>
+            <th style="width: 25%">Start Date</th>
+            <th style="width: 25%">Firm</th>
+            <th style="width: 25%">Services</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-activeBooking let-i="index">
+          <tr>
+            <td>{{ activeBooking.bookingDate }}</td>
+            <td>{{ activeBooking.startDate }}</td>
+            <td>{{ activeBooking.firm }}</td>
+            <td>
+              <p *ngFor="let service of activeBooking.services">
+                {{ service.name }}
+              </p>
+            </td>
 
-                </tr>
-              </ng-template>
-             
-            </p-table>
-        </div>
+          </tr>
+ 
+        </ng-template>
+      </p-table>
     </div>
-    <div class="col-md-6">
-      <div class="card">
-        <p-table
-          [value]="archived_bookings"
-          [paginator]="true"
-          [rows]="archivedBooking_limit"
-          [totalRecords]="archivedBooking_totalPages"
-          [lazy]="true"
-          [showCurrentPageReport]="true"
-          [tableStyle]="{ 'min-width': '50rem' }"
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-          (onLazyLoad)="pageChange($event, 'archived')"
-        >
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <p-table
+        [value]="archived_bookings"
+        [paginator]="true"
+        [rows]="archivedBooking_limit"
+        [totalRecords]="archivedBooking_totalPages"
+        [lazy]="true"
+        [showCurrentPageReport]="true"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        (onLazyLoad)="pageChange($event, 'archived')"
+      >
         <ng-template pTemplate="caption"> Archived bookings</ng-template>
 
-          <ng-template pTemplate="header">
-            <tr>
-              <th style="width:25%">Date</th>
-              <th style="width:25%">Firm</th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-archivedBooking>
-            <tr>
-              <td>{{ archivedBooking.startDate }}</td>
-            </tr>
-          </ng-template>
-         
-        </p-table>
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 25%">Finish Date</th>
+            <th style="width: 25%">Firm</th>
+            <th style="width: 25%">Comment</th>
+            <th style="width: 25%">Rating</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-archivedBooking>
+          <tr>
+            <td>{{ archivedBooking.endDate }}</td>
+            <td>{{ archivedBooking.firm }}</td>
+            <td>{{ archivedBooking.comment }}</td>
+            <td>{{ archivedBooking.rating }}</td>
+
+
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
-    </div>
+  </div>
 </div>

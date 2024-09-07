@@ -57,12 +57,12 @@
                   <form [formGroup]="newBookingForm">
                     <div>
                       <p-calendar
-                        formControlName="startDate"
+                        formControlName="bookingDate"
                         [showTime]="true"
                         [hourFormat]="'24'"
                       ></p-calendar>
                       <p-messages
-                        *ngIf="!startDate?.valid || startDate?.dirty"
+                        *ngIf="!bookingDate?.valid || bookingDate?.dirty"
                         severity="error"
                       >
                         <p-message

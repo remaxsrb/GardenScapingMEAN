@@ -27,7 +27,7 @@ export class BookingService {
     limit: number,
 
   ): Observable<any> {
-    return this.http.get(`${this.backendUrl}/get_active_start_desc`, {
+    return this.http.get(`${this.backendUrl}/get_active_booking_desc`, {
       params: {
         id: id,
         page: page.toString(),
@@ -43,7 +43,7 @@ export class BookingService {
     limit: number,
 
   ): Observable<any> {
-    return this.http.get(`${this.backendUrl}/get_archived_start_desc`, {
+    return this.http.get(`${this.backendUrl}/get_archived_booking_desc`, {
       params: {
         id: id,
         page: page.toString(),

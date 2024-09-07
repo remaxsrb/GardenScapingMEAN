@@ -9,6 +9,11 @@ export const Booking = new Schema({
     ref: "User", 
     required: true,
   },
+  decorator: {
+    type: Schema.Types.ObjectId,
+    ref: "User", 
+    default: null
+  },
   firm: {
     type: Schema.Types.ObjectId,
     ref: "Firm",

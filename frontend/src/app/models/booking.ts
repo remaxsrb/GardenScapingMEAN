@@ -2,6 +2,7 @@ import { Service } from '../interfaces/service';
 import { Garden } from './garden';
 
 export class Booking {
+  _id: string = '';
   owner: string = '';
   firm: string = '';
   bookingDate: Date | string = new Date();

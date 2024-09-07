@@ -27,7 +27,7 @@ export class BookingService {
     limit: number,
 
   ): Observable<any> {
-    return this.http.get(`${this.backendUrl}/get_active_booking_desc`, {
+    return this.http.get(`${this.backendUrl}/active_booking_desc`, {
       params: {
         id: id,
         page: page.toString(),
@@ -43,7 +43,7 @@ export class BookingService {
     limit: number,
 
   ): Observable<any> {
-    return this.http.get(`${this.backendUrl}/get_archived_booking_desc`, {
+    return this.http.get(`${this.backendUrl}/archived_booking_desc`, {
       params: {
         id: id,
         page: page.toString(),
@@ -53,5 +53,42 @@ export class BookingService {
     });
   }
 
+  getNotStarted(
+    id:string,
+    page: number,
+    limit: number,
+
+  ): Observable<any> {
+    return this.http.get(`${this.backendUrl}/non_started`, {
+      params: {
+        id: id,
+        page: page.toString(),
+        limit: limit.toString(),
+
+      },
+    });
+  }
+
+  acceptJob(data:any) {
+    return this.http.post<any>(`${this.backendUrl}/accept_job`, data, {
+      headers: this.headers,
+    });
+  }
+
+  getJobsToFinish(
+    id:string,
+    page: number,
+    limit: number,
+
+  ): Observable<any> {
+    return this.http.get(`${this.backendUrl}/jobs_to_finish`, {
+      params: {
+        id: id,
+        page: page.toString(),
+        limit: limit.toString(),
+
+      },
+    });
+  }
 
 }

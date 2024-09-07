@@ -13,4 +13,5 @@ export class User {
     creditCardNumber: string = ''
     profilePhoto: string = ''
     status: string = ''
+    firm: string = ''
 }

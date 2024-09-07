@@ -17,10 +17,11 @@ export class BookingController {
   async handleGetBookings(
     req: express.Request,
     res: express.Response,
-    status: string
+    status: string,
+    useCase: string
   ) {
     try {
-      const _id = req.query.id as string;
+      let _id = req.query.id as string;
       const page = parseInt(req.query.page as string);
       const limit = parseInt(req.query.limit as string);
 
@@ -28,7 +29,8 @@ export class BookingController {
         _id,
         status,
         page,
-        limit
+        limit,
+        useCase
       );
 
       //? dohvata ime firme kad se sorita umesto ID-a
@@ -45,13 +47,13 @@ export class BookingController {
         );
       }
 
-      const totalDocuments = await bookingService.countDocuments(_id, status);
+      const totalDocuments = await bookingService.countDocuments(_id, status, useCase);
 
       return res.json({
         page,
         limit,
         totalDocuments,
-        totalPages: Math.ceil(totalDocuments / limit),
+        totalPages: Math.ceil(totalDocuments! / limit),
         bookings: updatedBookings,
       });
     } catch (err: any) {
@@ -60,12 +62,35 @@ export class BookingController {
   }
 
   async getActiveBookingDesc(req: express.Request, res: express.Response) {
-    return this.handleGetBookings(req, res, "active");
+    return this.handleGetBookings(req, res, "active", 'owner');
   }
 
   async getArchivedBookingDesc(req: express.Request, res: express.Response) {
-    return this.handleGetBookings(req, res, "archived");
+    return this.handleGetBookings(req, res, "archived", 'owner');
   }
+
+  async sortActiveByFirmDateDesc(req: express.Request, res: express.Response) {
+    return this.handleGetBookings(req, res, 'active', "firmNotStarted");
+  } 
+
+  async sortJobsToEndForDecoratorDateDesc(req: express.Request, res: express.Response) {
+    return this.handleGetBookings(req, res, 'active', "jobsToEndForDecorator");
+  } 
+
+  async acceptJob(req: express.Request, res: express.Response) {
+    try {
+      const { _id } = req.body;
+      const { startDate } = req.body ;
+      const { decorator } = req.body;
+
+
+      await bookingService.acceptJob(_id, decorator, startDate);
+      return res.status(200);
+    } catch (err: any) {
+      res.status(500).send(err);
+    }
+  }
+  
 
   async finishJob(req: express.Request, res: express.Response) {
     try {

@@ -19,6 +19,7 @@ import { TableModule } from 'primeng/table';
 import { StepsModule } from 'primeng/steps';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ChartModule } from 'primeng/chart';
+import { DialogModule } from 'primeng/dialog';
 
 // Third-party Modules
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
@@ -99,6 +100,7 @@ import { enviroment } from './env';
       StepsModule,
       CheckboxModule,
       ChartModule,
+      DialogModule,
       NgHcaptchaModule.forRoot({
         siteKey: enviroment.HCAPTCHAKEY, 
       }),

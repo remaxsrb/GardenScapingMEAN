@@ -18,8 +18,15 @@ export class TimeService {
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
 
-    return `${day}/${month}/${year}`;
+    return `${day}.${month}.${year}`;
   }
+
+  parseDateFromDDMMYY(dateStr: string) {
+    let [day, month, year] = dateStr.split('.').map(Number);
+
+    return new Date(year, month - 1, day);
+}
+
 
   replaceDateWithStartUnixEpoch(time: any) {
     const unixEpoch = new Date('1970-01-01T00:00:00Z');

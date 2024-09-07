@@ -62,10 +62,11 @@ export class OwnerDashboardBookingsComponent implements OnInit {
           this.archivedBooking_limit
         )
         .subscribe((data) => {
-          this.archived_bookings = data;
+          this.archived_bookings = data.bookings;
           this.archivedBooking_currentPage = data.page;
           this.archivedBooking_number_of_bookings = data.totalDocuments;
           this.archivedBooking_totalPages = data.totalPages;
+
           this.prepareData('archived');
         });
     }
@@ -101,8 +102,6 @@ export class OwnerDashboardBookingsComponent implements OnInit {
     }
   }
 
-  //?Inside this function fetch firm name based on ID ====> NAIVE SOLUTION
-
   prepareData(type: 'active' | 'archived') {
     if (type === 'active') {
       this.active_bookings.forEach((booking) => {
@@ -110,7 +109,8 @@ export class OwnerDashboardBookingsComponent implements OnInit {
           new Date(booking.bookingDate)
         );
       });
-    } else {
+    }
+    if (type === 'archived') {
       this.archived_bookings.forEach((booking) => {
         booking.bookingDate = this.timeService.formatDateToDDMMYYYY(
           new Date(booking.bookingDate)
@@ -118,6 +118,4 @@ export class OwnerDashboardBookingsComponent implements OnInit {
       });
     }
   }
-
-  
 }

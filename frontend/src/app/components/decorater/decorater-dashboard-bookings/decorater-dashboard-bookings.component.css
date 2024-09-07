@@ -1,0 +1,65 @@
+/* Main Content */
+main {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 10px; 
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Footer */
+  footer {
+    width: 100%;
+  }
+  
+  /* Custom Container */
+  .custom-container {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+  }
+  
+  /* Content Container */
+  .content-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Table */
+  .p-table .ui-table {
+    width: 100%;
+    table-layout: auto; /* Allows the table to take full width */
+    max-width: 100%;
+  }
+  
+  /* Inline Form */
+  .inline-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    width: 100%; /* Full width to occupy table cell */
+  }
+  
+  /* Form and Table Container Adjustments */
+  form {
+    width: auto;
+    display: flex;
+    align-items: center;
+  }
+  
+  textarea, p-calendar {
+    width: 100%;
+  }
+  
+  button {
+    margin-left: 5px;
+  }
+  

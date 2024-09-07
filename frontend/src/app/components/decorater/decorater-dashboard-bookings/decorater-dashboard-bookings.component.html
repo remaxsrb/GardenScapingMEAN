@@ -1,1 +1,85 @@
-<p>decorater-dashboard-bookings works!</p>
+<div class="row">
+    <!-- Radio Button for Start Job -->
+    <div class="col-12 col-md-6 d-flex align-items-center mb-2">
+      <p-radioButton
+        name="job"
+        value="startJob"
+        [(ngModel)]="action"
+        inputId="startJob"
+      ></p-radioButton>
+      <label for="startJob" class="ml-2 mb-0">Start Job</label>
+    </div>
+    <!-- Radio Button for End Job -->
+    <div class="col-12 col-md-6 d-flex align-items-center mb-2">
+      <p-radioButton
+        name="job"
+        value="endJob"
+        [(ngModel)]="action"
+        inputId="endJob"
+      ></p-radioButton>
+      <label for="endJob" class="ml-2 mb-0">End Job</label>
+    </div>
+  </div>
+  
+  <div class="row" *ngIf="action === 'startJob'">
+    <div class="col-12">
+      <div class="card">
+        <p-table
+          [value]="jobsToStart"
+          [paginator]="true"
+          [rows]="jobsToStart_limit"
+          [totalRecords]="jobsToStart_totalPages"
+          [lazy]="true"
+          [showCurrentPageReport]="true"
+          [tableStyle]="{ 'width': '100%' }"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          (onLazyLoad)="pageChange($event, 'start')"
+          class="responsive-table"
+        >
+          <ng-template pTemplate="caption">Active bookings</ng-template>
+  
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="w-10">Booking Date</th>
+              <th class="w-10">Start Date</th>
+              <th class="w-40">Services</th>
+              <th class="w-20">Reject</th>
+              <th class="w-20">Accept</th>
+            </tr>
+          </ng-template>
+  
+          <ng-template pTemplate="body" let-activeBooking let-i="rowIndex">
+            <tr>
+              <td>{{ activeBooking.bookingDate }}</td>
+              <td>{{ activeBooking.startDate }}</td>
+              <td>
+                <p *ngFor="let service of activeBooking.services">{{ service.name }}</p>
+              </td>
+              
+              <td>
+                <form [formGroup]="rejectJobForm" (ngSubmit)="rejectJob(i)" class="inline-form">
+                  <textarea rows="2" pInputTextarea formControlName="text"></textarea>
+                  <button pButton type="submit" label="Reject Job" class="p-button-danger mt-2" [disabled]="rejectJobForm.invalid"></button>
+                </form>
+              </td>
+              <td>
+                <form [formGroup]="acceptJobForm" (ngSubmit)="acceptJob(i)" class="inline-form">
+                  <p-calendar 
+                    formControlName="startDate" 
+                    dateFormat="dd.mm.yy"
+                    [showIcon]="true" 
+                    appendTo="body"
+                  ></p-calendar>
+                  <button pButton type="submit" label="Accept Job" class="p-button-success mt-2" [disabled]="acceptJobForm.invalid"></button>
+                </form>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="action === 'endJob'">
+    <!-- Content for End Job goes here -->
+  </div>
+  

@@ -6,12 +6,24 @@ bookingRouter.route('/create').post(
     (req, res) => new BookingController().create(req, res)
 )
 
-bookingRouter.route('/get_active_booking_desc').get(
+bookingRouter.route('/active_booking_desc').get(
     (req, res) => new BookingController().getActiveBookingDesc(req, res)
 )
 
-bookingRouter.route('/get_archived_booking_desc').get(
+bookingRouter.route('/archived_booking_desc').get(
     (req, res) => new BookingController().getArchivedBookingDesc(req, res)
+)
+
+bookingRouter.route('/non_started').get(
+    (req, res) => new BookingController().sortActiveByFirmDateDesc(req, res)
+)
+
+bookingRouter.route('/jobs_to_finish').get(
+    (req, res) => new BookingController().sortJobsToEndForDecoratorDateDesc(req, res)
+)
+
+bookingRouter.route('/accept_job').post(
+    (req, res) => new BookingController().acceptJob(req, res)
 )
 
 bookingRouter.route('/finishJob').post(

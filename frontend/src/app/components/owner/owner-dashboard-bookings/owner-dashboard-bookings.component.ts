@@ -108,6 +108,10 @@ export class OwnerDashboardBookingsComponent implements OnInit {
         booking.bookingDate = this.timeService.formatDateToDDMMYYYY(
           new Date(booking.bookingDate)
         );
+        if (booking.startDate !== null)
+          booking.startDate = this.timeService.formatDateToDDMMYYYY(
+            new Date(booking.startDate)
+          );
       });
     }
     if (type === 'archived') {
@@ -117,5 +121,26 @@ export class OwnerDashboardBookingsComponent implements OnInit {
         );
       });
     }
+  }
+
+  canCancelBooking(index: number) {
+    let startDate = this.active_bookings.at(index)?.startDate;
+    if (startDate === null) return false;
+
+    startDate = this.timeService.parseDateFromDDMMYY(
+      this.active_bookings.at(index)?.startDate as string
+    );
+    return this.timeService.getDaysDifference(startDate, new Date()) > 1;
+  }
+
+  cancelBooking(index: number) {
+    const toDelete = {
+      _id: this.active_bookings.at(index)?._id!
+    }
+    this.bookingService
+      .cancelBooking(JSON.stringify(toDelete))
+      .subscribe((data) => {
+        window.location.reload();
+      });
   }
 }

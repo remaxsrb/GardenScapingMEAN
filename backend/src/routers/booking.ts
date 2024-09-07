@@ -26,6 +26,10 @@ bookingRouter.route('/accept_job').post(
     (req, res) => new BookingController().acceptJob(req, res)
 )
 
+bookingRouter.route('/cancel_booking').post(
+    (req, res) => new BookingController().cancelBooking(req, res)
+)
+
 bookingRouter.route('/finishJob').post(
     (req, res) => new BookingController().finishJob(req, res)
 )

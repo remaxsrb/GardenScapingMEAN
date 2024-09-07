@@ -75,6 +75,12 @@ export class BookingService {
     });
   }
 
+  cancelBooking(_id:string) {
+    return this.http.post<any>(`${this.backendUrl}/cancel_booking`, _id, {
+      headers: this.headers,
+    });
+  }
+
   getJobsToFinish(
     id:string,
     page: number,

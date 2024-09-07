@@ -16,6 +16,10 @@ class BookingService {
     return await Booking.create(bookingData);
   }
 
+  async delete(_id: string) {
+    return await Booking.findOneAndDelete({_id});
+  }
+
   async all(page: number, limit: number) {
     const skip = (page - 1) * limit;
     return await Booking.find({}).skip(skip).limit(limit);

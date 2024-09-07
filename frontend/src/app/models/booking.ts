@@ -4,6 +4,7 @@ import { Garden } from './garden';
 export class Booking {
   _id: string = '';
   owner: string = '';
+  decorator: string = '';
   firm: string = '';
   bookingDate: Date | string = new Date();
   startDate: Date | string = new Date();

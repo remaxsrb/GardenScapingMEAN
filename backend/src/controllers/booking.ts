@@ -90,6 +90,18 @@ export class BookingController {
       res.status(500).send(err);
     }
   }
+
+  async cancelBooking(req: express.Request, res: express.Response) {
+    try {
+      const {_id} = req.body;
+      await bookingService.delete(_id);
+      return res.json({ status: 200, message: "Booking  deleted" });
+    } catch (err: any) {
+      const statusCode = err.status || 500;
+      const message = err.message || "Error deleting booking";
+      return res.status(statusCode).json({ message });
+    }
+  }
   
 
   async finishJob(req: express.Request, res: express.Response) {

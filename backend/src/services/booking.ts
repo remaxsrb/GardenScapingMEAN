@@ -111,15 +111,22 @@ class BookingService {
   }
 
   async finishJob(_id: string, finishDate: Date, jobPhoto: string) {
-    const booking = await Booking.findOne({ _id });
+    let update = {};
 
-    const updateQuery = { _id: _id };
-    const update = {
-      finishDate: finishDate,
-      photo: jobPhoto,
-    };
+    if ((jobPhoto === '')) {
+      update = {
+        finishDate: finishDate,
+        status: "archived",
+      };
+    } else {
+      update = {
+        finishDate: finishDate,
+        photo: jobPhoto,
+        status: "archived",
+      };
+    }
 
-    return await Booking.updateOne(updateQuery, update);
+    return await Booking.findByIdAndUpdate(_id, update);
   }
 }
 

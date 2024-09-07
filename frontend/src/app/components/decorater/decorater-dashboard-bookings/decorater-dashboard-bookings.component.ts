@@ -38,6 +38,8 @@ export class DecoraterDashboardBookingsComponent implements OnInit {
   rejectJobForm!: FormGroup;
 
   endJobForm!: FormGroup;
+  selectedFile: File | null = null;
+
 
   invalidStartDate: boolean = false;
 
@@ -63,7 +65,9 @@ export class DecoraterDashboardBookingsComponent implements OnInit {
 
   initEndJobForm() {
     this.endJobForm = this.fb.group({
+      _id: [''],
       finishDate: [new Date(), [Validators.required]],
+      photo: ['']
     });
   }
 
@@ -99,6 +103,27 @@ export class DecoraterDashboardBookingsComponent implements OnInit {
     this.rejectJobForm.patchValue({ booking: this.jobsToStart.at(index)?._id });
     this.commentService
       .create(this.rejectJobForm.value)
+      .subscribe((data) => {
+          window.location.reload();
+      });
+  }
+
+  onSelect(event: any) {
+    const file = event.currentFiles[0].name; // Get the first selected file
+    this.endJobForm.patchValue({ photo: file }); // Update form control value
+  }
+
+  finishJob(index: number) {
+    const startDate = this.timeService.parseDateFromDDMMYY(this.jobsToEnd.at(index)!.startDate as string);
+    const finishDate = new Date(this.endJobForm.get("finishDate")?.value!)
+
+    if(startDate.getTime() > finishDate.getTime()) {
+      return;
+    }
+
+    this.endJobForm.patchValue({ _id: this.jobsToEnd.at(index)?._id });
+    this.bookingService
+      .finishJob(this.endJobForm.value)
       .subscribe((data) => {
           window.location.reload();
       });
@@ -176,6 +201,10 @@ export class DecoraterDashboardBookingsComponent implements OnInit {
     }
     if (type === 'end') {
       this.jobsToEnd.forEach((booking) => {
+        if (booking.startDate !== null)
+          booking.startDate = this.timeService.formatDateToDDMMYYYY(
+            new Date(booking.startDate)
+          );
         booking.bookingDate = this.timeService.formatDateToDDMMYYYY(
           new Date(booking.bookingDate)
         );

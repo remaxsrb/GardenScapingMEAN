@@ -46,7 +46,7 @@ bookingRouter
   .post((req, res) => new BookingController().cancelBooking(req, res));
 
 bookingRouter
-  .route("/finishJob")
+  .route("/finish_job")
   .post((req, res) => new BookingController().finishJob(req, res));
 
 export default bookingRouter;

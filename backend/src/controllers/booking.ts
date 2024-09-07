@@ -138,9 +138,9 @@ export class BookingController {
     try {
       const { _id } = req.body;
       const { finishDate } = req.body;
-      const { jobPhoto } = req.body;
+      const { photo } = req.body;
 
-      await bookingService.finishJob(_id, finishDate, jobPhoto);
+      await bookingService.finishJob(_id, finishDate, photo);
       return res.status(200);
     } catch (err: any) {
       res.status(500).send(err);

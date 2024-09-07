@@ -72,6 +72,12 @@ export class BookingService {
     });
   }
 
+  finishJob(data: any) {
+    return this.http.post<any>(`${this.backendUrl}/finish_job`, data, {
+      headers: this.headers,
+    });
+  }
+
   cancelBooking(_id: string) {
     return this.http.post<any>(`${this.backendUrl}/cancel_booking`, _id, {
       headers: this.headers,

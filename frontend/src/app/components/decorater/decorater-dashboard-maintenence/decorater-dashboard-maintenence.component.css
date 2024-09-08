@@ -1,0 +1,8 @@
+  /* Inline Form */
+  .inline-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    width: 100%; /* Full width to occupy table cell */
+  }

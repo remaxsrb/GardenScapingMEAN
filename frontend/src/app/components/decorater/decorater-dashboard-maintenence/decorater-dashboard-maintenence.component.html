@@ -1,1 +1,67 @@
-<p>decorater-dashboard-maintenence works!</p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <p-table
+            [value]="maintained_bookings"
+            [paginator]="true"
+            [rows]="maintained_limit"
+            [totalRecords]="maintained_number_of_bookings"
+            [lazy]="true"
+            [showCurrentPageReport]="true"
+            [tableStyle]="{ 'min-width': '50rem' }"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            (onLazyLoad)="pageChange($event)"
+          >
+            <ng-template pTemplate="caption"> Maintaining </ng-template>
+    
+            <ng-template pTemplate="header">
+              <tr>
+                <th style="width: 10%">Finish Date</th>
+                <th style="width: 10%">Last Service Date</th>
+                <th style="width: 40%">Reject</th>
+                <th style="width: 40%">Accept</th>
+
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-maintainedBooking let-i="rowIndex">
+              <tr>
+                <td>{{ maintainedBooking.finishDate }}</td>
+                <td>{{ maintainedBooking.lastServiceDate }}</td>
+                <td>
+                    <button
+                style="text-wrap: nowrap;"
+                  pButton
+                  type="submit"
+                  label="Request Maintenance"
+                  class="p-button-danger mt-2"
+                  (click)="reject(i)"
+                ></button>
+                </td>
+                <td>
+                    <form
+                    [formGroup]="acceptMaintanenceForm"
+                    (ngSubmit)="acceptJob(i)"
+                    class="inline-form"
+                  >
+                    <p-calendar
+                      formControlName="lastServiceDate"
+                      dateFormat="dd.mm.yy"
+                      [showIcon]="true"
+                      [minDate]="minDate"
+                      appendTo="body"
+                    ></p-calendar>
+                    <button
+                      pButton
+                      type="submit"
+                      label="Accept Job"
+                      class="p-button-success mt-2"
+                      [disabled]="acceptMaintanenceForm.invalid"
+                    ></button>
+                  </form>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+    </div>
+</div>

@@ -64,11 +64,7 @@ export class BookingService {
     });
   }
 
-  getMaintained(
-    id: string,
-    page: number,
-    limit: number
-  ): Observable<any> {
+  getMaintained(id: string, page: number, limit: number): Observable<any> {
     return this.http.get(`${this.backendUrl}/maintain_for_owner`, {
       params: {
         id: id,
@@ -94,6 +90,12 @@ export class BookingService {
     });
   }
 
+  maintain(data: any) {
+    return this.http.post<any>(`${this.backendUrl}/maintain`, data, {
+      headers: this.headers,
+    });
+  }
+
   finishJob(data: any) {
     return this.http.post<any>(`${this.backendUrl}/finish_job`, data, {
       headers: this.headers,
@@ -105,7 +107,6 @@ export class BookingService {
       headers: this.headers,
     });
   }
-
 
   cancelBooking(_id: string) {
     return this.http.post<any>(`${this.backendUrl}/cancel_booking`, _id, {
@@ -126,6 +127,22 @@ export class BookingService {
   requestMaintenance(_id: string) {
     return this.http.post<any>(`${this.backendUrl}/request_maintenance`, _id, {
       headers: this.headers,
+    });
+  }
+
+  rejectMaintenance(_id: string) {
+    return this.http.post<any>(`${this.backendUrl}/reject_maintenance`, _id, {
+      headers: this.headers,
+    });
+  }
+
+  toMaintain(id: string, page: number, limit: number): Observable<any> {
+    return this.http.get(`${this.backendUrl}/maintain_for_decorator`, {
+      params: {
+        id: id,
+        page: page.toString(),
+        limit: limit.toString(),
+      },
     });
   }
 }

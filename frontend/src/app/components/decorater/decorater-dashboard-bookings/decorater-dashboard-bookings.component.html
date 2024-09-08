@@ -58,7 +58,7 @@
               </p>
             </td>
 
-            <td>
+            <td *ngIf="decorator.status!== 'banned'">
               <form
                 [formGroup]="rejectJobForm"
                 (ngSubmit)="rejectJob(i)"
@@ -78,7 +78,7 @@
                 ></button>
               </form>
             </td>
-            <td>
+            <td *ngIf="decorator.status!== 'banned'">
               <form
                 [formGroup]="acceptJobForm"
                 (ngSubmit)="acceptJob(i)"

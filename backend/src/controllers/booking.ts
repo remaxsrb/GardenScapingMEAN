@@ -189,6 +189,17 @@ export class BookingController {
     }
   } 
 
+  async rejectMaintenance(req: express.Request, res: express.Response) {
+    try {
+      const { _id } = req.body;
+
+      await bookingService.rejecttMaintenance(_id);
+      return res.status(200);
+    } catch (err: any) {
+      res.status(500).send(err);
+    }
+  } 
+
   async maintain(req: express.Request, res: express.Response) {
     try {
       const { _id } = req.body;

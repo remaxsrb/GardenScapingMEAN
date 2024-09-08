@@ -76,4 +76,8 @@ bookingRouter
   .route("/maintain")
   .post((req, res) => new BookingController().maintain(req, res));
 
+  bookingRouter
+  .route("/reject_maintenance")
+  .post((req, res) => new BookingController().requestMaintenance(req, res));
+
 export default bookingRouter;

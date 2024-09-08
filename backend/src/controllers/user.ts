@@ -1,5 +1,6 @@
 import express from "express";
 import userService from "../services/user";
+import booking from "../services/booking";
 
 export class UserController {
   async register(req: express.Request, res: express.Response) {
@@ -19,6 +20,14 @@ export class UserController {
     const { username, password } = req.body;
     try {
       const { token, user } = await userService.login(username, password);
+
+      if (user.role === "decorator") {
+        const latestJobPhoto = await booking.getLatestJobPhotoForDecorator(user._id.toString());
+        if(latestJobPhoto === '') {
+          userService.updateField(user._id.toString(), "status", "banned");
+        }
+      }
+
       return res.status(200).json({ token, user });
     } catch (err: any) {
       const statusCode = err.status || 500;

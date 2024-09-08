@@ -93,9 +93,13 @@ class BookingService {
             { owner: entity },
             { status },
             {
-              $or: [ {
-                $and: [{lastServiceDate: null}, {finishDate: {$lte: sixMonthsAgo}}]
-              },
+              $or: [
+                {
+                  $and: [
+                    { lastServiceDate: null },
+                    { finishDate: { $lte: sixMonthsAgo } },
+                  ],
+                },
 
                 { lastServiceDate: { $lte: sixMonthsAgo } }, //case of subsequent maintenance
               ],
@@ -112,9 +116,13 @@ class BookingService {
             { decorator: entity },
             { status },
             {
-              $or: [ {
-                $and: [{lastServiceDate: null}, {finishDate: {$lte: sixMonthsAgo}}]
-              },
+              $or: [
+                {
+                  $and: [
+                    { lastServiceDate: null },
+                    { finishDate: { $lte: sixMonthsAgo } },
+                  ],
+                },
 
                 { lastServiceDate: { $lte: sixMonthsAgo } }, //case of subsequent maintenance
               ],
@@ -154,9 +162,13 @@ class BookingService {
             { owner: entity },
             { status },
             {
-              $or: [ {
-                $and: [{lastServiceDate: null}, {finishDate: {$lte: sixMonthsAgo}}]
-              },
+              $or: [
+                {
+                  $and: [
+                    { lastServiceDate: null },
+                    { finishDate: { $lte: sixMonthsAgo } },
+                  ],
+                },
 
                 { lastServiceDate: { $lte: sixMonthsAgo } }, //case of subsequent maintenance
               ],
@@ -170,9 +182,13 @@ class BookingService {
             { decorator: entity },
             { status },
             {
-              $or: [ {
-                $and: [{lastServiceDate: null}, {finishDate: {$lte: sixMonthsAgo}}]
-              },
+              $or: [
+                {
+                  $and: [
+                    { lastServiceDate: null },
+                    { finishDate: { $lte: sixMonthsAgo } },
+                  ],
+                },
 
                 { lastServiceDate: { $lte: sixMonthsAgo } }, //case of subsequent maintenance
               ],
@@ -216,11 +232,29 @@ class BookingService {
     return await Booking.findByIdAndUpdate(_id, { status: "maintained" });
   }
 
+  async rejecttMaintenance(_id: string) {
+    return await Booking.findByIdAndUpdate(_id, { status: "archived" });
+  }
+
   async maintain(_id: string, lastServiceDate: Date) {
     return await Booking.findByIdAndUpdate(_id, {
       lastServiceDate,
       status: "archived",
     });
+  }
+
+  async getLatestJobPhotoForDecorator(_id: string) {
+
+    const now = new Date();
+    const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000)
+
+    const latestDocument = await Booking.find({
+      $and: [{ decorator: _id }, { finishDate: { $ne: null } }, { finishDate: { $lte: twentyFourHoursAgo }}],
+    })
+      .sort({ _id: -1 })
+      .limit(1)
+      .select("photo");
+    if (latestDocument.length > 0) return latestDocument[0].photo;
   }
 }
 

@@ -64,6 +64,20 @@ export class BookingService {
     });
   }
 
+  getMaintained(
+    id: string,
+    page: number,
+    limit: number
+  ): Observable<any> {
+    return this.http.get(`${this.backendUrl}/maintain_for_owner`, {
+      params: {
+        id: id,
+        page: page.toString(),
+        limit: limit.toString(),
+      },
+    });
+  }
+
   getNotStarted(id: string, page: number, limit: number): Observable<any> {
     return this.http.get(`${this.backendUrl}/non_started`, {
       params: {
@@ -106,6 +120,12 @@ export class BookingService {
         page: page.toString(),
         limit: limit.toString(),
       },
+    });
+  }
+
+  requestMaintenance(_id: string) {
+    return this.http.post<any>(`${this.backendUrl}/request_maintenance`, _id, {
+      headers: this.headers,
     });
   }
 }

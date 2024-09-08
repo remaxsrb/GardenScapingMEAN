@@ -118,6 +118,14 @@ export class BookingController {
     return this.handleGetBookings(req, res, 'active', "jobsToEndForDecorator");
   } 
 
+  async toRequestMaintaining(req: express.Request, res: express.Response) {
+    return this.handleGetBookings(req, res, 'maintained', "maintenanceForOwner");
+  } 
+
+  async toMaintain(req: express.Request, res: express.Response) {
+    return this.handleGetBookings(req, res, 'maintained', "maintenanceForDecorator");
+  } 
+
   async acceptJob(req: express.Request, res: express.Response) {
     try {
       const { _id } = req.body;

@@ -1,1 +1,79 @@
-<p>ownder-dashboard-maintenence works!</p>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <p-table
+        [value]="archived_bookings"
+        [paginator]="true"
+        [rows]="archivedBooking_limit"
+        [totalRecords]="archivedBooking_number_of_bookings"
+        [lazy]="true"
+        [showCurrentPageReport]="true"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        (onLazyLoad)="pageChange($event, 'archived')"
+      >
+        <ng-template pTemplate="caption"> Archived bookings</ng-template>
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 35%">Finish Date</th>
+            <th style="width: 35%">Last Service Date</th>
+            <th style="width: 10%">Firm</th>
+            <th style="width: 10%">Request Maintenance</th>
+
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-archivedBooking let-i="rowIndex">
+          <tr>
+            <td>{{ archivedBooking.finishDate }}</td>
+            <td>{{ archivedBooking.lastServiceDate }}</td>
+            <td>{{ archivedBooking.firm }}</td>
+            <td *ngIf="hasToRequestMaintaining(i)">
+                <button
+                style="text-wrap: nowrap;"
+                  pButton
+                  type="submit"
+                  label="Request Maintenance"
+                  class="p-button-success mt-2"
+                  (click)="requestMaintenance(i)"
+                ></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+        <p-table
+        [value]="maintained_bookings"
+        [paginator]="true"
+        [rows]="maintained_limit"
+        [totalRecords]="maintained_number_of_bookings"
+        [lazy]="true"
+        [showCurrentPageReport]="true"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        (onLazyLoad)="pageChange($event, 'archived')"
+      >
+        <ng-template pTemplate="caption"> Maintaining </ng-template>
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 35%">Finish Date</th>
+            <th style="width: 35%">Last Service Date</th>
+            <th style="width: 30%">Firm</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-maintainedBooking let-i="rowIndex">
+          <tr>
+            <td>{{ maintainedBooking.finishDate }}</td>
+            <td>{{ maintainedBooking.lastServiceDate }}</td>
+            <td>{{ maintainedBooking.firm }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

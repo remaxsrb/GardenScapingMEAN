@@ -44,6 +44,14 @@ bookingRouter
   .route("/past_month_count")
   .get((req, res) => new BookingController().getPastMonthCount(req, res));
 
+  bookingRouter
+  .route("/maintain_for_owner")
+  .get((req, res) => new BookingController().toRequestMaintaining(req, res));
+
+  bookingRouter
+  .route("/maintain_for_decorator")
+  .get((req, res) => new BookingController().toMaintain(req, res));
+
 bookingRouter
   .route("/accept_job")
   .post((req, res) => new BookingController().acceptJob(req, res));

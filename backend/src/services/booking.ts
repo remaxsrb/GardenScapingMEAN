@@ -20,8 +20,8 @@ class BookingService {
     return await Booking.findOneAndDelete({ _id });
   }
 
-  async allForDecorator(decorator:string) {
-    return await Booking.find({decorator})
+  async allForDecorator(decorator: string) {
+    return await Booking.find({ decorator });
   }
 
   async getPastDayCount() {
@@ -64,6 +64,8 @@ class BookingService {
     useCase: string
   ) {
     const skip = (page - 1) * limit;
+    const sixMonthsAgo = new Date();
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
 
     switch (useCase) {
       case "owner":
@@ -73,25 +75,65 @@ class BookingService {
           .limit(limit);
       case "firmNotStarted":
         return await Booking.find({
-          $and: [{ firm: entity }, { status: "active" }, { decorator: null }],
+          $and: [{ firm: entity }, { status }, { decorator: null }],
         })
           .sort({ bookingDate: -1 })
           .skip(skip)
           .limit(limit);
       case "jobsToEndForDecorator":
         return await Booking.find({
-          $and: [{ decorator: entity }, { status: "active" }],
+          $and: [{ decorator: entity }, { status }],
         })
           .sort({ bookingDate: -1 })
           .skip(skip)
           .limit(limit);
-        
+      case "maintenanceForOwner":
+        return await Booking.find({
+          $and: [
+            { owner: entity },
+            { status },
+            {
+              $or: [ {
+                $and: [{lastServiceDate: null}, {finishDate: {$lte: sixMonthsAgo}}]
+              },
+
+                { lastServiceDate: { $lte: sixMonthsAgo } }, //case of subsequent maintenance
+              ],
+            },
+          ],
+        })
+          .sort({ bookingDate: -1 })
+          .skip(skip)
+          .limit(limit);
+
+      case "maintenanceForDecorator":
+        return await Booking.find({
+          $and: [
+            { decorator: entity },
+            { status },
+            {
+              $or: [ {
+                $and: [{lastServiceDate: null}, {finishDate: {$lte: sixMonthsAgo}}]
+              },
+
+                { lastServiceDate: { $lte: sixMonthsAgo } }, //case of subsequent maintenance
+              ],
+            },
+          ],
+        })
+          .sort({ bookingDate: -1 })
+          .skip(skip)
+          .limit(limit);
+
       default:
         break;
     }
   }
 
   async countDocuments(entity: string, status: string, useCase: string) {
+    const sixMonthsAgo = new Date();
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+
     switch (useCase) {
       case "owner":
         return await Booking.countDocuments({
@@ -99,12 +141,45 @@ class BookingService {
         });
       case "firmNotStarted":
         return await Booking.countDocuments({
-          $and: [{ firm: entity }, { status: "active" }, { decorator: null }],
+          $and: [{ firm: entity }, { status }, { decorator: null }],
         });
       case "jobsToEndForDecorator":
         return await Booking.countDocuments({
-          $and: [{ decorator: entity }, { status: "active" }],
+          $and: [{ decorator: entity }, { status }],
         });
+
+      case "maintenanceForOwner":
+        return await Booking.countDocuments({
+          $and: [
+            { owner: entity },
+            { status },
+            {
+              $or: [ {
+                $and: [{lastServiceDate: null}, {finishDate: {$lte: sixMonthsAgo}}]
+              },
+
+                { lastServiceDate: { $lte: sixMonthsAgo } }, //case of subsequent maintenance
+              ],
+            },
+          ],
+        });
+
+      case "maintenanceForDecorator":
+        return await Booking.countDocuments({
+          $and: [
+            { decorator: entity },
+            { status },
+            {
+              $or: [ {
+                $and: [{lastServiceDate: null}, {finishDate: {$lte: sixMonthsAgo}}]
+              },
+
+                { lastServiceDate: { $lte: sixMonthsAgo } }, //case of subsequent maintenance
+              ],
+            },
+          ],
+        });
+
       default:
         break;
     }
@@ -138,11 +213,14 @@ class BookingService {
   }
 
   async requestMaintenance(_id: string) {
-    return await Booking.findByIdAndUpdate(_id, {status:"maintained"});
+    return await Booking.findByIdAndUpdate(_id, { status: "maintained" });
   }
 
-  async maintain(_id: string,lastServiceDate: Date) {
-    return await Booking.findByIdAndUpdate(_id, {lastServiceDate, status:"archived"});
+  async maintain(_id: string, lastServiceDate: Date) {
+    return await Booking.findByIdAndUpdate(_id, {
+      lastServiceDate,
+      status: "archived",
+    });
   }
 }
 

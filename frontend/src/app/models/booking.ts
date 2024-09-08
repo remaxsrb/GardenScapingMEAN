@@ -15,4 +15,5 @@ export class Booking {
   requests: string = '';
   status: string = 'active';
   rating: number = 0;
+  lastServiceDate: Date | string = new Date();
 }

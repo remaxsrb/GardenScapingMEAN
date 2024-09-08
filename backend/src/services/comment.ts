@@ -6,9 +6,16 @@ export class CommentService {
     return await Comment.create(comment)
   }
 
-  async getComments(user:string, type:string, page:number, limit:number) {
+  async getComments(user: string, type: string, page: number, limit: number, finishDate?: Date) {
     const skip = (page - 1) * limit;
-    return await Comment.find({ $and: [{ user }, { type }] }).skip(skip).limit(limit)
+    
+    const query: any = { user, type };
+
+    if(type === 'review') 
+      return await Comment.find(query).sort({ finishDate: -1 }).skip(skip).limit(limit);
+    
+    return await Comment.find(query).skip(skip).limit(limit);;
+
   }
 
   async countDocuments(user:string, type:string) {

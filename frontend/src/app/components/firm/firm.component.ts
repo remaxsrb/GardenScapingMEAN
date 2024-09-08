@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -36,7 +37,7 @@ import { Router } from '@angular/router';
   templateUrl: './firm.component.html',
   styleUrls: ['./firm.component.css'],
 })
-export class FirmComponent implements OnInit, AfterViewInit {
+export class FirmComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private geocodingService: GeocodingService,
     private timeService: TimeService,
@@ -46,6 +47,7 @@ export class FirmComponent implements OnInit, AfterViewInit {
     private bookingService: BookingService,
     private router: Router
   ) {}
+
 
   private map!: L.Map;
   firm: Firm = new Firm();
@@ -93,12 +95,16 @@ export class FirmComponent implements OnInit, AfterViewInit {
     this.initNewBookingForm();
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     this.initMap();
     if (this.firm.address) {
       const fullAddress = `${this.firm.address.street} ${this.firm.address.number}, ${this.firm.address.city}`;
       this.geocodeRestaurantAddress(fullAddress);
     }
+  }
+
+  ngOnDestroy() {
+    localStorage.removeItem('firm');
   }
 
   previousStep() {

@@ -13,6 +13,10 @@ export const Comment = new Schema(
       ref: "Booking",
       required: true,
     },
+    finishDate: {
+      type: Date,
+      default: null
+    },
     type: {
       type: String,
       enum: ["rejection", "review"],

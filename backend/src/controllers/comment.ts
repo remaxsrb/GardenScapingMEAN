@@ -14,15 +14,30 @@ export class CommentController {
 
   async getReviewComments(req: express.Request, res: express.Response) {
 
+    try {
     const user = req.query.user as string
+    const finishDate = req.query.finishDate as string
+
     const page = parseInt(req.query.page as string);
     const limit = parseInt(req.query.limit as string);
 
-    const comments = await commentService.getComments(user, 'review', page, limit)
+    const comments = await commentService.getComments(user, 'review', page, limit, new Date(finishDate))
 
     const totalDocuments = await commentService.countDocuments(user, 'review');
 
+      return res.json({
+        page,
+        limit,
+        totalDocuments,
+        totalPages: Math.ceil(totalDocuments! / limit),
+        comments: comments,
+      });
+    } catch (err: any) {
+      res.status(500).send(err);
+    }
   }
+
+  
 
 
   async getRejectionComments(req: express.Request, res: express.Response) {

@@ -44,8 +44,8 @@ export class DecoraterDashboardBookingsComponent implements OnInit {
   invalidStartDate: boolean = false;
 
   ngOnInit(): void {
-    const ownerInfo = localStorage.getItem('user');
-    if (ownerInfo) this.decorator = JSON.parse(ownerInfo);
+    const decoratorInfo = localStorage.getItem('user');
+    if (decoratorInfo) this.decorator = JSON.parse(decoratorInfo);
 
     this.initAcceptForm();
     this.initEndJobForm();

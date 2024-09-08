@@ -20,6 +20,10 @@ class BookingService {
     return await Booking.findOneAndDelete({ _id });
   }
 
+  async allForDecorator(decorator:string) {
+    return await Booking.find({decorator})
+  }
+
   async getPastDayCount() {
     const past24Hours = new Date();
     past24Hours.setDate(past24Hours.getDate() - 1);
@@ -81,6 +85,7 @@ class BookingService {
           .sort({ bookingDate: -1 })
           .skip(skip)
           .limit(limit);
+        
       default:
         break;
     }
@@ -100,7 +105,6 @@ class BookingService {
         return await Booking.countDocuments({
           $and: [{ decorator: entity }, { status: "active" }],
         });
-
       default:
         break;
     }
@@ -129,11 +133,17 @@ class BookingService {
     return await Booking.findByIdAndUpdate(_id, update);
   }
 
-
-  async rate (_id:string, rating:number) {
-    return await Booking.findByIdAndUpdate(_id, {rating})
+  async rate(_id: string, rating: number) {
+    return await Booking.findByIdAndUpdate(_id, { rating });
   }
 
+  async requestMaintenance(_id: string) {
+    return await Booking.findByIdAndUpdate(_id, {status:"maintained"});
+  }
+
+  async maintain(_id: string,lastServiceDate: Date) {
+    return await Booking.findByIdAndUpdate(_id, {lastServiceDate, status:"archived"});
+  }
 }
 
 export default new BookingService();

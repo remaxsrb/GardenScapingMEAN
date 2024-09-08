@@ -42,6 +42,14 @@ export class BookingService {
     });
   }
 
+  allForDecorator(id: string): Observable<any> {
+    return this.http.get(`${this.backendUrl}/all_for_decorator`, {
+      params: {
+        id: id,
+      },
+    });
+  }
+
   getArchivedBookings(
     id: string,
     page: number,

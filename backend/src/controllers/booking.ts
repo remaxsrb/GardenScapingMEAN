@@ -14,6 +14,17 @@ export class BookingController {
     }
   }
 
+  async allForDecorator(req: express.Request, res: express.Response) {
+    try {
+     const bookings = await bookingService.allForDecorator(req.params.id as string);
+
+     return res.json(bookings);
+
+    } catch (err: any) {
+      res.status(500).send(err);
+    }
+  }
+
   async getPastDayCount(req: express.Request, res: express.Response) {
 
     try {
@@ -153,6 +164,29 @@ export class BookingController {
       const { rating } = req.body;
 
       await bookingService.rate(_id, rating);
+      return res.status(200);
+    } catch (err: any) {
+      res.status(500).send(err);
+    }
+  }
+
+  async requestMaintenance(req: express.Request, res: express.Response) {
+    try {
+      const { _id } = req.body;
+
+      await bookingService.requestMaintenance(_id);
+      return res.status(200);
+    } catch (err: any) {
+      res.status(500).send(err);
+    }
+  } 
+
+  async maintain(req: express.Request, res: express.Response) {
+    try {
+      const { _id } = req.body;
+      const { lastServiceDate } = req.body;
+
+      await bookingService.rate(_id, lastServiceDate);
       return res.status(200);
     } catch (err: any) {
       res.status(500).send(err);

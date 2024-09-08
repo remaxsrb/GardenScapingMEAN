@@ -26,6 +26,13 @@ bookingRouter
     new BookingController().sortJobsToEndForDecoratorDateDesc(req, res)
   );
 
+  bookingRouter
+  .route("/all_for_decorator")
+  .get((req, res) =>
+    new BookingController().allForDecorator(req, res)
+  );
+
+
 bookingRouter
   .route("/past_day_count")
   .get((req, res) => new BookingController().getPastDayCount(req, res));
@@ -52,5 +59,13 @@ bookingRouter
 bookingRouter
   .route("/rate")
   .post((req, res) => new BookingController().rate(req, res));
+
+  bookingRouter
+  .route("/request_maintenance")
+  .post((req, res) => new BookingController().requestMaintenance(req, res));
+
+  bookingRouter
+  .route("/maintain")
+  .post((req, res) => new BookingController().maintain(req, res));
 
 export default bookingRouter;

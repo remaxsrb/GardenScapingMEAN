@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Booking } from 'src/app/models/booking';
+import { Comment } from 'src/app/models/comment';
 import { User } from 'src/app/models/user';
 import { BookingService } from 'src/app/services/modelServices/booking.service';
+import { CommentService } from 'src/app/services/modelServices/comment.service';
 import { FirmService } from 'src/app/services/modelServices/firm.service';
 import { TimeService } from 'src/app/services/utilityServices/time.service';
 
@@ -13,7 +16,9 @@ import { TimeService } from 'src/app/services/utilityServices/time.service';
 export class OwnerDashboardBookingsComponent implements OnInit {
   constructor(
     private bookingService: BookingService,
-    private timeService: TimeService
+    private timeService: TimeService,
+    private commentService: CommentService,
+    private fb: FormBuilder
   ) {}
 
   owner = new User();
@@ -30,12 +35,26 @@ export class OwnerDashboardBookingsComponent implements OnInit {
   archivedBooking_totalPages: number = -1;
   archivedBooking_number_of_bookings: number = 0;
 
+  commentForm!: FormGroup;
+
+  comments: Comment[] = [];
+
   ngOnInit(): void {
     const ownerInfo = localStorage.getItem('user');
     if (ownerInfo) this.owner = JSON.parse(ownerInfo);
-
+    this.initCommentForm();
     this.loadDocuments('active');
     this.loadDocuments('archived');
+  }
+
+  initCommentForm() {
+    this.commentForm = this.fb.group({
+      user: this.owner._id,
+      booking: [''],
+      finishDate: null,
+      type: 'review',
+      text: ['', Validators.required],
+    });
   }
 
   loadDocuments(type: 'active' | 'archived') {
@@ -68,6 +87,17 @@ export class OwnerDashboardBookingsComponent implements OnInit {
           this.archivedBooking_totalPages = data.totalPages;
 
           this.prepareData('archived');
+        });
+
+      this.commentService
+        .getReviews(
+          this.owner._id,
+          this.archivedBooking_currentPage,
+          this.archivedBooking_limit
+        )
+        .subscribe((data) => {
+          this.comments = data.comments;
+          console.log(this.comments)
         });
     }
   }
@@ -139,8 +169,8 @@ export class OwnerDashboardBookingsComponent implements OnInit {
 
   cancelBooking(index: number) {
     const toDelete = {
-      _id: this.active_bookings.at(index)?._id!
-    }
+      _id: this.active_bookings.at(index)?._id!,
+    };
     this.bookingService
       .cancelBooking(JSON.stringify(toDelete))
       .subscribe((data) => {
@@ -149,26 +179,39 @@ export class OwnerDashboardBookingsComponent implements OnInit {
   }
 
   canComment(index: number) {
+    let comment = this.comments[index];
+
+    if (comment === undefined) return true;
+    return false;
   }
+
+  review(index: number) {
+    this.commentForm.patchValue({ booking: this.archived_bookings.at(index)?._id });
+
+    const finishDate = this.timeService.parseDateFromDDMMYY(this.archived_bookings.at(index)?.finishDate as string);
+
+    this.commentForm.patchValue({ finishDate});
+    this.commentService
+      .create(this.commentForm.value)
+      .subscribe((data) => {
+          window.location.reload();
+      });
+  }
+
   canRate(index: number) {
     let rating = this.archived_bookings.at(index)?.rating!;
-    console.log(rating)
     if (rating > 0) return false;
-    console.log(rating > 0)
     return true;
   }
 
   handleRatingClick(event: any, index: number): void {
     const data = {
       _id: this.archived_bookings.at(index)?._id,
-      rating: event.value
-    }
+      rating: event.value,
+    };
 
-    this.bookingService.rate(JSON.stringify(data)).subscribe(data=> {
-      window.location.reload()
-    })
-
+    this.bookingService.rate(JSON.stringify(data)).subscribe((data) => {
+      window.location.reload();
+    });
   }
-
-
 }

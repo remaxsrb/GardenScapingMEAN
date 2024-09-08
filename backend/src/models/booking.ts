@@ -31,6 +31,10 @@ export const Booking = new Schema({
     type: Date,
     default: null
   },
+  lastServiceDate: {
+    type: Date,
+    default: null
+  },
   garden: {
     type: Garden,
     required: true
@@ -44,7 +48,7 @@ export const Booking = new Schema({
   },
   status: {
     type: String,
-    enum: ["active", "archived"],
+    enum: ["active", "archived", "maintained"],
     default: "active"
   },
   rating: {

@@ -22,6 +22,11 @@ export class BookingService {
 
   getPastDayCount(): Observable<any> {
     return this.http.get(`${this.backendUrl}/past_day_count`);
+    
+  }
+
+  latest_photos(): Observable<any> {
+    return this.http.get(`${this.backendUrl}/latest_photos`);
   }
 
   getPastWeekCount(): Observable<any> {

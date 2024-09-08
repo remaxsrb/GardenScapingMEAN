@@ -5,6 +5,7 @@ import bookingRouter from './routers/booking';
 import firmRouter from './routers/firm';
 import userRouter from './routers/user';
 import commentRouter from './routers/comment';
+import fileRouter from './routers/file';
 
 const app = express();
 
@@ -31,6 +32,8 @@ router.use("/user", userRouter);
 router.use("/firm", firmRouter);
 router.use("/booking", bookingRouter);
 router.use("/comment", commentRouter);
+router.use("/file", fileRouter);
+
 
 
 // Main route

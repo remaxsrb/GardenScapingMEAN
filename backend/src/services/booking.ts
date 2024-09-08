@@ -20,6 +20,10 @@ class BookingService {
     return await Booking.findOneAndDelete({ _id });
   }
 
+  async findFirm(_id: string) {
+    return await Booking.findById(_id).select("firm");
+  }
+
   async allForDecorator(decorator: string) {
     return await Booking.find({ decorator });
   }
@@ -281,6 +285,14 @@ class BookingService {
       .select("photo");
     if (latestDocument.length > 0) return latestDocument[0].photo;
   }
+
+  async getLatestPhotos() {
+    return await Booking.find({ finishDate: { $ne: null } })
+      .sort({ _id: -1 })
+      .limit(3)
+      .select("photo");
+  }
+
 }
 
 export default new BookingService();

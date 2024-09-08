@@ -149,6 +149,16 @@ export class BookingController {
     return this.handleGetBookings(req, res, 'maintained', "maintenanceForDecorator");
   } 
 
+  async latestPhotos(req: express.Request, res: express.Response) {
+    try {
+      const bookings = await bookingService.getLatestPhotos();
+
+      return res.json(bookings);
+    } catch (err: any) {
+      res.status(500).send(err);
+    }
+  }
+
   async acceptJob(req: express.Request, res: express.Response) {
     try {
       const { _id } = req.body;
@@ -195,6 +205,13 @@ export class BookingController {
       const { rating } = req.body;
 
       await bookingService.rate(_id, rating);
+
+      const booking = await bookingService.findFirm(_id);
+
+      const firm = booking?.firm.toString();
+
+      await firmService.rate(rating, firm);
+      
       return res.status(200);
     } catch (err: any) {
       res.status(500).send(err);

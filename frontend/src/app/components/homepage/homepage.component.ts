@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Booking } from "src/app/models/booking";
 import { Decorator } from "src/app/models/decorator";
 import { Firm } from "src/app/models/firm";
 import { RegexPatterns } from "src/app/regexPatterns";
@@ -44,6 +45,9 @@ export class HomepageComponent implements OnInit {
 
   searchForm!: FormGroup;
 
+  jobPhotos: string[] = [];
+  responsiveOptions: any[] | undefined;
+
   ngOnInit(): void {
     this.userService.countOwner().subscribe((data) => {
       this.number_of_owners = data.count;
@@ -65,9 +69,38 @@ export class HomepageComponent implements OnInit {
     this.bookingService.getPastMonthCount().subscribe(data=> {
       this.pastMonthCount = data;
     })
-    
+
+
+
+    this.bookingService.latest_photos().subscribe(data=> {
+
+      data.forEach((element:Booking) => {
+        this.jobPhotos!.push( "assets/photos/" + element.photo)
+      });
+      console.log('Job Photos:', this.jobPhotos);
+
+    })
+    this.initResponsiveOptions()
     this.initSearchForm();
     this.loadDocuments();
+  }
+
+  initResponsiveOptions() {
+    
+    this.responsiveOptions = [
+      {
+          breakpoint: '1024px',
+          numVisible: 5
+      },
+      {
+          breakpoint: '768px',
+          numVisible: 3
+      },
+      {
+          breakpoint: '560px',
+          numVisible: 1
+      }
+  ];
   }
 
   initSearchForm() {

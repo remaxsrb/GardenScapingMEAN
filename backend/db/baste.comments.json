@@ -1,0 +1,29 @@
+[{
+  "_id": {
+    "$oid": "66dcb921732981ec08681446"
+  },
+  "user": {
+    "$oid": "66ae020b0c047e0604dba881"
+  },
+  "booking": {
+    "$oid": "66dcb659732981ec086812b2"
+  },
+  "type": "rejection",
+  "text": "Partizan"
+},
+{
+  "_id": {
+    "$oid": "66dd5f2b5b118aa7119acf8f"
+  },
+  "user": {
+    "$oid": "66a284a3191715590e4c3b8e"
+  },
+  "booking": {
+    "$oid": "66dcb6bb732981ec08681300"
+  },
+  "finishDate": {
+    "$date": "2024-09-29T22:00:00.000Z"
+  },
+  "type": "review",
+  "text": "Partizan"
+}]

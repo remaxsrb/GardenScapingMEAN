@@ -103,13 +103,13 @@
     "$oid": "66a7a40032ceeb1fa5b6fc64"
   },
   "bookingDate": {
-    "$date": "2024-09-07T20:25:18.948Z"
+    "$date": "2024-02-04T20:25:18.948Z"
   },
   "startDate": {
-    "$date": "2024-09-20T22:00:00.000Z"
+    "$date": "2024-03-06T22:00:00.000Z"
   },
   "finishDate": {
-    "$date": "2024-09-29T22:00:00.000Z"
+    "$date": "2024-03-07T22:00:00.000Z"
   },
   "garden": {
     "width": 4,
@@ -133,7 +133,233 @@
     }
   ],
   "requests": "",
-  "status": "archived",
+  "status": "maintained",
   "rating": 5,
   "lastServiceDate": null
+},
+{
+  "_id": {
+    "$oid": "66dd9abc2763abdb0c782c4e"
+  },
+  "owner": {
+    "$oid": "66a284a3191715590e4c3b8e"
+  },
+  "decorator": {
+    "$oid": "66ae020b0c047e0604dba881"
+  },
+  "firm": {
+    "$oid": "66a7a40032ceeb1fa5b6fc64"
+  },
+  "bookingDate": {
+    "$date": "2023-02-04T20:25:18.948Z"
+  },
+  "startDate": {
+    "$date": "2023-03-06T22:00:00.000Z"
+  },
+  "finishDate": {
+    "$date": "2023-03-07T22:00:00.000Z"
+  },
+  "garden": {
+    "width": 4,
+    "height": 7,
+    "type": "restaurant",
+    "waterArea": 5,
+    "greenArea": 6,
+    "sittingArea": 7,
+    "_id": {
+      "$oid": "66dcb6bb732981ec08681301"
+    }
+  },
+  "photo": "pool2.jpg",
+  "services": [
+    {
+      "name": "Servis1",
+      "price": 100,
+      "_id": {
+        "$oid": "66a7a40032ceeb1fa5b6fc66"
+      }
+    }
+  ],
+  "requests": "",
+  "status": "archived",
+  "rating": 3,
+  "lastServiceDate": {
+    "$date": "2023-09-06T22:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "66dd9b8a2763abdb0c782c4f"
+  },
+  "owner": {
+    "$oid": "66a284a3191715590e4c3b8e"
+  },
+  "decorator": {
+    "$oid": "66ae020b0c047e0604dba881"
+  },
+  "firm": {
+    "$oid": "66a7a40032ceeb1fa5b6fc64"
+  },
+  "bookingDate": {
+    "$date": "2022-02-04T20:25:18.948Z"
+  },
+  "startDate": {
+    "$date": "2022-03-06T22:00:00.000Z"
+  },
+  "finishDate": {
+    "$date": "2022-03-07T22:00:00.000Z"
+  },
+  "garden": {
+    "width": 4,
+    "height": 7,
+    "type": "restaurant",
+    "waterArea": 5,
+    "greenArea": 6,
+    "sittingArea": 7,
+    "_id": {
+      "$oid": "66dcb6bb732981ec08681301"
+    }
+  },
+  "photo": "pool3.jpg",
+  "services": [
+    {
+      "name": "Servis1",
+      "price": 100,
+      "_id": {
+        "$oid": "66a7a40032ceeb1fa5b6fc66"
+      }
+    }
+  ],
+  "requests": "",
+  "status": "archived",
+  "rating": 3,
+  "lastServiceDate": {
+    "$date": "2022-09-06T22:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "66ddb9fbdb5350dd559d7597"
+  },
+  "owner": {
+    "$oid": "66a284a3191715590e4c3b8e"
+  },
+  "decorator": null,
+  "firm": {
+    "$oid": "66a7a40032ceeb1fa5b6fc64"
+  },
+  "bookingDate": {
+    "$date": "2024-09-08T14:51:09.995Z"
+  },
+  "startDate": null,
+  "finishDate": null,
+  "lastServiceDate": null,
+  "garden": {
+    "width": 3,
+    "height": 4,
+    "type": "private",
+    "waterArea": 5,
+    "greenArea": 4,
+    "sittingArea": 5,
+    "_id": {
+      "$oid": "66ddb9fbdb5350dd559d7598"
+    }
+  },
+  "photo": "",
+  "services": [
+    {
+      "name": "Servis1",
+      "price": 100,
+      "_id": {
+        "$oid": "66a7a40032ceeb1fa5b6fc66"
+      }
+    }
+  ],
+  "requests": "",
+  "status": "active",
+  "rating": 0
+},
+{
+  "_id": {
+    "$oid": "66ddbaa33e138f8120a01530"
+  },
+  "owner": {
+    "$oid": "66a284a3191715590e4c3b8e"
+  },
+  "decorator": null,
+  "firm": {
+    "$oid": "66a7a45a32ceeb1fa5b6fc6a"
+  },
+  "bookingDate": {
+    "$date": "2024-09-09T14:54:08.000Z"
+  },
+  "startDate": null,
+  "finishDate": null,
+  "lastServiceDate": null,
+  "garden": {
+    "width": 3,
+    "height": 4,
+    "type": "private",
+    "waterArea": 4,
+    "greenArea": 5,
+    "sittingArea": 6,
+    "_id": {
+      "$oid": "66ddbaa33e138f8120a01531"
+    }
+  },
+  "photo": "",
+  "services": [
+    {
+      "name": "Servis1",
+      "price": 100,
+      "_id": {
+        "$oid": "66a7a45a32ceeb1fa5b6fc6c"
+      }
+    }
+  ],
+  "requests": "",
+  "status": "active",
+  "rating": 0
+},
+{
+  "_id": {
+    "$oid": "66ddbae33e138f8120a01537"
+  },
+  "owner": {
+    "$oid": "66a284a3191715590e4c3b8e"
+  },
+  "decorator": null,
+  "firm": {
+    "$oid": "66a7a45a32ceeb1fa5b6fc6a"
+  },
+  "bookingDate": {
+    "$date": "2024-09-08T14:55:06.883Z"
+  },
+  "startDate": null,
+  "finishDate": null,
+  "lastServiceDate": null,
+  "garden": {
+    "width": 3,
+    "height": 5,
+    "type": "restaurant",
+    "waterArea": 4,
+    "greenArea": 4,
+    "sittingArea": 3,
+    "_id": {
+      "$oid": "66ddbae33e138f8120a01538"
+    }
+  },
+  "photo": "",
+  "services": [
+    {
+      "name": "Servis1",
+      "price": 100,
+      "_id": {
+        "$oid": "66a7a45a32ceeb1fa5b6fc6c"
+      }
+    }
+  ],
+  "requests": "",
+  "status": "active",
+  "rating": 0
 }]

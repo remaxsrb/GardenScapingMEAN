@@ -67,7 +67,7 @@ class FirmService {
     return await Firm.findOne(query);
   }
 
-  async rate(ownerReview: number, _id: string) {
+  async rate(ownerReview: number, _id: string | undefined) {
     var newReviewCount = 0;
     var newRating = 0;
     const firm = await Firm.findOne({ _id });

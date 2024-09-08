@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -10,17 +10,22 @@ export class JsonService {
   private layoutUrl = 'assets/gardenLayouts'; 
   private photoUrl = 'assets/photos'; 
 
-   
+  private apiUrl = 'http://127.0.0.1:4000';
+
+  backendUrl = `${this.apiUrl}/file`;
+
+  headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient) { }
 
-  get_layout(fileName:string): Observable<any> {
-    return this.http.get<any>(`${this.layoutUrl}/${fileName}`);
+  get_layout(fileName:string): Observable<string> {
+    return this.http.get<string>(`${this.layoutUrl}/${fileName}`);
   }
 
-  saveLayout(fileName: string, data: any): Observable<any> {
-    const url = `${this.layoutUrl}/${fileName}`;
-    return this.http.post(url, data, { responseType: 'text' });
+  saveLayout(data: any) {
+    return this.http.post<any>(`${this.backendUrl}/save`, data, {
+      headers: this.headers,
+    });
   }
 
   get_photo(fileName:string): Observable<Blob> {

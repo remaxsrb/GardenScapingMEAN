@@ -133,8 +133,22 @@
             </div>
 
             <div class="row">
-                <div class="col-md-12"></div>
-            </div>
+                <div class="col-md-12">
+                  <!-- <div class="card">
+                    <p-galleria [value]="jobPhotos" [numVisible]="3">
+                        <ng-template pTemplate="item" let-item>
+                          <img [src]="item" style="width: 100%; height: auto;" />
+                        </ng-template>
+                      </p-galleria>
+                  </div> -->
+                  <div class="image-gallery">
+                    <div *ngFor="let photo of jobPhotos" class="gallery-item">
+                      <img [src]="photo" alt="Job Photo" style="width: 100%; height: auto;" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
         </div>
     </main>
     <footer class="bg-dark text-white py-3 mt-4">

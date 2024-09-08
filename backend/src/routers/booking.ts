@@ -55,6 +55,10 @@ bookingRouter
   .get((req, res) => new BookingController().getPastTwoYears(req, res));
 
   bookingRouter
+  .route("/latest_photos")
+  .get((req, res) => new BookingController().latestPhotos(req, res));
+
+  bookingRouter
   .route("/maintain_for_owner")
   .get((req, res) => new BookingController().toRequestMaintaining(req, res));
 

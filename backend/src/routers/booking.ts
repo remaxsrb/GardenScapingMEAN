@@ -32,6 +32,12 @@ bookingRouter
     new BookingController().allForDecorator(req, res)
   );
 
+  bookingRouter
+  .route("/all_for_firm")
+  .get((req, res) =>
+    new BookingController().allForFirm(req, res)
+  );
+
 
 bookingRouter
   .route("/past_day_count")
@@ -43,6 +49,10 @@ bookingRouter
 bookingRouter
   .route("/past_month_count")
   .get((req, res) => new BookingController().getPastMonthCount(req, res));
+
+  bookingRouter
+  .route("/past_two_years")
+  .get((req, res) => new BookingController().getPastTwoYears(req, res));
 
   bookingRouter
   .route("/maintain_for_owner")

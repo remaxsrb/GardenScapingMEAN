@@ -50,6 +50,22 @@ export class BookingService {
     });
   }
 
+  allForFirm(id: string): Observable<any> {
+    return this.http.get(`${this.backendUrl}/all_for_firm`, {
+      params: {
+        id: id,
+      },
+    });
+  }
+
+  pastTwoYears(id: string): Observable<any> {
+    return this.http.get(`${this.backendUrl}/past_two_years`, {
+      params: {
+        id: id,
+      },
+    });
+  }
+
   getArchivedBookings(
     id: string,
     page: number,

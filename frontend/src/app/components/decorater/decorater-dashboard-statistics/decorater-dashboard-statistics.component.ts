@@ -3,6 +3,7 @@ import { Chart, ChartData, ChartOptions } from 'chart.js';
 import { Booking } from 'src/app/models/booking';
 import { User } from 'src/app/models/user';
 import { BookingService } from 'src/app/services/modelServices/booking.service';
+import { ChartService } from 'src/app/services/utilityServices/chart.service';
 
 @Component({
   selector: 'app-decorater-dashboard-statistics',
@@ -10,11 +11,21 @@ import { BookingService } from 'src/app/services/modelServices/booking.service';
   styleUrls: ['./decorater-dashboard-statistics.component.css'],
 })
 export class DecoraterDashboardStatisticsComponent implements OnInit {
-  constructor(private bookingService: BookingService) {}
+  constructor(
+    private bookingService: BookingService,
+    private chartService: ChartService
+  ) {}
 
   decorator: User = new User();
-  bookingsForDecorator: Booking[] = [];
+
   byMonthChartData: any;
+  byMonthChartOptions: any;
+
+  byDecoratorInFirmData: any;
+  byDecoratorInFirmOptions: any;
+
+  averagePerDayData: any;
+  averagePerDatOptions: any;
 
   ngOnInit(): void {
     const decoratorInfo = localStorage.getItem('user');
@@ -23,82 +34,24 @@ export class DecoraterDashboardStatisticsComponent implements OnInit {
     this.bookingService
       .allForDecorator(this.decorator._id)
       .subscribe((data) => {
-        this.bookingsForDecorator = data.bookings;
-        this.prepareChartData();
+        const { data: chartData, options } =
+          this.chartService.getBookingChartData(data);
+        this.byMonthChartData = chartData;
+        this.byMonthChartOptions = options;
       });
-  }
 
-  prepareChartData() {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color').trim();
-    const textColorSecondary = documentStyle
-      .getPropertyValue('--text-color-secondary')
-      .trim();
-    const surfaceBorder = documentStyle
-      .getPropertyValue('--surface-border')
-      .trim();
-
-    const months = Array.from({ length: 12 }, (_, i) => i + 1); // Months 1-12
-    const monthLabels = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
-
-    const bookingCounts = months.map((month) => {
-      return this.bookingsForDecorator.filter(
-        (booking) => new Date(booking.bookingDate).getMonth() + 1 === month
-      ).length;
+    this.bookingService.allForFirm(this.decorator.firm).subscribe((data) => {
+      const { data: chartData, options } =
+        this.chartService.getDecoratorPieChartData(data);
+      this.byDecoratorInFirmData = chartData;
+      this.byDecoratorInFirmOptions = options;
     });
 
-    const maxBookingCount = Math.max(...bookingCounts);
-
-    this.byMonthChartData = {
-      labels: monthLabels,
-      datasets: [
-        {
-          label: 'Booking Count',
-          data: bookingCounts,
-          backgroundColor: '#42A5F5',
-        },
-      ],
-      options: {
-        scales: {
-          x: {
-            ticks: {
-              color: textColor,
-              autoSkip: false,
-            },
-            grid: {
-              color: surfaceBorder,
-              drawBorder: false,
-              borderWidth: 1,
-            },
-          },
-          y: {
-            beginAtZero: true,
-            ticks: {
-              stepSize: 1,
-              color: textColor,
-            },
-            grid: {
-              color: surfaceBorder,
-              drawBorder: false,
-              borderWidth: 1,
-            },
-            suggestedMax: maxBookingCount + 1,
-          },
-        },
-      },
-    };
+    this.bookingService.pastTwoYears(this.decorator._id).subscribe((data) => {
+      const { data: chartData, options } =
+        this.chartService.getWeeklyAverageBookingsData(data);
+      this.averagePerDayData = chartData;
+      this.averagePerDatOptions = options;
+    });
   }
 }

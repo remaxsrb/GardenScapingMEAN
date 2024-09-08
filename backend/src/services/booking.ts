@@ -24,6 +24,10 @@ class BookingService {
     return await Booking.find({ decorator });
   }
 
+  async allForFirm(firm: string) {
+    return await Booking.find({ firm });
+  }
+
   async getPastDayCount() {
     const past24Hours = new Date();
     past24Hours.setDate(past24Hours.getDate() - 1);
@@ -48,6 +52,24 @@ class BookingService {
 
     return await Booking.countDocuments({
       bookingDate: { $gte: pastMonth },
+    });
+  }
+
+  async getPastTwoYears(decorator: string) {
+    const today = new Date();
+    const pastTwoYearsDate = new Date(
+      today.setFullYear(today.getFullYear() - 2)
+    );
+
+    return await Booking.find({
+      $and: [
+        {
+          bookingDate: { $gte: pastTwoYearsDate },
+        },
+        {
+          decorator,
+        },
+      ],
     });
   }
 
@@ -232,7 +254,7 @@ class BookingService {
     return await Booking.findByIdAndUpdate(_id, { status: "maintained" });
   }
 
-  async rejecttMaintenance(_id: string) {
+  async rejectMaintenance(_id: string) {
     return await Booking.findByIdAndUpdate(_id, { status: "archived" });
   }
 
@@ -244,12 +266,15 @@ class BookingService {
   }
 
   async getLatestJobPhotoForDecorator(_id: string) {
-
     const now = new Date();
-    const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000)
+    const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
 
     const latestDocument = await Booking.find({
-      $and: [{ decorator: _id }, { finishDate: { $ne: null } }, { finishDate: { $lte: twentyFourHoursAgo }}],
+      $and: [
+        { decorator: _id },
+        { finishDate: { $ne: null } },
+        { finishDate: { $lte: twentyFourHoursAgo } },
+      ],
     })
       .sort({ _id: -1 })
       .limit(1)

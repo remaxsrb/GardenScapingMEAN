@@ -16,7 +16,18 @@ export class BookingController {
 
   async allForDecorator(req: express.Request, res: express.Response) {
     try {
-     const bookings = await bookingService.allForDecorator(req.params.id as string);
+     const bookings = await bookingService.allForDecorator(req.query.id as string);
+
+     return res.json(bookings);
+
+    } catch (err: any) {
+      res.status(500).send(err);
+    }
+  }
+
+  async allForFirm(req: express.Request, res: express.Response) {
+    try {
+     const bookings = await bookingService.allForFirm(req.query.id as string);
 
      return res.json(bookings);
 
@@ -35,6 +46,18 @@ export class BookingController {
       res.status(500).send(err);
     }
   }
+
+  async getPastTwoYears(req: express.Request, res: express.Response) {
+
+    try {
+      const bookings = await bookingService.getPastTwoYears(req.query.id as string);
+
+      return res.json(bookings);
+    } catch (err: any) {
+      res.status(500).send(err);
+    }
+  }
+
   async getPastWeekCount(req: express.Request, res: express.Response) {
     try {
       const count = await bookingService.getPastWeekCount();
@@ -193,7 +216,7 @@ export class BookingController {
     try {
       const { _id } = req.body;
 
-      await bookingService.rejecttMaintenance(_id);
+      await bookingService.rejectMaintenance(_id);
       return res.status(200);
     } catch (err: any) {
       res.status(500).send(err);

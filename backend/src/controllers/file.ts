@@ -1,32 +1,28 @@
-import { Request, Response } from "express";
-import FileService from "../services/file";
+import { Request, Response } from 'express';
+import fileService from '../services/file';
 
 export class FileController {
-  private textService: FileService;
 
-  constructor() {
-    this.textService = new FileService();
-  }
 
-  public async saveText(req: Request, res: Response): Promise<void> {
-    const { text, fileName } = req.body;
-
-    if (!text || !fileName) {
-      res.status(400).json({ error: "Text and file name are required" });
-      return;
-    }
-
+  async uploadFile (req: Request, res: Response) {
     try {
-      await this.textService.saveTextToFile(text, fileName);
-      res
-        .status(200)
-        .json({ message: "Text serialized to JSON file successfully" });
-    } catch (err) {
-      res
-        .status(500)
-        .json({ error: "Failed to write JSON file" });
+      
+      const filePath = await fileService.handleFileUpload(req.file!);
+      res.status(200).json({ message: 'File uploaded successfully', filePath: filePath });
+    } catch (error) {
+      res.status(500).json({ message: 'File upload failed'});
     }
-  }
-}
+  };
 
-export default FileController;
+  async serveFileHandler (req: Request, res: Response) {
+    const  fileName  = req.query.fileName as string;
+    try {
+      const filePath = await fileService.serveFile(fileName);
+      res.sendFile(filePath);
+    } catch (error) {
+      res.status(404).json({ message: error });
+    }
+  };
+
+
+}

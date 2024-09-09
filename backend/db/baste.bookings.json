@@ -122,7 +122,7 @@
       "$oid": "66dcb6bb732981ec08681301"
     }
   },
-  "photo": "pool1.jpg",
+  "photo": "http://localhost:4000/files/photos/pool1.jpg",
   "services": [
     {
       "name": "Servis1",
@@ -170,7 +170,7 @@
       "$oid": "66dcb6bb732981ec08681301"
     }
   },
-  "photo": "pool2.jpg",
+  "photo": "http://localhost:4000/files/photos/pool2.jpg",
   "services": [
     {
       "name": "Servis1",
@@ -220,7 +220,7 @@
       "$oid": "66dcb6bb732981ec08681301"
     }
   },
-  "photo": "pool3.jpg",
+  "photo": "http://localhost:4000/files/photos/pool3.jpg",
   "services": [
     {
       "name": "Servis1",
@@ -356,6 +356,90 @@
       "price": 100,
       "_id": {
         "$oid": "66a7a45a32ceeb1fa5b6fc6c"
+      }
+    }
+  ],
+  "requests": "",
+  "status": "active",
+  "rating": 0
+},
+{
+  "_id": {
+    "$oid": "66ddf0477df7dcb73aa35661"
+  },
+  "owner": {
+    "$oid": "66a284a3191715590e4c3b8e"
+  },
+  "decorator": null,
+  "firm": {
+    "$oid": "66a7a40032ceeb1fa5b6fc64"
+  },
+  "bookingDate": {
+    "$date": "2024-12-21T19:42:42.000Z"
+  },
+  "startDate": null,
+  "finishDate": null,
+  "lastServiceDate": null,
+  "garden": {
+    "width": 5,
+    "height": 7,
+    "type": "private",
+    "waterArea": 5,
+    "greenArea": 4,
+    "sittingArea": 7,
+    "_id": {
+      "$oid": "66ddf0477df7dcb73aa35662"
+    }
+  },
+  "photo": "",
+  "services": [
+    {
+      "name": "Servis1",
+      "price": 100,
+      "_id": {
+        "$oid": "66a7a40032ceeb1fa5b6fc66"
+      }
+    }
+  ],
+  "requests": "",
+  "status": "active",
+  "rating": 0
+},
+{
+  "_id": {
+    "$oid": "66ddf07b7df7dcb73aa35668"
+  },
+  "owner": {
+    "$oid": "66a284a3191715590e4c3b8e"
+  },
+  "decorator": null,
+  "firm": {
+    "$oid": "66a7a40032ceeb1fa5b6fc64"
+  },
+  "bookingDate": {
+    "$date": "2024-09-08T18:43:51.913Z"
+  },
+  "startDate": null,
+  "finishDate": null,
+  "lastServiceDate": null,
+  "garden": {
+    "width": 5,
+    "height": 4,
+    "type": "private",
+    "waterArea": 4,
+    "greenArea": 4,
+    "sittingArea": 5,
+    "_id": {
+      "$oid": "66ddf07b7df7dcb73aa35669"
+    }
+  },
+  "photo": "",
+  "services": [
+    {
+      "name": "Servis1",
+      "price": 100,
+      "_id": {
+        "$oid": "66a7a40032ceeb1fa5b6fc66"
       }
     }
   ],

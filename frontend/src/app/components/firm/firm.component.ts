@@ -244,28 +244,28 @@ export class FirmComponent implements OnInit, AfterViewInit, OnDestroy {
     const file: File = event.target.files[0];
     this.selectedFile = file;
 
-    this.jsonService.get_layout(this.selectedFile.name).subscribe(data=> {
-      this.shapes = JSON.parse(data);
+    // this.jsonService.get_layout(this.selectedFile.name).subscribe(data=> {
+    //   this.shapes = JSON.parse(data);
 
-      let waterArea = 0;
-      let sittingArea = 0;
-      let greenArea = 0;
+    //   let waterArea = 0;
+    //   let sittingArea = 0;
+    //   let greenArea = 0;
 
-      this.shapes.forEach((element: Shape) => {
-        if(element.imageSrc==="brown-circle.jpeg" || element.imageSrc==="tall-gray-rectangle.jpeg")
-          sittingArea++;
-        if(element.imageSrc==="wide-blue-elipse.jpeg" || element.imageSrc==="wide-blue-rectangle.jpeg")
-          waterArea++;
-        if(element.imageSrc==="green-square.jpeg")
-          greenArea++
-      });
+    //   this.shapes.forEach((element: Shape) => {
+    //     if(element.imageSrc==="brown-circle.jpeg" || element.imageSrc==="tall-gray-rectangle.jpeg")
+    //       sittingArea++;
+    //     if(element.imageSrc==="wide-blue-elipse.jpeg" || element.imageSrc==="wide-blue-rectangle.jpeg")
+    //       waterArea++;
+    //     if(element.imageSrc==="green-square.jpeg")
+    //       greenArea++
+    //   });
 
-      this.gardenForm.patchValue({waterArea: waterArea});
-      this.gardenForm.patchValue({sittingArea: sittingArea});
-      this.gardenForm.patchValue({greenArea: greenArea});
+    //   this.gardenForm.patchValue({waterArea: waterArea});
+    //   this.gardenForm.patchValue({sittingArea: sittingArea});
+    //   this.gardenForm.patchValue({greenArea: greenArea});
 
 
-    })
+    // })
 
   }
 
@@ -310,8 +310,6 @@ export class FirmComponent implements OnInit, AfterViewInit, OnDestroy {
           fileName,
           text
         }
-        this.jsonService.saveLayout(payload).subscribe()
-
         this.newBookingForm.reset()
         window.location.reload()
       }

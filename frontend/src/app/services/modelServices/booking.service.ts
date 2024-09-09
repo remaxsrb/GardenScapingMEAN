@@ -8,9 +8,9 @@ import { Observable } from 'rxjs/internal/Observable';
 export class BookingService {
   private apiUrl = 'http://127.0.0.1:4000';
 
-  backendUrl = `${this.apiUrl}/booking`;
+  private backendUrl = `${this.apiUrl}/booking`;
 
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
+  private headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient) {}
 

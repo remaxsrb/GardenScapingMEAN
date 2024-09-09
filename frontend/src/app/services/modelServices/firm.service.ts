@@ -9,9 +9,9 @@ import { Firm } from "src/app/models/firm";
 export class FirmService {
   private apiUrl = "http://127.0.0.1:4000";
 
-  backendUrl = `${this.apiUrl}/firm`;
+  private backendUrl = `${this.apiUrl}/firm`;
 
-  headers = new HttpHeaders().set("Content-Type", "application/json");
+  private headers = new HttpHeaders().set("Content-Type", "application/json");
 
   constructor(private http: HttpClient) {}
 
@@ -31,14 +31,14 @@ export class FirmService {
   getDocuments(
     page: number,
     limit: number,
-    field: string,
+    sortingField: string,
     order: number = 1,
   ): Observable<any> {
     return this.http.get(`${this.backendUrl}/get`, {
       params: {
         page: page.toString(),
         limit: limit.toString(),
-        field: field,
+        sortingField: sortingField,
         order: order.toString()
       },
     });
@@ -50,20 +50,22 @@ export class FirmService {
     });
   }
 
-  sortPaginated(field: string, order: number, page: number, limit: number) {
-    return this.http.get<Firm[]>(
-      `${this.backendUrl}/sort?field=${field}&order=${order}&page=${page}&limit=${limit}`,
-    );
+
+  readByValue(
+    value:string,
+    page: number,
+    limit: number,
+  
+  ): Observable<any> {
+    return this.http.get(`${this.backendUrl}/get`, {
+      params: {
+        value: value,
+        page: page.toString(),
+        limit: limit.toString()
+       
+      },
+    });
   }
 
-  readByFields(searchData: any) {
-    const name = searchData.name;
-    const street = searchData.address.street;
-    const number = searchData.address.number;
-    const city = searchData.address.city;
-
-    return this.http.get<Firm[]>(
-      `${this.backendUrl}/read?name=${name}&street=${street}&number=${number}&city=${city}`,
-    );
-  }
+  
 }

@@ -110,10 +110,12 @@ export class HomepageComponent implements OnInit {
     });
   }
 
-  applyFilters() {
-    // this.firmService.readByFields().subscribe((data) => {
-    //   this.firms = data;
-    // })
+  refreshData() {
+    this.currentPage = 1;
+    this.sortingOrder = 1;
+    this.sortingField = "";
+    this.loadDocuments();
+
   }
 
   loadDocuments() {
@@ -126,18 +128,6 @@ export class HomepageComponent implements OnInit {
       });
   }
 
-  // sortDocuments() {
-  //   this.firmService
-  //     .sortPaginated(
-  //       this.sortingField,
-  //       this.sortingOrder,
-  //       this.currentPage,
-  //       this.limit,
-  //     )
-  //     .subscribe((data) => {
-  //       this.firms = data;
-  //     });
-  // }
 
   pageChange(event: any) {
     this.currentPage = event.first / event.rows + 1; // Calculate the current page
@@ -159,4 +149,21 @@ export class HomepageComponent implements OnInit {
   isLastPage() {
     return this.currentPage === this.totalPages;
   }
+
+  filterFirmNames(event: any) {
+
+    const value = event.target.value
+
+    if(value === "") 
+      this.refreshData()
+    else {
+      this.firmService.readByValue(value, this.currentPage, this.limit).subscribe(data=> {
+        this.firms = data.firms
+        this.totalPages = data.totalPages;
+        this.number_of_firms = data.totalDocuments;
+      })
+    }
+
+  }
+
 }

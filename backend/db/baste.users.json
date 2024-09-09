@@ -24,7 +24,7 @@
       "$oid": "66a284a3191715590e4c3b90"
     }
   },
-  "profilePhoto": "srb_dedpul.png",
+  "profilePhoto": "http://localhost:4000/files/photos/tombraider.jpg",
   "status": "active"
 },
 {
@@ -41,7 +41,7 @@
     "$oid": "66ae020b0c047e0604dba881"
   },
   "username": "pera123",
-  "password": "$2a$10$bQLhFIDb3YnHUZi/gJhsGuQ/r3TbNInKMYGh8MDirR7A6DRA.7hRe",
+  "password": "$2a$10$yWOiHM17brbz4Q61l7ngCexuDXoOCBGmdhdFejZTE33TCtlj755IW",
   "email": "pera123@gmail.com",
   "role": "decorator",
   "firstname": "Pera",
@@ -56,7 +56,7 @@
     }
   },
   "phoneNumber": "0641111111",
-  "profilePhoto": "default_male.png",
+  "profilePhoto": "http://localhost:4000/files/photos/default_male.png",
   "firm": {
     "$oid": "66a7a40032ceeb1fa5b6fc64"
   }
@@ -106,7 +106,7 @@
     }
   },
   "phoneNumber": "0641111111",
-  "profilePhoto": "default_female.png",
+  "profilePhoto": "http://localhost:4000/files/photos/default_female.png",
   "firm": {
     "$oid": "66a7a45a32ceeb1fa5b6fc6a"
   }
@@ -131,7 +131,7 @@
     }
   },
   "phoneNumber": "0641111111",
-  "profilePhoto": "default_male.png",
+  "profilePhoto": "http://localhost:4000/files/photos/default_male.png",
   "firm": {
     "$oid": "66a7a45a32ceeb1fa5b6fc6a"
   }
@@ -156,7 +156,7 @@
     }
   },
   "phoneNumber": "0641111111",
-  "profilePhoto": "default_female.png",
+  "profilePhoto": "http://localhost:4000/files/photos/default_female.png",
   "firm": {
     "$oid": "66a7a46132ceeb1fa5b6fc70"
   }
@@ -181,7 +181,7 @@
     }
   },
   "phoneNumber": "0641111111",
-  "profilePhoto": "default_female.png",
+  "profilePhoto": "http://localhost:4000/files/photos/default_female.png",
   "firm": {
     "$oid": "66a7a46132ceeb1fa5b6fc70"
   }
@@ -206,7 +206,7 @@
     }
   },
   "phoneNumber": "0641111111",
-  "profilePhoto": "default_male.png",
+  "profilePhoto": "http://localhost:4000/files/photos/default_male.png",
   "firm": {
     "$oid": "66a7a46832ceeb1fa5b6fc76"
   }
@@ -231,7 +231,7 @@
     }
   },
   "phoneNumber": "0641111111",
-  "profilePhoto": "default_male.png",
+  "profilePhoto": "http://localhost:4000/files/photos/default_male.png",
   "firm": {
     "$oid": "66a7a46832ceeb1fa5b6fc76"
   }
@@ -256,7 +256,7 @@
     }
   },
   "phoneNumber": "0641111111",
-  "profilePhoto": "default_male.png",
+  "profilePhoto": "http://localhost:4000/files/photos/default_male.png",
   "firm": {
     "$oid": "66a7a46e32ceeb1fa5b6fc7c"
   }
@@ -281,7 +281,7 @@
     }
   },
   "phoneNumber": "0641111111",
-  "profilePhoto": "default_male.png",
+  "profilePhoto": "http://localhost:4000/files/photos/default_male.png",
   "firm": {
     "$oid": "66a7a46e32ceeb1fa5b6fc7c"
   }
@@ -306,7 +306,7 @@
     }
   },
   "phoneNumber": "0641111111",
-  "profilePhoto": "default_male.png",
+  "profilePhoto": "http://localhost:4000/files/photos/default_male.png",
   "firm": {
     "$oid": "66a7a47532ceeb1fa5b6fc82"
   }
@@ -331,7 +331,7 @@
     }
   },
   "phoneNumber": "0641111111",
-  "profilePhoto": "default_female.png",
+  "profilePhoto": "http://localhost:4000/files/photos/default_female.png",
   "firm": {
     "$oid": "66a7a47532ceeb1fa5b6fc82"
   }

@@ -37,18 +37,18 @@ export class FirmController {
     try {
       const page = parseInt(req.query.page as string);
       const limit = parseInt(req.query.limit as string);
-      const field = req.query.field as string
+      const sortingField = req.query.sortingField as string
       const order = parseInt(req.query.order as string) === 1 ? 1 : -1;
       
       var firms = null;
       
-      if(field==="")
+      if(sortingField==="")
         firms = await firmService.getPaginated(page, limit);
       else
         firms = await firmService.sortPaginated(
           page,
           limit,
-          field,
+          sortingField,
           order,
         );
       
@@ -66,6 +66,14 @@ export class FirmController {
     }
   }
 
+  async readByValue( req: express.Request,
+    res: express.Response) {
+      const value = parseInt(req.query.value as string);
+      const page = parseInt(req.query.page as string);
+      const limit = parseInt(req.query.limit as string);
+  }
+  
+
   async rate(req: express.Request, res: express.Response) {
     const ownerReview = parseInt(req.body.review as string);
     const { _id } = req.body;
@@ -78,80 +86,7 @@ export class FirmController {
     }
   }
 
-  async readByFields(req: express.Request, res: express.Response) {
-    const { name } = req.query;
-    const { street } = req.query;
-    const { number } = req.query;
-    const { city } = req.query;
 
-    const address = {
-      street: street,
-      number: number,
-      city: city,
-    };
-
-    try {
-      return await firmService.readByFields(name as string, address);
-    } catch (err: any) {
-      res.status(500).send(err);
-    }
-  }
-
-  private async sortAllByField(
-    req: express.Request,
-    res: express.Response,
-    fieldToSort: string,
-    direction: "asc" | "desc",
-  ) {
-    try {
-      const results = await firmService.sortAllByField(fieldToSort, direction);
-      if (results.length > 0) return res.json(results);
-      else console.log("No documents found");
-    } catch (err) {
-      console.error(err);
-      return res.status(500).json({ message: "Internal server error" });
-    }
-  }
-
-  async sortPaginated(
-    req: express.Request,
-    res: express.Response,
-  ) {
-    try {
-      const page = parseInt(req.query.page as string);
-      const limit = parseInt(req.query.limit as string);
-      const field = req.query.field as string;
-      const order = parseInt(req.query.order as string) === 1 ? 1 : -1;
-
-      const results = await firmService.sortPaginated(
-        page,
-        limit,
-        field,
-        order,
-      );
-      if (results.length > 0) return res.json(results);
-      else console.log("No documents found");
-    } catch (err) {
-      console.error(err);
-      return res.status(500).json({ message: "Internal server error" });
-    }
-  }
-
-  // sort_by_name_asc(req: express.Request, res: express.Response) {
-  //   this.sortPaginatedByField(req, res, "name", "asc");
-  // }
-
-  // sort_by_name_desc(req: express.Request, res: express.Response) {
-  //   this.sortPaginatedByField(req, res, "name", "desc");
-  // }
-
-  // sort_by_address_asc(req: express.Request, res: express.Response) {
-  //   this.sortPaginatedByField(req, res, "address", "asc");
-  // }
-
-  // sort_by_address_desc(req: express.Request, res: express.Response) {
-  //   this.sortPaginatedByField(req, res, "address", "desc");
-  // }
 }
 
 export default new FirmController();

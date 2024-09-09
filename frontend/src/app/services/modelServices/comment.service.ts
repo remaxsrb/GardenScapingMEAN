@@ -9,9 +9,9 @@ export class CommentService {
 
   private apiUrl = "http://127.0.0.1:4000";
 
-  backendUrl = `${this.apiUrl}/comment`;
+  private backendUrl = `${this.apiUrl}/comment`;
 
-  headers = new HttpHeaders().set("Content-Type", "application/json");
+  private headers = new HttpHeaders().set("Content-Type", "application/json");
 
   constructor(private http: HttpClient) {}
 

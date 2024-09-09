@@ -37,7 +37,6 @@ const User = new Schema(
     firm: {
       type: Schema.Types.ObjectId,
       ref: "Firm",
-      required: true,
     },
   },
   { versionKey: false },

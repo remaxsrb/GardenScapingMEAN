@@ -1,159 +1,153 @@
 <body>
-    <header class="bg-primary text-white py-3">
-        <h1>GardenScaping</h1>
-    </header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
+  <header class="bg-primary text-white py-3">
+    <h1>GardenScaping</h1>
+  </header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="collapse navbar-collapse justify-content-center"
+        id="navbarNavAltMarkup"
+      >
+        <div class="navbar-nav">
+          <a class="nav-item btn btn-outline-primary ms-2" routerLink="/login"
+            >Log in</a
+          >
+          <a class="nav-item btn btn-outline-primary ms-2" routerLink="/signup"
+            >Sign up</a
+          >
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- Main Content -->
+  <main class="container-fluid d-flex flex-column justify-content-start">
+    <div class="container">
+      <!-- General data row -->
+      <div class="row">
+        <div class="col-md text-center">
+          <p class="text-nowrap">Firms: {{ number_of_firms }}</p>
+        </div>
+        <div class="col-md text-center">
+          <p class="text-nowrap">Registered owners: {{ number_of_owners }}</p>
+        </div>
+        <div class="col-md text-center">
+          <p class="text-nowrap">
+            Bookings in past 24 hours: {{ pastDayCount }}
+          </p>
+        </div>
+        <div class="col-md text-center">
+          <p class="text-nowrap">Bookings in past week: {{ pastWeekCount }}</p>
+        </div>
+        <div class="col-md text-center">
+          <p class="text-nowrap">
+            Bookings in past month: {{ pastMonthCount }}
+          </p>
+        </div>
+      </div>
+      <!-- Table row -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <p-table
+              [value]="firms"
+              [paginator]="true"
+              [rows]="limit"
+              [totalRecords]="number_of_firms"
+              [lazy]="true"
+              [showCurrentPageReport]="true"
+              [tableStyle]="{ 'min-width': '50rem' }"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+              (onPage)="pageChange($event)"
+              (onSort)="sortChange($event)"
+              [(selection)]="selectedFirm"
+              dataKey="_id"
             >
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div
-                class="collapse navbar-collapse justify-content-center"
-                id="navbarNavAltMarkup"
-            >
-                <div class="navbar-nav">
-                    <a
-                        class="nav-item btn btn-outline-primary ms-2"
-                        routerLink="/login"
-                        >Log in</a
-                    >
-                    <a
-                        class="nav-item btn btn-outline-primary ms-2"
-                        routerLink="/signup"
-                        >Sign up</a
-                    >
-                </div>
-            </div>
-        </div>
-    </nav>
-    <!-- Main Content -->
-    <main class="container-fluid d-flex flex-column justify-content-start">
-        <div class="container">
-            <!-- General data row -->
-            <div class="row">
-                <div class="col-md text-center">
-                    <p class="text-nowrap">Firms: {{ number_of_firms }}</p>
-                </div>
-                <div class="col-md text-center">
-                    <p class="text-nowrap">
-                        Registered owners: {{ number_of_owners }}
-                    </p>
-                </div>
-                <div class="col-md text-center">
-                    <p class="text-nowrap">Bookings in past 24 hours: {{ pastDayCount }}</p>
-                </div>
-                <div class="col-md text-center">
-                    <p class="text-nowrap">Bookings in past week: {{ pastWeekCount }}</p>
-                </div>
-                <div class="col-md text-center">
-                    <p class="text-nowrap">Bookings in past month: {{ pastMonthCount }}</p>
-                </div>
-            </div>
-            <!-- Table row -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <p-table
-                            [value]="firms"
-                            [paginator]="true"
-                            [rows]="limit"
-                            [totalRecords]="number_of_firms"
-                            [lazy]="true"
-                            [showCurrentPageReport]="true"
-                            [tableStyle]="{ 'min-width': '50rem' }"
-                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                            (onPage)="pageChange($event)"
-                            (onSort)="sortChange($event)"
-                            [(selection)]="selectedFirm"
-                            dataKey="_id"
-                        >
-                            <ng-template pTemplate="caption"> </ng-template>
+              <ng-template pTemplate="caption">
+                <span class="p-input-icon-left ml-auto">
+                  <i class="pi pi-search"></i>
+                  <input
+                    pInputText
+                    type="text"
+                    (input)="filterFirmNames($event)"
+                    placeholder="Search firm names"
+                  />
+                </span>
+              </ng-template>
 
-                            <ng-template pTemplate="header">
-                                <tr>
-                                                <th style="width: 5%"></th>
-                                    <th
-                                        pSortableColumn="name"
-                                        style="width: 20%"
-                                    >
-                                        Name
-                                        <p-sortIcon field="name"></p-sortIcon>
-                                    </th>
-                                    <th
-                                        pSortableColumn="address"
-                                        style="width: 20%"
-                                    >
-                                        Address
-                                        <p-sortIcon
-                                            field="address"
-                                        ></p-sortIcon>
-                                    </th>
-                                </tr>
-                            </ng-template>
+              <ng-template pTemplate="header">
+                <tr>
+                  <th style="width: 5%"></th>
+                  <th pSortableColumn="name" style="width: 20%">
+                    Name
+                    <p-sortIcon field="name"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="address" style="width: 20%">
+                    Address
+                    <p-sortIcon field="address"></p-sortIcon>
+                  </th>
+                </tr>
+              </ng-template>
 
-                            <ng-template pTemplate="body" let-firm>
-                                <tr>
-                                    <td>
-                                        <p-tableRadioButton
-                                            [value]="firm"
-                                        ></p-tableRadioButton>
-                                    </td>
-                                    <td>{{ firm.name }}</td>
-                                    <td>
-                                        {{ firm.address.street }}
-                                        {{ firm.address.number }},
-                                        {{ firm.address.city }}
-                                    </td>
-                                </tr>
-                                <tr *ngIf="selectedFirm._id === firm._id">
-                                      <td colspan="2">
-                                        <div *ngFor="let decorator of decorators">
-                                          <div *ngIf="firm._id === decorator.firm">
-                                            <ul class="list-group">
-                                              <li class="list-group-item">
-                                                {{ decorator.firstname }} {{ decorator.lastname }}
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                      </td>
-                                    </tr>
-                            </ng-template>
-                        </p-table>
+              <ng-template pTemplate="body" let-firm>
+                <tr>
+                  <td>
+                    <p-tableRadioButton [value]="firm"></p-tableRadioButton>
+                  </td>
+                  <td>{{ firm.name }}</td>
+                  <td>
+                    {{ firm.address.street }}
+                    {{ firm.address.number }},
+                    {{ firm.address.city }}
+                  </td>
+                </tr>
+                <tr *ngIf="selectedFirm._id === firm._id">
+                  <td colspan="2">
+                    <div *ngFor="let decorator of decorators">
+                      <div *ngIf="firm._id === decorator.firm">
+                        <ul class="list-group">
+                          <li class="list-group-item">
+                            {{ decorator.firstname }} {{ decorator.lastname }}
+                          </li>
+                        </ul>
+                      </div>
                     </div>
-                </div>
-            </div>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                  <!-- <div class="card">
-                    <p-galleria [value]="jobPhotos" [numVisible]="3">
-                        <ng-template pTemplate="item" let-item>
-                          <img [src]="item" style="width: 100%; height: auto;" />
-                        </ng-template>
-                      </p-galleria>
-                  </div> -->
-                  <div class="image-gallery">
-                    <div *ngFor="let photo of jobPhotos" class="gallery-item">
-                      <img [src]="photo" alt="Job Photo" style="width: 100%; height: auto;" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
+      <div class="row">
+        <div class="col-md-12">
+          <div class="image-gallery">
+            <div *ngFor="let photo of jobPhotos" class="gallery-item">
+              <img
+                [src]="photo"
+                alt="Job Photo"
+                style="width: 100%; height: auto"
+              />
+            </div>
+          </div>
         </div>
-    </main>
-    <footer class="bg-dark text-white py-3 mt-4">
-        <div class="container">
-            <p>&copy; 2024 Marko Jovanovic</p>
-        </div>
-    </footer>
+      </div>
+    </div>
+  </main>
+  <footer class="bg-dark text-white py-3 mt-4">
+    <div class="container">
+      <p>&copy; 2024 Marko Jovanovic</p>
+    </div>
+  </footer>
 </body>

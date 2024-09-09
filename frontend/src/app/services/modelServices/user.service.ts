@@ -10,9 +10,9 @@ export class UserService {
 
   private apiUrl = 'http://127.0.0.1:4000';
 
-  backendUrl = `${this.apiUrl}/user`;
+  private backendUrl = `${this.apiUrl}/user`;
 
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
+  private headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   register(user: any): Observable<any> {
     return this.http.post<any>(

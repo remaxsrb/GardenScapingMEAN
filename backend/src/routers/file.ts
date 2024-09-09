@@ -1,9 +1,19 @@
-import express from "express";
-import { FileController } from "../controllers/file"; 
+import express from 'express';
+
+import { FileController } from '../controllers/file';
+import fileService from '../services/file'
+
 const fileRouter = express.Router();
 
-fileRouter.route('/save').post(
-    (req, res) => new FileController().saveText(req, res)
+
+
+fileRouter.route('/upload').post( fileService.multerUpload.single('file'),
+    (req, res) => new FileController().uploadFile(req, res)
 )
 
-export default fileRouter; 
+fileRouter.route('/get').get(
+    (req, res) => new FileController().serveFileHandler(req, res)
+)
+
+
+export default fileRouter;

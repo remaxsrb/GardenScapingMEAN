@@ -48,6 +48,12 @@ class FirmService {
     return await Firm.find({}).sort(sortOptions).skip(skip).limit(limit);
   }
 
+  async readByValue(value: string, page: number, limit: number) {
+    const skip = (page - 1) * limit;
+    return await Firm.find({field:value}).skip(skip).limit(limit);
+
+  }
+
   async readByFields(name: string, address: any) {
     const query: { [key: string]: any } = {};
 
@@ -64,7 +70,7 @@ class FirmService {
       query["address.city"] = address.city;
     }
 
-    return await Firm.findOne(query);
+    return await Firm.find(query);
   }
 
   async rate(ownerReview: number, _id: string | undefined) {

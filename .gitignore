@@ -5,3 +5,4 @@ frontend/README.md
 .editorconfig
 .angular/
 frontend/src/app/env.ts
+backend/.env

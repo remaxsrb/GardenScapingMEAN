@@ -1,24 +1,25 @@
-import { Component, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
-import { User } from "src/app/models/user";
-import { UserService } from "src/app/services/modelServices/user.service";
-import { JsonService } from "src/app/services/utilityServices/json.service";
-import { RegexPatterns } from "../../regexPatterns";
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/modelServices/user.service';
+import { JsonService } from 'src/app/services/utilityServices/json.service';
+import { RegexPatterns } from '../../regexPatterns';
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
   ValidatorFn,
   Validators,
-} from "@angular/forms";
-import { ImageValidationService } from "src/app/services/utilityServices/image-validation-service.service";
+} from '@angular/forms';
+import { ImageValidationService } from 'src/app/services/utilityServices/image-validation-service.service';
+import { FileService } from 'src/app/services/utilityServices/file.service';
 
-type CardType = "MASTERCARD" | "VISA" | "DINERS" | "UNKNOWN";
+type CardType = 'MASTERCARD' | 'VISA' | 'DINERS' | 'UNKNOWN';
 
 @Component({
-  selector: "app-user-profile",
-  templateUrl: "./user-profile.component.html",
-  styleUrls: ["./user-profile.component.css"],
+  selector: 'app-user-profile',
+  templateUrl: './user-profile.component.html',
+  styleUrls: ['./user-profile.component.css'],
 })
 export class UserProfileComponent implements OnInit {
   constructor(
@@ -26,12 +27,13 @@ export class UserProfileComponent implements OnInit {
     private userService: UserService,
     private imageDim: ImageValidationService,
     private fb: FormBuilder,
+    private fileService: FileService
   ) {}
   user: User = new User();
   addressForm!: FormGroup;
   userUpdateForm!: FormGroup;
   ccForm!: FormGroup;
-  cardType: string = "unknown"; // Default to unknown or adjust as necessary
+  cardType: string = 'unknown'; // Default to unknown or adjust as necessary
 
   selectedFile: File | null = null;
 
@@ -43,7 +45,7 @@ export class UserProfileComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    const user_data = localStorage.getItem("user");
+    const user_data = localStorage.getItem('user');
     if (user_data) {
       this.user = JSON.parse(user_data);
     }
@@ -51,28 +53,26 @@ export class UserProfileComponent implements OnInit {
     this.initCCForm();
     this.initUserUpdateForm();
     this.userUpdateForm
-      .get("creditCardNumber.cardNumber")
+      .get('creditCardNumber.cardNumber')
       ?.valueChanges.subscribe((value: string) => {
         this.cardType = this.getCardType(value);
       });
-
-    this.jsonService.get_photo(this.user.profilePhoto).subscribe((data) => {
-      this.user.profilePhoto = URL.createObjectURL(data);
-    });
   }
+
+
 
   initAddressForm(): void {
     this.addressForm = this.fb.group({
-      street: ["", [Validators.pattern(RegexPatterns.STREET_NAME)]],
-      number: ["", [Validators.pattern(RegexPatterns.STREET_NUMBER)]],
-      city: [""],
+      street: ['', [Validators.pattern(RegexPatterns.STREET_NAME)]],
+      number: ['', [Validators.pattern(RegexPatterns.STREET_NUMBER)]],
+      city: [''],
     });
   }
 
   initCCForm(): void {
     this.ccForm = this.fb.group({
       cardNumber: [
-        "",
+        '',
         [
           Validators.required,
           this.cardTypeValidator(RegexPatterns.cardPatterns),
@@ -83,36 +83,35 @@ export class UserProfileComponent implements OnInit {
 
   initUserUpdateForm(): void {
     this.userUpdateForm = this.fb.group({
-      username: [""],
-      email: ["", Validators.email],
-      firstname: [""],
-      lastname: [""],
+      username: [''],
+      email: ['', Validators.email],
+      firstname: [''],
+      lastname: [''],
       address: this.addressForm,
-      phoneNumber: ["", [Validators.pattern(RegexPatterns.PHONE_NUMBER)]],
+      phoneNumber: ['', [Validators.pattern(RegexPatterns.PHONE_NUMBER)]],
       creditCardNumber: this.ccForm,
-      profilePhoto: [""]
-
+      profilePhoto: [''],
     });
   }
 
   getCardType(cardNumber: string): string {
     // Remove non-numeric characters
-    const cleanedCardNumber = cardNumber.replace(/\D/g, "");
+    const cleanedCardNumber = cardNumber.replace(/\D/g, '');
 
     for (const [type, pattern] of Object.entries(RegexPatterns.cardPatterns)) {
       if (pattern.test(cleanedCardNumber)) {
         return type;
       }
     }
-    return "UNKNOWN"; // Default to 'unknown' if no match
+    return 'UNKNOWN'; // Default to 'unknown' if no match
   }
 
   getCardIcon(cardType: CardType): string {
     const icons: { [key in CardType]: string } = {
-      MASTERCARD: "assets/icons/mastercard.svg",
-      VISA: "assets/icons/visa.svg",
-      DINERS: "assets/icons/diners.svg",
-      UNKNOWN: "assets/icons/default.svg",
+      MASTERCARD: 'assets/icons/mastercard.svg',
+      VISA: 'assets/icons/visa.svg',
+      DINERS: 'assets/icons/diners.svg',
+      UNKNOWN: 'assets/icons/default.svg',
     };
 
     return icons[cardType];
@@ -130,7 +129,7 @@ export class UserProfileComponent implements OnInit {
 
       const cardNumber = control.value;
       const valid = Object.values(cardPatterns).some((pattern) =>
-        pattern.test(cardNumber),
+        pattern.test(cardNumber)
       );
 
       return valid ? null : { invalidCardType: true };
@@ -138,39 +137,37 @@ export class UserProfileComponent implements OnInit {
   }
 
   get username() {
-    return this.userUpdateForm.get("username");
+    return this.userUpdateForm.get('username');
   }
 
   get email() {
-    return this.userUpdateForm.get("email");
+    return this.userUpdateForm.get('email');
   }
   get firstname() {
-    return this.userUpdateForm.get("firstname");
+    return this.userUpdateForm.get('firstname');
   }
   get lastname() {
-    return this.userUpdateForm.get("lastname");
+    return this.userUpdateForm.get('lastname');
   }
   get phoneNumber() {
-    return this.userUpdateForm.get("phoneNumber");
+    return this.userUpdateForm.get('phoneNumber');
   }
   get cardNumber() {
-    return this.ccForm.get("cardNumber");
+    return this.ccForm.get('cardNumber');
   }
   get profilePhoto() {
-    return this.userUpdateForm.get("profilePhoto");
+    return this.userUpdateForm.get('profilePhoto');
   }
 
   get street() {
-    return this.addressForm.get("street");
+    return this.addressForm.get('street');
   }
   get number() {
-    return this.addressForm.get("number");
+    return this.addressForm.get('number');
   }
   get city() {
-    return this.addressForm.get("city");
+    return this.addressForm.get('city');
   }
-
-
 
   onSubmit() {
     if (this.firstname!.value) {
@@ -239,13 +236,13 @@ export class UserProfileComponent implements OnInit {
 
     this.userService.findByUsername(this.user.username).subscribe({
       next: (data) => {
-        localStorage.removeItem("user");
-        localStorage.setItem("user", JSON.stringify(data));
+        localStorage.removeItem('user');
+        localStorage.setItem('user', JSON.stringify(data));
         window.location.reload();
       },
     });
   }
-  
+
   validDimensions(image: File): Observable<boolean> {
     return this.imageDim.validateImageDimensions(image);
   }
@@ -253,31 +250,44 @@ export class UserProfileComponent implements OnInit {
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     this.selectedFile = file;
+    console.log(this.selectedFile);
   }
 
   updatePhoto() {
     this.update_flags.invalid_picture_dimensions = false;
 
     if (this.selectedFile) {
-      console.log(this.selectedFile.name)
-      this.userUpdateForm.patchValue({
-        profilePhoto: this.selectedFile.name, // Assign file name to plan in form
-      });
-      const data = {
-        _id: this.user._id,
-        profilePhoto: this.profilePhoto!.value,
-      };
-      this.userService.updateProfilePhoto(data).subscribe({
-        next: () => {
-          this.userService.findByUsername(this.user.username).subscribe({
-            next: (data) => {
-              localStorage.removeItem("user");
-              localStorage.setItem("user", JSON.stringify(data));
-              window.location.reload();
-            },
-          });
-        },
+      console.log(this.selectedFile);
+
+      this.fileService.uploadFile(this.selectedFile).subscribe((data) => {
+        this.handleUpdateInDB();
       });
     }
   }
+
+
+
+  private handleUpdateInDB() {
+    this.userUpdateForm.patchValue({
+      profilePhoto: this.selectedFile!.name, // Assign file name to plan in form
+    });
+    const data = {
+      _id: this.user._id,
+      profilePhoto: this.profilePhoto!.value,
+    };
+    this.userService.updateProfilePhoto(data).subscribe({
+      next: () => {
+        this.refreshUserPhoto(data);
+      },
+    });
+  }
+
+  private refreshUserPhoto(data: any) {
+    localStorage.removeItem('user');
+
+    this.user.profilePhoto = data.filePath;
+    localStorage.setItem('user', JSON.stringify(this.user));
+    window.location.reload();
+  }
 }
+//profilePhoto

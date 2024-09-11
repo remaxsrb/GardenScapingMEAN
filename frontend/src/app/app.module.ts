@@ -24,7 +24,7 @@ import { GalleriaModule } from 'primeng/galleria';
 
 // Third-party Modules
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
-import { RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
+import { RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings, RecaptchaFormsModule } from 'ng-recaptcha';
 
 // My Components and services
 import { AppRoutingModule } from './app-routing.module';
@@ -104,6 +104,7 @@ import {environment } from './env';
     DialogModule,
     GalleriaModule,
     RecaptchaModule,
+    RecaptchaFormsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => localStorage.getItem('access_token'),

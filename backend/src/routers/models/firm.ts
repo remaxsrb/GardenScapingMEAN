@@ -10,7 +10,7 @@ firmRouter.route('/get').get(
     (req, res) => new FirmController().get(req, res)
 )
 
-firmRouter.route('/getBy').get(
+firmRouter.route('/search').get(
     (req, res) => new FirmController().readByValue(req, res)
 )
 

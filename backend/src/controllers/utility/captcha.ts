@@ -9,8 +9,6 @@ export class CaptchaController {
     try {
       const response = await captchaService.validate(token);
 
-      console.log(response.data.success)
-
       if (response.data.success) {
         // CAPTCHA is valid, proceed with form processing
         res.status(200).send("CAPTCHA verification succeeded");

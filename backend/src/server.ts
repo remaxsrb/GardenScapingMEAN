@@ -1,4 +1,7 @@
 import express from 'express';
+import dotenv from 'dotenv';
+dotenv.config()
+
 import cors from "cors";
 import mongoose from "mongoose";
 import bookingRouter from './routers/models/booking';
@@ -8,9 +11,7 @@ import commentRouter from './routers/models/comment';
 import fileRouter from './routers/utility/file';
 import path from 'path';
 
-import dotenv from 'dotenv';
 import captchaRouter from './routers/utility/captcha';
-dotenv.config()
 
 const app = express();
 

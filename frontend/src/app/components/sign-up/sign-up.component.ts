@@ -150,6 +150,7 @@ export class SignUpComponent implements OnInit {
   get username() {
     return this.signUpForm.get('username');
   }
+  
   get password() {
     return this.signUpForm.get('password');
   }
@@ -174,6 +175,11 @@ export class SignUpComponent implements OnInit {
   get profilePhoto() {
     return this.signUpForm.get('profilePhoto');
   }
+
+  get captcha() {
+    return this.signUpForm.get('captcha');
+  }
+
   get street() {
     return this.addressForm.get('street');
   }
@@ -261,7 +267,11 @@ export class SignUpComponent implements OnInit {
   onCaptchaResolved(token: any) {
 
     this.captchaService.validate(token).subscribe(data => {
-      console.log(data.message)
+      if(data.status === 200)
+        this.signUpForm.patchValue({captcha: "passed"})
+      else
+      this.signUpForm.patchValue({captcha: ""})
+
     })
 
   }

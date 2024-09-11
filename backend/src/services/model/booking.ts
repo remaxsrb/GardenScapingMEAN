@@ -1,5 +1,5 @@
-import Booking from "../models/booking";
-import Firm from "../models/firm";
+import Booking from "../../models/booking";
+import Firm from "../../models/firm";
 
 class BookingService {
   async create(bookingData: any) {

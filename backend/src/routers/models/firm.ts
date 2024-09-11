@@ -1,5 +1,5 @@
 import express from "express";
-import { FirmController } from "../controllers/firm"; 
+import { FirmController } from "../../controllers/models/firm"; 
 const firmRouter = express.Router();
 
 firmRouter.route('/create').post(
@@ -10,9 +10,9 @@ firmRouter.route('/get').get(
     (req, res) => new FirmController().get(req, res)
 )
 
-// firmRouter.route('/get').get(
-//     (req, res) => new FirmController().readByValue(req, res)
-// )
+firmRouter.route('/getBy').get(
+    (req, res) => new FirmController().readByValue(req, res)
+)
 
 firmRouter.route('/rate').post(
     (req, res) => new FirmController().rate(req, res)

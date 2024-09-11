@@ -1,5 +1,5 @@
 import express from "express";
-import commentService from "../services/comment";
+import commentService from "../../services/model/comment";
 export class CommentController {
   async create(req: express.Request, res: express.Response) {
     try {

@@ -24,7 +24,7 @@ import { GalleriaModule } from 'primeng/galleria';
 
 // Third-party Modules
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
-import { NgHcaptchaModule } from 'ng-hcaptcha';
+import { RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
 
 // My Components and services
 import { AppRoutingModule } from './app-routing.module';
@@ -52,8 +52,8 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthService } from './services/utilityServices/auth.service';
-import { enviroment } from './env';
 
+import {environment } from './env';
 
 @NgModule({
   declarations: [
@@ -78,46 +78,48 @@ import { enviroment } from './env';
     DecoraterDashboardComponent,
     DecoraterDashboardBookingsComponent,
     DecoraterDashboardMaintenenceComponent,
-    DecoraterDashboardStatisticsComponent
+    DecoraterDashboardStatisticsComponent,
   ],
   imports: [
-      BrowserModule,
-      AppRoutingModule,
-      FormsModule,
-      ReactiveFormsModule,
-      HttpClientModule,
-      BrowserAnimationsModule,
-      CalendarModule,
-      RatingModule,
-      DropdownModule,
-      InputTextModule,
-      FileUploadModule,
-      TableModule,
-      RadioButtonModule,
-      MessageModule,
-      MessagesModule,
-      PasswordModule,
-      SelectButtonModule,
-      StepsModule,
-      CheckboxModule,
-      ChartModule,
-      DialogModule,
-      GalleriaModule,
-      NgHcaptchaModule.forRoot({
-        siteKey: enviroment.HCAPTCHAKEY, 
-      }),
-      JwtModule.forRoot({
-        config: {
-          tokenGetter: () => localStorage.getItem('access_token'),
-          allowedDomains: ['http://127.0.0.1:4000/'],
-        },
-      }),
-    ],
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    CalendarModule,
+    RatingModule,
+    DropdownModule,
+    InputTextModule,
+    FileUploadModule,
+    TableModule,
+    RadioButtonModule,
+    MessageModule,
+    MessagesModule,
+    PasswordModule,
+    SelectButtonModule,
+    StepsModule,
+    CheckboxModule,
+    ChartModule,
+    DialogModule,
+    GalleriaModule,
+    RecaptchaModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('access_token'),
+        allowedDomains: ['http://127.0.0.1:4000/'],
+      },
+    }),
+  ],
   providers: [
-      AuthService,
-      JwtHelperService,
-      { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    ],
-  bootstrap: [AppComponent]
+    AuthService,
+    JwtHelperService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: { siteKey: environment.SITEKEY } as RecaptchaSettings, // Replace with your actual site key
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

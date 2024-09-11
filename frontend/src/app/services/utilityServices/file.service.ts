@@ -14,7 +14,12 @@ export class FileService {
 
   getFile(fileName: string) {
     const params = new HttpParams().set('fileName', fileName);
-    return this.http.get<any>(`${this.backendUrl}/get`, { params });
+    return this.http.get<any>(`${this.backendUrl}/getFile`, { params });
+  }
+
+  getFilePath(fileName: string) {
+    const params = new HttpParams().set('fileName', fileName);
+    return this.http.get<any>(`${this.backendUrl}/getFilePath`, { params });
   }
 
   uploadFile(file:File) {

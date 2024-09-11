@@ -4,6 +4,7 @@ import { Booking } from 'src/app/models/booking';
 import { User } from 'src/app/models/user';
 import { BookingService } from 'src/app/services/modelServices/booking.service';
 import { CommentService } from 'src/app/services/modelServices/comment.service';
+import { FileService } from 'src/app/services/utilityServices/file.service';
 import { TimeService } from 'src/app/services/utilityServices/time.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class DecoraterDashboardBookingsComponent implements OnInit {
     private bookingService: BookingService,
     private commentService: CommentService,
     private timeService: TimeService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private fileService: FileService
   ) {}
 
   action: string = 'startJob';
@@ -39,7 +41,6 @@ export class DecoraterDashboardBookingsComponent implements OnInit {
 
   endJobForm!: FormGroup;
   selectedFile: File | null = null;
-
 
   invalidStartDate: boolean = false;
 
@@ -67,7 +68,7 @@ export class DecoraterDashboardBookingsComponent implements OnInit {
     this.endJobForm = this.fb.group({
       _id: [''],
       finishDate: [new Date(), [Validators.required]],
-      photo: ['']
+      photo: [''],
     });
   }
 
@@ -81,31 +82,29 @@ export class DecoraterDashboardBookingsComponent implements OnInit {
   }
 
   acceptJob(index: number) {
+    const bookingDate = this.timeService.parseDateFromDDMMYY(
+      this.jobsToStart.at(index)!.bookingDate as string
+    );
+    const startDate = new Date(this.acceptJobForm.get('startDate')?.value!);
 
-    const bookingDate = this.timeService.parseDateFromDDMMYY(this.jobsToStart.at(index)!.bookingDate as string);
-    const startDate = new Date(this.acceptJobForm.get("startDate")?.value!)
-
-    if(bookingDate.getTime() > startDate.getTime()) {
+    if (bookingDate.getTime() > startDate.getTime()) {
       this.invalidStartDate = true;
       return;
-
     }
     this.invalidStartDate = false;
     this.acceptJobForm.patchValue({ _id: this.jobsToStart.at(index)?._id });
     this.bookingService
       .acceptJob(this.acceptJobForm.value)
       .subscribe((data) => {
-          window.location.reload();
+        window.location.reload();
       });
   }
 
   rejectJob(index: number) {
     this.rejectJobForm.patchValue({ booking: this.jobsToStart.at(index)?._id });
-    this.commentService
-      .create(this.rejectJobForm.value)
-      .subscribe((data) => {
-          window.location.reload();
-      });
+    this.commentService.create(this.rejectJobForm.value).subscribe((data) => {
+      window.location.reload();
+    });
   }
 
   onSelect(event: any) {
@@ -114,19 +113,29 @@ export class DecoraterDashboardBookingsComponent implements OnInit {
   }
 
   finishJob(index: number) {
-    const startDate = this.timeService.parseDateFromDDMMYY(this.jobsToEnd.at(index)!.startDate as string);
-    const finishDate = new Date(this.endJobForm.get("finishDate")?.value!)
+    const startDate = this.timeService.parseDateFromDDMMYY(
+      this.jobsToEnd.at(index)!.startDate as string
+    );
+    const finishDate = new Date(this.endJobForm.get('finishDate')?.value!);
 
-    if(startDate.getTime() > finishDate.getTime()) {
+    if (startDate.getTime() > finishDate.getTime()) {
       return;
     }
 
-    this.endJobForm.patchValue({ _id: this.jobsToEnd.at(index)?._id });
-    this.bookingService
-      .finishJob(this.endJobForm.value)
-      .subscribe((data) => {
-          window.location.reload();
+    if (this.selectedFile) {
+      this.fileService.uploadFile(this.selectedFile).subscribe((data) => {
+        this.endJobForm.patchValue({
+          photo: data.filePath,
+        });
+
+        this.endJobForm.patchValue({ _id: this.jobsToEnd.at(index)?._id });
+        this.bookingService
+          .finishJob(this.endJobForm.value)
+          .subscribe((data) => {
+            window.location.reload();
+          });
       });
+    }
   }
 
   loadDocuments(type: 'start' | 'end') {

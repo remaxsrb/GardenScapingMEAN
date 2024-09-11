@@ -1,5 +1,5 @@
 import express from "express";
-import { CommentController } from "../controllers/comment"; 
+import { CommentController } from "../../controllers/models/comment"; 
 const commentRouter = express.Router();
 
 commentRouter.route('/create').post(

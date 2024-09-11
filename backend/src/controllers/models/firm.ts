@@ -1,5 +1,5 @@
 import express from "express";
-import firmService from "../services/firm";
+import firmService from "../../services/model/firm";
 
 export class FirmController {
   async create(req: express.Request, res: express.Response) {
@@ -37,22 +37,22 @@ export class FirmController {
     try {
       const page = parseInt(req.query.page as string);
       const limit = parseInt(req.query.limit as string);
-      const sortingField = req.query.sortingField as string
+      const sortingField = req.query.sortingField as string;
       const order = parseInt(req.query.order as string) === 1 ? 1 : -1;
-      
+
       var firms = null;
-      
-      if(sortingField==="")
+
+      if (sortingField === "")
         firms = await firmService.getPaginated(page, limit);
       else
         firms = await firmService.sortPaginated(
           page,
           limit,
           sortingField,
-          order,
+          order
         );
-      
-      //const 
+
+      //const
       const totalDocuments = await firmService.countDocuments();
 
       return res.json({
@@ -66,13 +66,28 @@ export class FirmController {
     }
   }
 
-  async readByValue( req: express.Request,
-    res: express.Response) {
-      const value = parseInt(req.query.value as string);
+  async readByValue(req: express.Request, res: express.Response) {
+    try {
+      const value = req.query.value as string
       const page = parseInt(req.query.page as string);
       const limit = parseInt(req.query.limit as string);
+
+      const firms = await firmService.readByValue(value, page, limit); 
+
+      const totalDocuments = await firmService.countFilteredDocuments(value);
+
+      return res.json({
+        page,
+        totalDocuments,
+        totalPages: Math.ceil(totalDocuments / limit),
+        firms,
+      });
+
+
+    } catch (err: any) {
+      res.status(500).send(err);
+    }
   }
-  
 
   async rate(req: express.Request, res: express.Response) {
     const ownerReview = parseInt(req.body.review as string);
@@ -85,8 +100,6 @@ export class FirmController {
       res.status(500).send(err);
     }
   }
-
-
 }
 
 export default new FirmController();

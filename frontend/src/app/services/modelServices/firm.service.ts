@@ -57,7 +57,7 @@ export class FirmService {
     limit: number,
   
   ): Observable<any> {
-    return this.http.get(`${this.backendUrl}/get`, {
+    return this.http.get(`${this.backendUrl}/getBy`, {
       params: {
         value: value,
         page: page.toString(),

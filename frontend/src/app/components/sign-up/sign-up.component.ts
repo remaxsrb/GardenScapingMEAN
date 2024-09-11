@@ -1,43 +1,47 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { Observable } from "rxjs";
-import { UserService } from "src/app/services/modelServices/user.service";
-import { RegexPatterns } from "../../regexPatterns";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { UserService } from 'src/app/services/modelServices/user.service';
+import { RegexPatterns } from '../../regexPatterns';
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
   ValidatorFn,
   Validators,
-} from "@angular/forms";
-import { Message } from "primeng/api/message";
-import { ImageValidationService } from "src/app/services/utilityServices/image-validation-service.service";
-import { enviroment } from "src/app/env";
+} from '@angular/forms';
+import { Message } from 'primeng/api/message';
+import { ImageValidationService } from 'src/app/services/utilityServices/image-validation-service.service';
+import { environment } from 'src/app/env';
+import { FileService } from 'src/app/services/utilityServices/file.service';
+import { CaptchaService } from 'src/app/services/utilityServices/captcha.service';
 
-type CardType = "MASTERCARD" | "VISA" | "DINERS" | "UNKNOWN";
+type CardType = 'MASTERCARD' | 'VISA' | 'DINERS' | 'UNKNOWN';
 
 @Component({
-  selector: "app-sign-up",
-  templateUrl: "./sign-up.component.html",
-  styleUrls: ["./sign-up.component.css"],
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.css'],
 })
 export class SignUpComponent implements OnInit {
   signUpForm!: FormGroup;
   addressForm!: FormGroup;
   ccForm!: FormGroup;
   selectedFile: File | null = null;
-  cardType: string = "unknown"; // Default to unknown or adjust as necessary
+  cardType: string = 'unknown'; // Default to unknown or adjust as necessary
 
   errorMessage: Message[] = [];
 
   captchaResponse: string | null = null;
-  captchakey: string = enviroment.HCAPTCHAKEY;
+  readonly captchakey: string = environment.SITEKEY;
 
   constructor(
     private userService: UserService,
     private imageValidationService: ImageValidationService,
     private router: Router,
     private fb: FormBuilder,
+    private fileService: FileService,
+    private captchaService: CaptchaService
   ) {}
 
   ngOnInit(): void {
@@ -45,75 +49,80 @@ export class SignUpComponent implements OnInit {
     this.initCCForm();
     this.initSignUpForm();
     this.signUpForm
-      .get("creditCardNumber.cardNumber")
+      .get('creditCardNumber.cardNumber')
       ?.valueChanges.subscribe((value: string) => {
         this.cardType = this.getCardType(value);
       });
   }
-  
+
   initCCForm(): void {
     this.ccForm = this.fb.group({
-      cardNumber: ['', [Validators.required,
-      this.cardTypeValidator(RegexPatterns.cardPatterns)]]
-    })
+      cardNumber: [
+        '',
+        [
+          Validators.required,
+          this.cardTypeValidator(RegexPatterns.cardPatterns),
+        ],
+      ],
+    });
   }
 
   initAddressForm(): void {
     this.addressForm = this.fb.group({
       street: [
-        "",
+        '',
         [Validators.required, Validators.pattern(RegexPatterns.STREET_NAME)],
       ],
       number: [
-        "",
+        '',
         [Validators.required, Validators.pattern(RegexPatterns.STREET_NUMBER)],
       ],
-      city: ["", Validators.required],
+      city: ['', Validators.required],
     });
   }
 
   initSignUpForm(): void {
     this.signUpForm = this.fb.group({
-      username: ["", Validators.required],
+      username: ['', Validators.required],
       password: [
-        "",
+        '',
         [Validators.required, Validators.pattern(RegexPatterns.PASSWORD)],
       ],
-      email: ["", [Validators.required, Validators.email]],
-      role: ["owner"],
-      firstname: ["", Validators.required],
-      lastname: ["", Validators.required],
-      gender: ["", Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      role: ['owner'],
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
+      gender: ['', Validators.required],
       address: this.addressForm,
       phoneNumber: [
-        "",
+        '',
         [Validators.required, Validators.pattern(RegexPatterns.PHONE_NUMBER)],
       ],
       creditCardNumber: this.ccForm,
-      profilePhoto: [""],
-      status: ["pending"],
-      captcha: ['', Validators.required]
+      profilePhoto: [''],
+      status: ['pending'],
+      captcha: ['', Validators.required],
     });
   }
 
   getCardType(cardNumber: string): string {
     // Remove non-numeric characters
-    const cleanedCardNumber = cardNumber.replace(/\D/g, "");
+    const cleanedCardNumber = cardNumber.replace(/\D/g, '');
 
     for (const [type, pattern] of Object.entries(RegexPatterns.cardPatterns)) {
       if (pattern.test(cleanedCardNumber)) {
         return type;
       }
     }
-    return "UNKNOWN"; // Default to 'unknown' if no match
+    return 'UNKNOWN'; // Default to 'unknown' if no match
   }
 
   getCardIcon(cardType: CardType): string {
     const icons: { [key in CardType]: string } = {
-      MASTERCARD: "assets/icons/mastercard.svg",
-      VISA: "assets/icons/visa.svg",
-      DINERS: "assets/icons/diners.svg",
-      UNKNOWN: "assets/icons/default.svg",
+      MASTERCARD: 'assets/icons/mastercard.svg',
+      VISA: 'assets/icons/visa.svg',
+      DINERS: 'assets/icons/diners.svg',
+      UNKNOWN: 'assets/icons/default.svg',
     };
 
     return icons[cardType];
@@ -131,7 +140,7 @@ export class SignUpComponent implements OnInit {
 
       const cardNumber = control.value;
       const valid = Object.values(cardPatterns).some((pattern) =>
-        pattern.test(cardNumber),
+        pattern.test(cardNumber)
       );
 
       return valid ? null : { invalidCardType: true };
@@ -139,40 +148,40 @@ export class SignUpComponent implements OnInit {
   }
 
   get username() {
-    return this.signUpForm.get("username");
+    return this.signUpForm.get('username');
   }
   get password() {
-    return this.signUpForm.get("password");
+    return this.signUpForm.get('password');
   }
   get email() {
-    return this.signUpForm.get("email");
+    return this.signUpForm.get('email');
   }
   get gender() {
-    return this.signUpForm.get("gender");
+    return this.signUpForm.get('gender');
   }
   get firstname() {
-    return this.signUpForm.get("firstname");
+    return this.signUpForm.get('firstname');
   }
   get lastname() {
-    return this.signUpForm.get("lastname");
+    return this.signUpForm.get('lastname');
   }
   get phoneNumber() {
-    return this.signUpForm.get("phoneNumber");
+    return this.signUpForm.get('phoneNumber');
   }
   get cardNumber() {
-    return this.ccForm.get("cardNumber");
+    return this.ccForm.get('cardNumber');
   }
   get profilePhoto() {
-    return this.signUpForm.get("profilePhoto");
+    return this.signUpForm.get('profilePhoto');
   }
   get street() {
-    return this.addressForm.get("street");
+    return this.addressForm.get('street');
   }
   get number() {
-    return this.addressForm.get("number");
+    return this.addressForm.get('number');
   }
   get city() {
-    return this.addressForm.get("city");
+    return this.addressForm.get('city');
   }
 
   signupResponseFlags = {
@@ -190,26 +199,33 @@ export class SignUpComponent implements OnInit {
 
   onSubmit() {
     if (this.selectedFile) {
-      this.signUpForm.patchValue({
-        profilePhoto: this.selectedFile.name, // Assign file name to form
+      this.fileService.uploadFile(this.selectedFile).subscribe((data) => {
+        this.signUpForm.patchValue({
+          profilePhoto: data.filePath,
+        });
       });
     } else {
       // Set default profile photo based on gender
-      this.signUpForm.patchValue({
-        profilePhoto:
-          this.gender?.value === "male"
-            ? "default_male.png"
-            : "default_female.png",
+
+      const photo =
+        this.gender?.value === 'male'
+          ? 'default_male.png'
+          : 'default_female.png';
+
+      this.fileService.getFilePath(photo).subscribe((data) => {
+        this.signUpForm.patchValue({
+          profilePhoto: data.filePath,
+        });
       });
     }
 
     this.signUpForm.removeControl('captcha');
-    
+
     //?Is backend captcha check necessary?
 
     this.userService.register(this.signUpForm.value).subscribe({
       next: () => {
-        this.router.navigate(["/"]);
+        this.router.navigate(['/']);
       },
       error: (error) => {
         // Handle specific errors or show a general message
@@ -224,7 +240,7 @@ export class SignUpComponent implements OnInit {
         }
 
         this.errorMessage = [
-          { severity: "error", summary: "Error", detail: error.error?.message },
+          { severity: 'error', summary: 'Error', detail: error.error?.message },
         ];
       },
     });
@@ -232,7 +248,7 @@ export class SignUpComponent implements OnInit {
 
   private setErr(message: string) {
     this.errorMessage = [
-      { severity: "error", summary: "Error", detail: message },
+      { severity: 'error', summary: 'Error', detail: message },
     ];
   }
 
@@ -242,20 +258,14 @@ export class SignUpComponent implements OnInit {
     this.errorMessage = [];
   }
 
-  onCaptchaSuccess(response: any): void {
-    this.captchaResponse = response.token; 
-    this.signUpForm.controls['captcha'].setValue(this.captchaResponse);
+  onCaptchaResolved(token: any) {
+
+    this.captchaService.validate(token).subscribe(data => {
+      console.log(data.message)
+    })
+
   }
 
-  onCaptchaError(error: any): void {
-    this.captchaResponse = null;
-    this.signUpForm.controls['captcha'].setErrors({ 'captchaError': true });
-  }
-
-  onCaptchaExpired(): void {
-    this.captchaResponse = null;
-    this.signUpForm.controls['captcha'].setValue(null);
-  }
-
+  
 
 }

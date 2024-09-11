@@ -1,6 +1,6 @@
 import express from "express";
-import userService from "../services/user";
-import booking from "../services/booking";
+import userService from "../../services/model/user";
+import booking from "../../services/model/booking";
 
 export class UserController {
   async register(req: express.Request, res: express.Response) {

@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import Firm from "../models/firm";
+import Firm from "../../models/firm";
 
 class FirmService {
   async create(firmData: any) {
@@ -26,6 +26,11 @@ class FirmService {
     return await Firm.countDocuments();
   }
 
+  async countFilteredDocuments(value:string) {
+    return await Firm.countDocuments({name: value});
+  }
+
+
   async sortAllByField(field: string, direction: "asc" | "desc") {
     const sortOptions: { [field: string]: "asc" | "desc" | 1 | -1 } = {
       [field]: direction === "desc" ? -1 : 1,
@@ -50,7 +55,7 @@ class FirmService {
 
   async readByValue(value: string, page: number, limit: number) {
     const skip = (page - 1) * limit;
-    return await Firm.find({field:value}).skip(skip).limit(limit);
+    return await Firm.find({name:value}).skip(skip).limit(limit);
 
   }
 

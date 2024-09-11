@@ -1,4 +1,4 @@
-import Comment from "../models/comment"
+import Comment from "../../models/comment"
 
 
 export class CommentService {

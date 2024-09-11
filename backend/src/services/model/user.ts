@@ -1,6 +1,6 @@
-import User from "../models/user";
+import User from "../../models/user";
 import bcrypt from "bcryptjs";
-import jwt_service from "../utilities/jwt";
+import jwt_service from "../../utilities/jwt";
 
 class UserService {
   async checkExistingUser(username: string, email: string) {

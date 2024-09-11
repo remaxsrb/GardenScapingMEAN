@@ -2,7 +2,7 @@
   <!-- Header -->
   <header class="bg-primary text-white py-3">
     <h1>Garden Scaping</h1>
-  </header>
+  </header> 
 
   <!-- Main Content -->
   <main
@@ -309,13 +309,11 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            <ng-hcaptcha
-              [siteKey]=captchakey
-              (success)="onCaptchaSuccess($event)"
-              (error)="onCaptchaError($event)"
-              (expired)="onCaptchaExpired()"
-            >
-            </ng-hcaptcha>
+            <re-captcha
+            formControlName="captcha"
+            (resolved)="onCaptchaResolved($event)"
+            siteKey={{captchakey}}>
+          </re-captcha>
           </div>
         </div>
         <div class="row">

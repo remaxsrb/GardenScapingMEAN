@@ -1,14 +1,15 @@
 import express from 'express';
 import cors from "cors";
 import mongoose from "mongoose";
-import bookingRouter from './routers/booking';
-import firmRouter from './routers/firm';
-import userRouter from './routers/user';
-import commentRouter from './routers/comment';
-import fileRouter from './routers/file';
+import bookingRouter from './routers/models/booking';
+import firmRouter from './routers/models/firm';
+import userRouter from './routers/models/user';
+import commentRouter from './routers/models/comment';
+import fileRouter from './routers/utility/file';
 import path from 'path';
 
 import dotenv from 'dotenv';
+import captchaRouter from './routers/utility/captcha';
 dotenv.config()
 
 const app = express();
@@ -39,6 +40,8 @@ router.use("/firm", firmRouter);
 router.use("/booking", bookingRouter);
 router.use("/comment", commentRouter);
 router.use("/file", fileRouter);
+router.use("/captcha", captchaRouter);
+
 
 
 

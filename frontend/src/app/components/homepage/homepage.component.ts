@@ -75,7 +75,7 @@ export class HomepageComponent implements OnInit {
     this.bookingService.latest_photos().subscribe(data=> {
 
       data.forEach((element:Booking) => {
-        this.jobPhotos!.push( "assets/photos/" + element.photo)
+        this.jobPhotos!.push(element.photo)
       });
       console.log('Job Photos:', this.jobPhotos);
 

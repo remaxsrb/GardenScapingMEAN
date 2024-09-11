@@ -304,6 +304,11 @@
                 [maxFileSize]="1000000"
                 (onSelect)="onFileSelected($event)"
               ></p-fileUpload>
+              <small
+              class="p-error"
+              *ngIf="!signupResponseFlags.validImage"
+              >Image is too large</small
+            >
             </span>
           </div>
         </div>

@@ -33,7 +33,6 @@ export class SignUpComponent implements OnInit {
   errorMessage: Message[] = [];
 
   captchaResponse: string | null = null;
-  readonly captchakey: string = environment.SITEKEY;
 
   constructor(
     private userService: UserService,
@@ -193,6 +192,7 @@ export class SignUpComponent implements OnInit {
   signupResponseFlags = {
     emailOrUsernameTaken: false,
     generalErrors: false,
+    validImage: true
   };
 
   validDimensions(image: File): Observable<boolean> {
@@ -200,7 +200,11 @@ export class SignUpComponent implements OnInit {
   }
 
   onFileSelected(event: any) {
+    this.signupResponseFlags.validImage = true
     this.selectedFile = event.files[0]; // Store the actual File object
+    this.imageValidationService.validateImageDimensions(this.selectedFile!).subscribe(data => {
+      this.signupResponseFlags.validImage = data
+    })
   }
 
   onSubmit() {
@@ -261,11 +265,13 @@ export class SignUpComponent implements OnInit {
   private clearErr() {
     this.signupResponseFlags.emailOrUsernameTaken = false;
     this.signupResponseFlags.generalErrors = false;
+    this.signupResponseFlags.validImage = true;
+
     this.errorMessage = [];
   }
 
   onCaptchaResolved(token: any) {
-
+    this.signUpForm.patchValue({captcha: ""})
     this.captchaService.validate(token).subscribe(data => {
       if(data.status === 200)
         this.signUpForm.patchValue({captcha: "passed"})

@@ -5,12 +5,22 @@
                 <img src="{{ user.profilePhoto }}" class="img-fluid" alt="" />
                 <div class="card-body">
                     <form (ngSubmit)="updatePhoto()">
-                        <input
-                            type="file"
-                            class="form-control"
-                            id="inputGroupFile02"
-                            (change)="onFileSelected($event)"
-                        />
+                        <p-fileUpload
+                        
+                        mode="basic"
+                        name="demo[]"
+                        chooseLabel="Choose"
+                        chooseIcon="pi pi-upload"
+                        url="https://www.primefaces.org/cdn/api/upload.php"
+                        accept=".png,.jpg"
+                        [maxFileSize]="1000000"
+                        (onSelect)="onFileSelected($event)"
+                      ></p-fileUpload>
+                        <small
+                        class="p-error"
+                        *ngIf="!update_flags.valid_picture_dimensions"
+                        >Image is too large</small
+                      >
                         <button
                             type="submit"
                             class="btn btn-dark"

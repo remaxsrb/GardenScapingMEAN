@@ -5,6 +5,7 @@ import { User } from 'src/app/models/user';
 import { BookingService } from 'src/app/services/modelServices/booking.service';
 import { CommentService } from 'src/app/services/modelServices/comment.service';
 import { FileService } from 'src/app/services/utilityServices/file.service';
+import { ImageValidationService } from 'src/app/services/utilityServices/image-validation-service.service';
 import { TimeService } from 'src/app/services/utilityServices/time.service';
 
 @Component({
@@ -18,7 +19,9 @@ export class DecoraterDashboardBookingsComponent implements OnInit {
     private commentService: CommentService,
     private timeService: TimeService,
     private fb: FormBuilder,
-    private fileService: FileService
+    private fileService: FileService,
+    private imageValidationService: ImageValidationService,
+
   ) {}
 
   action: string = 'startJob';
@@ -41,8 +44,9 @@ export class DecoraterDashboardBookingsComponent implements OnInit {
 
   endJobForm!: FormGroup;
   selectedFile: File | null = null;
+  validDimensions: boolean = false;
 
-  invalidStartDate: boolean = false;
+  invalidStartDate: boolean = true;
 
   ngOnInit(): void {
     const decoratorInfo = localStorage.getItem('user');
@@ -108,8 +112,18 @@ export class DecoraterDashboardBookingsComponent implements OnInit {
   }
 
   onSelect(event: any) {
-    const file = event.currentFiles[0].name; // Get the first selected file
-    this.endJobForm.patchValue({ photo: file }); // Update form control value
+    this.validDimensions = true;
+    this.selectedFile = event.files[0]; // Store the actual File object
+    this.imageValidationService
+      .validateImageDimensions(this.selectedFile!)
+      .subscribe((data) => {
+        this.validDimensions = data;
+
+        if(this.validDimensions)
+          this.endJobForm.patchValue({ photo: this.selectedFile }); 
+
+      });
+
   }
 
   finishJob(index: number) {

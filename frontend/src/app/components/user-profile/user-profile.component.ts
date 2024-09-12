@@ -25,7 +25,7 @@ export class UserProfileComponent implements OnInit {
   constructor(
     private jsonService: JsonService,
     private userService: UserService,
-    private imageDim: ImageValidationService,
+    private imageValidationService: ImageValidationService,
     private fb: FormBuilder,
     private fileService: FileService
   ) {}
@@ -38,7 +38,7 @@ export class UserProfileComponent implements OnInit {
   selectedFile: File | null = null;
 
   update_flags = {
-    invalid_picture_dimensions: false,
+    valid_picture_dimensions: true,
     email_taken: false,
     username_exists: false,
     general_errors: false,
@@ -58,8 +58,6 @@ export class UserProfileComponent implements OnInit {
         this.cardType = this.getCardType(value);
       });
   }
-
-
 
   initAddressForm(): void {
     this.addressForm = this.fb.group({
@@ -244,18 +242,20 @@ export class UserProfileComponent implements OnInit {
   }
 
   validDimensions(image: File): Observable<boolean> {
-    return this.imageDim.validateImageDimensions(image);
+    return this.imageValidationService.validateImageDimensions(image);
   }
 
   onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    this.selectedFile = file;
-    console.log(this.selectedFile);
+    this.update_flags.valid_picture_dimensions = true;
+    this.selectedFile = event.files[0]; // Store the actual File object
+    this.imageValidationService
+      .validateImageDimensions(this.selectedFile!)
+      .subscribe((data) => {
+        this.update_flags.valid_picture_dimensions = data;
+      });
   }
 
   updatePhoto() {
-    this.update_flags.invalid_picture_dimensions = false;
-
     if (this.selectedFile) {
       console.log(this.selectedFile);
 
@@ -265,20 +265,22 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-
-
   private handleUpdateInDB() {
-    this.userUpdateForm.patchValue({
-      profilePhoto: this.selectedFile!.name, // Assign file name to plan in form
-    });
-    const data = {
-      _id: this.user._id,
-      profilePhoto: this.profilePhoto!.value,
-    };
-    this.userService.updateProfilePhoto(data).subscribe({
-      next: () => {
-        this.refreshUserPhoto(data);
-      },
+    this.fileService.uploadFile(this.selectedFile).subscribe((data) => {
+      this.userUpdateForm.patchValue({
+        profilePhoto: data.filePath,
+      });
+
+      const payload = {
+        _id: this.user._id,
+        profilePhoto: this.profilePhoto!.value,
+      };
+
+      this.userService.updateProfilePhoto(payload).subscribe({
+        next: () => {
+          this.refreshUserPhoto(data);
+        },
+      });
     });
   }
 

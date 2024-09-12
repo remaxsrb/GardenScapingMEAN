@@ -74,15 +74,34 @@
               dataKey="_id"
             >
               <ng-template pTemplate="caption">
-                <span class="p-input-icon-left ml-auto">
-                  <i class="pi pi-search"></i>
-                  <input
-                    pInputText
-                    type="text"
-                    (input)="filterFirmNames($event)"
-                    placeholder="Search firm names"
-                  />
-                </span>
+                <form
+                  [formGroup]="searchForm"
+                  (ngSubmit)="search()"
+                  class="inline-form"
+                >
+                  <span class="p-input-icon-left ml-auto">
+                    <input
+                      formControlName="name"
+                      pInputText
+                      type="text"
+                      placeholder="Firm name"
+                    />
+                  </span>
+                  <span class="p-input-icon-left ml-auto">
+                    <input
+                      formControlName="address"
+                      pInputText
+                      type="text"
+                      placeholder="Street number, City"
+                    />
+                  </span>
+                  <button
+                    pButton
+                    type="submit"
+                    label="Search"
+                    class="p-button-secondary mt-2"
+                  ></button>
+                </form>
               </ng-template>
 
               <ng-template pTemplate="header">

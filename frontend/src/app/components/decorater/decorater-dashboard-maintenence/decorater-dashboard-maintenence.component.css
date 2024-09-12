@@ -1,8 +1,14 @@
-  /* Inline Form */
-  .inline-form {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-    width: 100%; /* Full width to occupy table cell */
-  }
+.inline-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  width: 100%; /* Full width to occupy table cell */
+  margin-bottom: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+.p-button-label{
+  margin: 0;
+}

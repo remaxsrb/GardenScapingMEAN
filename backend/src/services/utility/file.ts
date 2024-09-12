@@ -112,6 +112,25 @@ export class FileService {
       });
     });
   }
+
+
+  // Method to save JSON text data to a file
+  async saveJsonToFile(fileName: string, jsonData: string): Promise<string> {
+    const filePath = path.join(baseDir, 'gardens', `${Date.now()}-${fileName}`);
+
+    // Write JSON data to file
+    return new Promise((resolve, reject) => {
+      fs.writeFile(filePath, jsonData, 'utf8', (err) => {
+        if (err) {
+          reject(`Error saving JSON file: ${err.message}`);
+        } else {
+          resolve(`File saved successfully: ${filePath}`);
+        }
+      });
+    });
+  }
+
+
 }
 
 export default new FileService();

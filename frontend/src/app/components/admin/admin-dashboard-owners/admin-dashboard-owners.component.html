@@ -22,7 +22,7 @@
         <td>{{ owner.creditCardNumber.cardNumber }}</td>
         <td>{{ owner.status }}</td>
         <td>
-          <form (ngSubmit)="updateStatus(owner, i)" #ownerStatusForm="ngForm">
+          <form (ngSubmit)="updateStatus(owner, i)" #ownerStatusForm="ngForm" class="inline-form">
             <div class="d-flex align-items-center">
               <select
                 id="status-{{ i }}"

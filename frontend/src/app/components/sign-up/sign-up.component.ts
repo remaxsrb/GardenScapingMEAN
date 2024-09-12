@@ -231,8 +231,6 @@ export class SignUpComponent implements OnInit {
 
     this.signUpForm.removeControl('captcha');
 
-    //?Is backend captcha check necessary?
-
     this.userService.register(this.signUpForm.value).subscribe({
       next: () => {
         this.router.navigate(['/']);

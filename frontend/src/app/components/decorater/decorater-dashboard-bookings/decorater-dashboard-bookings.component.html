@@ -149,6 +149,11 @@
               (onSelect)="onSelect($event)"
               chooseLabel="Browse"
             ></p-fileUpload>
+            <small
+            class="p-error"
+            *ngIf="!validDimensions"
+            >Image is too large</small
+          >
                 <p-calendar
                   formControlName="finishDate"
                   dateFormat="dd.mm.yy"

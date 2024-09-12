@@ -97,8 +97,6 @@ export class BookingController {
         useCase
       );
 
-      //? dohvata ime firme kad se sorita umesto ID-a
-
       let updatedBookings = null;
       if (bookings) {
         updatedBookings = await Promise.all(

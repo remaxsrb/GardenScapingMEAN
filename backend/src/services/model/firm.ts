@@ -27,7 +27,7 @@ class FirmService {
   }
 
   async countFilteredDocuments(value:string) {
-    return await Firm.countDocuments({name: value});
+    return await Firm.countDocuments({name:{ $regex: value, $options: 'i' }});
   }
 
 

@@ -91,10 +91,13 @@
 .p-fileupload-buttonbar {
   display: flex;
   justify-content: center;
+  max-height: '50px';
+   overflow: 'hidden';
 }
 
 .p-fileupload-buttonbar .p-button {
-  width: 100%;
+  max-height: '50px';
+  overflow: 'hidden';
 }
 
 /* PrimeNG Table Styles */
@@ -110,6 +113,8 @@
   padding: 10px; /* Add padding for spacing */
   border-bottom: 1px solid #ddd; /* Add subtle borders for row separation */
 }
+
+
 
 /* Responsive Adjustments for Small Screens */
 @media (max-width: 768px) {

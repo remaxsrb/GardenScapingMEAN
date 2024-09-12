@@ -22,7 +22,7 @@ export class FileService {
     return this.http.get<any>(`${this.backendUrl}/getFilePath`, { params });
   }
 
-  uploadFile(file:File) {
+  uploadFile(file:any) {
 
     const formData = new FormData();
     formData.append('file', file, file.name);

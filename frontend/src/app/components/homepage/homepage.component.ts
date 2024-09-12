@@ -106,7 +106,7 @@ export class HomepageComponent implements OnInit {
   initSearchForm() {
     this.searchForm = this.fb.group({
       name: [""],
-      address:[this.addressString]
+      address:['']
     });
   }
 
@@ -163,6 +163,27 @@ export class HomepageComponent implements OnInit {
         this.number_of_firms = data.totalDocuments;
       })
     }
+
+  }
+
+  get name() {
+    return this.searchForm.get('name');
+  }
+  get address() {
+    return this.searchForm.get('address');
+  }
+
+
+  search() {
+    console.log(this.searchForm.value)
+    let address = this.address?.value.split(",")
+    const city = address[1]
+    const street = address[0].split(" ")[0]
+    const number = address[0].split(" ")[1]
+    console.log(street)
+    console.log(number)
+    console.log(city)
+
 
   }
 

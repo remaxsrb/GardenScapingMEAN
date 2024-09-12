@@ -66,13 +66,13 @@ export class FirmController {
     }
   }
 
-  async readByValue(req: express.Request, res: express.Response) {
+  async search(req: express.Request, res: express.Response) {
     try {
       const value = req.query.value as string
       const page = parseInt(req.query.page as string);
       const limit = parseInt(req.query.limit as string);
 
-      const firms = await firmService.readByValue(value, page, limit); 
+      const firms = await firmService.search(value, page, limit); 
 
       const totalDocuments = await firmService.countFilteredDocuments(value);
 

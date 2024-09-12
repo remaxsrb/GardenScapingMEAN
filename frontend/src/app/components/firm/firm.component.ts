@@ -31,6 +31,7 @@ import { JsonService } from 'src/app/services/utilityServices/json.service';
 import { DrawShapesService } from 'src/app/services/utilityServices/draw-shapes.service';
 import { BookingService } from 'src/app/services/modelServices/booking.service';
 import { Router } from '@angular/router';
+import { Message } from 'primeng/api/message';
 
 @Component({
   selector: 'app-firm',
@@ -48,7 +49,6 @@ export class FirmComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router
   ) {}
 
-
   private map!: L.Map;
   firm: Firm = new Firm();
   owner: Owner = new Owner();
@@ -64,6 +64,8 @@ export class FirmComponent implements OnInit, AfterViewInit, OnDestroy {
   gardenTypes: SelectItem[] = [];
 
   fileError = false;
+  overlapError = false;
+  errorMessage: Message[] = [];
 
   ngOnInit(): void {
     const firm_data = localStorage.getItem('firm');
@@ -131,11 +133,9 @@ export class FirmComponent implements OnInit, AfterViewInit, OnDestroy {
       photo: [''],
       services: [, [Validators.required]],
       requests: [''],
-      status: 'active'
+      status: 'active',
     });
   }
-
-  
 
   get bookingDate() {
     return this.newBookingForm.get('bookingDate');
@@ -237,7 +237,6 @@ export class FirmComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onOptionChange(option: 'canvas' | 'file') {
     this.uploadOption = option;
-
   }
 
   onFileChange(event: any) {
@@ -264,9 +263,7 @@ export class FirmComponent implements OnInit, AfterViewInit, OnDestroy {
     //   this.gardenForm.patchValue({sittingArea: sittingArea});
     //   this.gardenForm.patchValue({greenArea: greenArea});
 
-
     // })
-
   }
 
   onDragStart(event: DragEvent) {
@@ -282,14 +279,32 @@ export class FirmComponent implements OnInit, AfterViewInit, OnDestroy {
     event.preventDefault(); // Allow drop
   }
 
-  onDrop(event: DragEvent) {
+  async onDrop(event: DragEvent) {
     event.preventDefault();
+    const drawingResult = await this.drawShapesService.drawShape(event, this.shapes);
+    console.log(drawingResult)
+    this.shapes = drawingResult.shapes;
+    this.overlapError = drawingResult.isOverlapping;
 
-    this.shapes = this.drawShapesService.drawShape(event, this.shapes);
+    if (this.overlapError)
+      this.errorMessage = [
+        {
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Shapes can not overlap on canvas',
+        },
+      ];
+    else this.errorMessage = [];
+  }
+
+  private setErr(message: string) {
+    this.errorMessage = [
+      { severity: 'error', summary: 'Error', detail: message },
+    ];
   }
 
   toggleService(service: Service, index: number) {
-    if (!this.selectedServicesArray.some(s => s.name === service.name)) {
+    if (!this.selectedServicesArray.some((s) => s.name === service.name)) {
       this.selectedServicesArray.push(service);
     } else {
       this.selectedServicesArray = this.selectedServicesArray.filter(
@@ -300,19 +315,15 @@ export class FirmComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSubmit() {
-
-    this.bookingService.create(this.newBookingForm.value).subscribe(
-      data => {
-        
-        const fileName = this.owner._id;
-        const text = this.shapes
-        const payload = {
-          fileName,
-          text
-        }
-        this.newBookingForm.reset()
-        window.location.reload()
-      }
-    )
+    this.bookingService.create(this.newBookingForm.value).subscribe((data) => {
+      const fileName = this.owner._id;
+      const text = this.shapes;
+      const payload = {
+        fileName,
+        text,
+      };
+      this.newBookingForm.reset();
+      window.location.reload();
+    });
   }
 }

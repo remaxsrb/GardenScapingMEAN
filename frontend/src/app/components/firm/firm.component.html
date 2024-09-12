@@ -276,6 +276,18 @@
                           />
                         </div>
                       </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p-messages
+                            *ngIf="
+                              overlapError
+                            "
+                            [(value)]="errorMessage"
+                            [closable]="false"
+                            severity="error"
+                          ></p-messages>
+                        </div>
+                      </div>
                     </div>
 
                     <div *ngIf="uploadOption === 'file'">
@@ -302,12 +314,12 @@
                     <p-checkbox
                       [inputId]="service.name"
                       [value]="service"
-                      (onChange)="toggleService( service, i)"
+                      (onChange)="toggleService(service, i)"
                     >
                     </p-checkbox>
                     <label [for]="service.name">{{ service.name }}</label>
                   </div>
-                  
+
                   <form [formGroup]="newBookingForm" (ngSubmit)="onSubmit()">
                     <textarea
                       formControlName="requests"

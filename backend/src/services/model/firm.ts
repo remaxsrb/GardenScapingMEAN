@@ -53,9 +53,9 @@ class FirmService {
     return await Firm.find({}).sort(sortOptions).skip(skip).limit(limit);
   }
 
-  async readByValue(value: string, page: number, limit: number) {
+  async search(value: string, page: number, limit: number) {
     const skip = (page - 1) * limit;
-    return await Firm.find({name:value}).skip(skip).limit(limit);
+    return await Firm.find({name:{ $regex: value, $options: 'i' }}).skip(skip).limit(limit);
 
   }
 

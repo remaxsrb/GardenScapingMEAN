@@ -1,7 +1,9 @@
 export interface Shape {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-    imageSrc: string;
-  }
+  id: string;
+  type: 'rectangle' | 'circle' | 'ellipse';
+  color: string;
+  x?: number; 
+  y?: number; 
+  width: number;
+  height: number;
+}

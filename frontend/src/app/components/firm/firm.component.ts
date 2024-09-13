@@ -1,4 +1,5 @@
 import {
+  AfterViewChecked,
   AfterViewInit,
   ChangeDetectorRef,
   Component,
@@ -39,7 +40,12 @@ import { FileService } from 'src/app/services/utilityServices/file.service';
   templateUrl: './firm.component.html',
   styleUrls: ['./firm.component.css'],
 })
-export class FirmComponent implements OnInit, AfterViewInit, OnDestroy {
+export class FirmComponent
+  implements OnInit, AfterViewInit, OnDestroy, AfterViewChecked
+{
+  @ViewChild('gardenCanvas', { static: false })
+  gardenCanvas!: ElementRef<HTMLCanvasElement>;
+
   constructor(
     private geocodingService: GeocodingService,
     private timeService: TimeService,
@@ -49,7 +55,6 @@ export class FirmComponent implements OnInit, AfterViewInit, OnDestroy {
     private bookingService: BookingService,
     private router: Router,
     private fileService: FileService
-
   ) {}
 
   private map!: L.Map;
@@ -58,17 +63,20 @@ export class FirmComponent implements OnInit, AfterViewInit, OnDestroy {
   gardenForm!: FormGroup;
   newBookingForm!: FormGroup;
   selectedServicesArray: Service[] = [];
-  uploadOption: 'canvas' | 'file' = 'canvas'; // Default to canvas
+  drawOption: 'draw' | 'file' = 'draw'; // Default to canvas
   selectedFile: File | null = null;
-  shapes: Shape[] = [];
+  drawnShapes: Shape[] = [];
 
   activeIndex: number = 0;
   stepsItems: SelectItem[] = [];
   gardenTypes: SelectItem[] = [];
 
   fileError = false;
+  private canvasInitialized = false;
   overlapError = false;
   errorMessage: Message[] = [];
+
+  shapes: Shape[] = [];
 
   ngOnInit(): void {
     const firm_data = localStorage.getItem('firm');
@@ -100,20 +108,83 @@ export class FirmComponent implements OnInit, AfterViewInit, OnDestroy {
     this.initNewBookingForm();
   }
 
+  initAvailableShapes() {
+    this.shapes = [
+      {
+        id: 'shape1',
+        type: 'rectangle',
+        color: 'green',
+        width: 50,
+        height: 50,
+      }, // Square for Private
+      { id: 'shape2', type: 'circle', color: 'brown', width: 50, height: 50 }, // Circle for Private
+      {
+        id: 'shape3',
+        type: 'rectangle',
+        color: 'gray',
+        width: 50,
+        height: 100,
+      }, // Tall Rectangle for Private
+    ];
+
+    if (this.type === 'private')
+      this.shapes.push({
+        id: 'shape4',
+        type: 'rectangle',
+        color: 'blue',
+        width: 100,
+        height: 50,
+      }); // Wide Rectangle for Private)
+    if (this.type === 'restaurant')
+      this.shapes.push({
+        id: 'shape5',
+        type: 'ellipse',
+        color: 'blue',
+        width: 100,
+        height: 50,
+      }); // Ellipse for Public
+  }
+
   ngAfterViewInit() {
     this.initMap();
     if (this.firm.address) {
       const fullAddress = `${this.firm.address.street} ${this.firm.address.number}, ${this.firm.address.city}`;
       this.geocodeRestaurantAddress(fullAddress);
     }
+    if (this.activeIndex === 1) {
+      this.initializeCanvas();
+    }
+  }
+
+  ngAfterViewChecked() {
+    if (
+      this.activeIndex === 1 &&
+      this.gardenCanvas &&
+      !this.canvasInitialized
+    ) {
+      this.initializeCanvas();
+      this.canvasInitialized = true;
+    }
+  }
+
+  initializeCanvas() {
+    console.log('AAAAAAAAAAAAAAAAAAAAAAAA');
+    const canvas = this.gardenCanvas.nativeElement;
+    const context = canvas.getContext('2d');
+
+    if (context) {
+      // Clear the canvas
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (this.activeIndex === 1) {
+        console.log(this.shapes);
+        //this.drawShapesService.drawShapes(this.shapes);
+      }
+    }
   }
 
   ngOnDestroy() {
     localStorage.removeItem('firm');
-  }
-
-  previousStep() {
-    this.activeIndex--;
   }
 
   initGardenForm() {
@@ -178,14 +249,19 @@ export class FirmComponent implements OnInit, AfterViewInit, OnDestroy {
 
   prevStep() {
     this.activeIndex = Math.max(this.activeIndex - 1, 0);
+    if (this.activeIndex !== 1) this.canvasInitialized = false; // Reset initialization flag
   }
-
   nextStep() {
     if (this.isCurrentStepValid())
       this.activeIndex = Math.min(
         this.activeIndex + 1,
         this.stepsItems.length - 1
       );
+    if (this.activeIndex === 1) {
+      this.canvasInitialized = false;
+
+      this.initAvailableShapes();
+    }
   }
   isCurrentStepValid() {
     switch (this.activeIndex) {
@@ -202,11 +278,18 @@ export class FirmComponent implements OnInit, AfterViewInit, OnDestroy {
         return (
           isStartDateValid &&
           this.width!.valid &&
+          this.width?.value > 0 &&
           this.height!.valid &&
+          this.height?.value > 0 &&
           this.type
         );
       case 1:
-        return this.waterArea!.valid && this.greenArea!.valid;
+        return (
+          this.waterArea!.valid &&
+          this.waterArea?.value > 0 &&
+          this.greenArea!.valid &&
+          this.greenArea?.value > 0
+        );
       case 2:
         return this.requests!.valid;
       default:
@@ -238,36 +321,56 @@ export class FirmComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
-  onOptionChange(option: 'canvas' | 'file') {
-    this.uploadOption = option;
+  onOptionChange(option: 'draw' | 'file') {
+    this.drawOption = option;
   }
 
   onFileChange(event: any) {
     const file: File = event.target.files[0];
     this.selectedFile = file;
-
-    
   }
 
-  onDragStart(event: DragEvent) {
-    if (event.dataTransfer) {
-      event.dataTransfer.setData(
-        'text/plain',
-        (event.target as HTMLImageElement).src
-      );
-    }
+  onDragStart(event: DragEvent, shape: Shape): void {
+    event.dataTransfer?.setData('shape', JSON.stringify(shape));
   }
 
   onDragOver(event: DragEvent) {
     event.preventDefault(); // Allow drop
   }
 
-  async onDrop(event: DragEvent) {
+  onDrop(event: DragEvent) {
     event.preventDefault();
-    const drawingResult = await this.drawShapesService.drawShape(event, this.shapes);
-    console.log(drawingResult)
-    this.shapes = drawingResult.shapes;
-    this.overlapError = drawingResult.isOverlapping;
+    const canvas = this.gardenCanvas.nativeElement;
+    const context = canvas.getContext('2d');
+    const data = event.dataTransfer?.getData('shape');
+    if (data) {
+      const shape: Shape = JSON.parse(data);
+      const x = event.offsetX;
+      const y = event.offsetY;
+
+      this.overlapError = false;
+
+      // If drawing was successful (no overlap), store the shape with its position
+      if (
+        !this.drawShapesService.isOverlapping(
+          x,
+          y,
+          shape.width,
+          shape.height,
+          this.drawnShapes
+        )
+      ) {
+        // Call drawShapeOnCanvas from the service, which will handle the overlap check
+        this.drawShapesService.drawShapeOnCanvas(
+          context!,
+          shape,
+          x,
+          y,
+          this.drawnShapes
+        );
+        this.drawnShapes.push({ ...shape, x, y });
+      } else this.overlapError = true;
+    }
 
     if (this.overlapError)
       this.errorMessage = [
@@ -298,17 +401,16 @@ export class FirmComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSubmit() {
+    const fileName = this.owner._id + '.json';
+    const text = this.shapes;
+    const payload = {
+      fileName,
+      text,
+    };
 
-    const fileName = this.owner._id+".json";
-      const text = this.shapes;
-      const payload = {
-        fileName,
-        text,
-      };
+    console.log(payload);
 
-      console.log(payload)
-
-      this.fileService.uploadFile(payload)
+    this.fileService.uploadFile(payload);
 
     this.bookingService.create(this.newBookingForm.value).subscribe((data) => {
       this.newBookingForm.reset();

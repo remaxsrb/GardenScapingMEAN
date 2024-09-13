@@ -189,26 +189,25 @@
                       <label>
                         <input
                           type="radio"
-                          name="uploadOption"
-                          (change)="onOptionChange('canvas')"
-                          [checked]="uploadOption === 'canvas'"
+                          name="drawOption"
+                          (change)="onOptionChange('draw')"
+                          [checked]="drawOption === 'draw'"
                         />
                         Canvas
                       </label>
                       <label>
                         <input
                           type="radio"
-                          name="uploadOption"
+                          name="drawOption"
                           (change)="onOptionChange('file')"
-                          [checked]="uploadOption === 'file'"
+                          [checked]="drawOption === 'file'"
                         />
                         File Upload
                       </label>
                     </div>
-
-                    <!-- Conditional Display Based on Radio Selection -->
-                    <div *ngIf="uploadOption === 'canvas'">
-                      <canvas
+                    <div class="row">
+                      <div class="col-md-6">
+                        <canvas
                         #gardenCanvas
                         id="gardenCanvas"
                         width="500"
@@ -217,65 +216,36 @@
                         (drop)="onDrop($event)"
                         (dragover)="onDragOver($event)"
                       ></canvas>
+                      </div>
+                    </div>
 
-                      <div class="row">
-                        <div class="col-sm-3">
-                          <img
-                            src="assets/photos/green-square.jpeg"
-                            id="draggableImage"
-                            class="draggable-image"
-                            draggable="true"
-                            (dragstart)="onDragStart($event)"
-                            a
-                            lt="Drag Me"
-                          />
-                        </div>
-                        <div class="col-sm-3">
-                          <img
-                            src="assets/photos/brown-circle.jpeg"
-                            id="draggableImage"
-                            class="draggable-image"
-                            draggable="true"
-                            (dragstart)="onDragStart($event)"
-                            a
-                            lt="Drag Me"
-                          />
-                        </div>
-                        <div class="col-sm-3">
-                          <img
-                            src="assets/photos/tall-gray-rectangle.jpeg"
-                            id="draggableImage"
-                            class="draggable-image"
-                            draggable="true"
-                            (dragstart)="onDragStart($event)"
-                            a
-                            lt="Drag Me"
-                          />
-                        </div>
-                        <div class="col-sm-3">
-                          <!-- Show rectangle image if the type is 'private' -->
-                          <img
-                            *ngIf="type === 'private'"
-                            src="assets/photos/wide-blue-rectangle.jpeg"
-                            id="draggableImage"
-                            class="draggable-image"
-                            draggable="true"
-                            (dragstart)="onDragStart($event)"
-                            alt="Drag Me"
-                          />
+                    <!-- Conditional Display Based on Radio Selection -->
+                    <div *ngIf="drawOption === 'draw'">
+                      
 
-                          <!-- Show ellipse image if the type is 'restaurant' -->
-                          <img
-                            *ngIf="type === 'restaurant'"
-                            src="assets/photos/wide-blue-elipse.jpeg"
-                            id="draggableImage"
-                            class="draggable-image"
-                            draggable="true"
-                            (dragstart)="onDragStart($event)"
-                            alt="Drag Me"
-                          />
+                      <div class="row shape-container">
+                        <div
+                          class="col-md-3"
+                          *ngFor="let shape of shapes"
+                          [id]="shape.id"
+                          [ngClass]="{
+                            'square': shape.type === 'rectangle' && shape.width === shape.height,
+                            'circle': shape.type === 'circle',
+                            'tall-rectangle': shape.type === 'rectangle' && shape.width < shape.height,
+                            'wide-rectangle': shape.type === 'rectangle' && shape.width > shape.height,
+                            'ellipse': shape.type === 'ellipse'
+                          }"
+                          [ngStyle]="{
+                            'background-color': shape.color,
+                            'width.px': shape.width,
+                            'height.px': shape.height
+                          }"
+                          draggable="true"
+                          (dragstart)="onDragStart($event, shape)"
+                        >
                         </div>
                       </div>
+                      
                       <div class="row">
                         <div class="col-md-12">
                           <p-messages
@@ -290,12 +260,19 @@
                       </div>
                     </div>
 
-                    <div *ngIf="uploadOption === 'file'">
-                      <input
-                        type="file"
-                        (change)="onFileChange($event)"
+                    <div *ngIf="drawOption === 'file'">
+                      <p-fileUpload
+                        
+                        mode="basic"
+                        name="demo[]"
+                        chooseLabel="Choose"
+                        chooseIcon="pi pi-upload"
+                        url="https://www.primefaces.org/cdn/api/upload.php"
                         accept=".json"
-                      />
+                        [maxFileSize]="1000000"
+                        (onSelect)="onFileChange($event)"
+                      ></p-fileUpload>
+                       
                       <p-messages *ngIf="fileError" severity="error">
                         <p-message
                           severity="error"

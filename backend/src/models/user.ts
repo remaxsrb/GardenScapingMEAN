@@ -32,7 +32,7 @@ const User = new Schema(
     profilePhoto: { type: String, match: /\.(png|jpg)$/i },
     status: {
       type: String,
-      enum: ["pending", "active", "banned"],
+      enum: ["pending", "active", "banned", "busy", "available"],
     },
     firm: {
       type: Schema.Types.ObjectId,

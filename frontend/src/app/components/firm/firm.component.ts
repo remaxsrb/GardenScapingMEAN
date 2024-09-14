@@ -331,7 +331,15 @@ export class FirmComponent
   }
 
   onDragStart(event: DragEvent, shape: Shape): void {
-    event.dataTransfer?.setData('shape', JSON.stringify(shape));
+    const target = event.target as HTMLElement;
+
+    // Calculate the mouse offset relative to the shape's top-left corner
+    const offsetX = event.clientX - target.getBoundingClientRect().left;
+    const offsetY = event.clientY - target.getBoundingClientRect().top;
+
+    // Pass the shape's properties and the offset
+    const shapeData = { shape, offsetX, offsetY };
+    event.dataTransfer?.setData('shapeData', JSON.stringify(shapeData));
   }
 
   onDragOver(event: DragEvent) {
@@ -342,12 +350,13 @@ export class FirmComponent
     event.preventDefault();
     const canvas = this.gardenCanvas.nativeElement;
     const context = canvas.getContext('2d');
-    const data = event.dataTransfer?.getData('shape');
+    const data = event.dataTransfer?.getData('shapeData');
     if (data) {
-      const shape: Shape = JSON.parse(data);
-      const x = event.offsetX;
-      const y = event.offsetY;
+      const { shape, offsetX, offsetY } = JSON.parse(data);
 
+      const canvasRect = (event.target as HTMLCanvasElement).getBoundingClientRect();
+      const x = event.clientX - canvasRect.left - offsetX;
+      const y = event.clientY - canvasRect.top - offsetY;
       this.overlapError = false;
 
       // If drawing was successful (no overlap), store the shape with its position

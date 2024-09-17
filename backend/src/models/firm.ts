@@ -29,6 +29,7 @@ const Firm = new Schema(
       type: Number,
       min: 0,
       max: 5,
+      default: 0,
       required: true,
     },
     services: [Service],

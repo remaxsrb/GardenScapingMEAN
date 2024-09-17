@@ -113,7 +113,7 @@ export class FirmComponent
       {
         id: 'shape1',
         type: 'rectangle',
-        color: 'green',
+        color: '#11ff00',
         width: 50,
         height: 50,
       }, // Square for Private
@@ -131,17 +131,17 @@ export class FirmComponent
       this.shapes.push({
         id: 'shape4',
         type: 'rectangle',
-        color: 'blue',
-        width: 100,
-        height: 50,
+        color: '#00a7ff',
+        width: 200,
+        height: 100,
       }); // Wide Rectangle for Private)
     if (this.type === 'restaurant')
       this.shapes.push({
         id: 'shape5',
         type: 'ellipse',
-        color: 'blue',
-        width: 100,
-        height: 50,
+        color: '#00a7ff',
+        width: 200,
+        height: 100,
       }); // Ellipse for Public
   }
 

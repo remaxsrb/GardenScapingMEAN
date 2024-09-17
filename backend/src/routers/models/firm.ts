@@ -14,10 +14,6 @@ firmRouter.route('/search').get(
     (req, res) => new FirmController().search(req, res)
 )
 
-firmRouter.route('/rate').post(
-    (req, res) => new FirmController().rate(req, res)
-)
-
 firmRouter.route('/getname').get(
     (req, res) => new FirmController().getName(req, res)
 )

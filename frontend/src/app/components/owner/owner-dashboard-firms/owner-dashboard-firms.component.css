@@ -1,0 +1,15 @@
+.inline-form {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: flex-start;
+    width: 100%; /* Full width to occupy table cell */
+    margin-bottom: 0;
+    padding: 0;
+    box-shadow: none;
+    max-width: 100%;
+  }
+
+  .p-button-label{
+    margin: 0;
+  }

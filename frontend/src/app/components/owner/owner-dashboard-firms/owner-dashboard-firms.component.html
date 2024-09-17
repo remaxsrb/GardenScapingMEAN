@@ -16,9 +16,49 @@
                             (onPage)="pageChange($event)"
                             (onSort)="sortChange($event)"
                         >
-                            <ng-template pTemplate="caption">
-                                <!-- Add your caption template here if needed -->
-                            </ng-template>
+                        <ng-template pTemplate="caption">
+                            <form
+                              [formGroup]="searchForm"
+                              (ngSubmit)="search()"
+                              class="inline-form"
+                            >
+            
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="p-input-icon-left ml-auto">
+                                  <input
+                                    formControlName="name"
+                                    pInputText
+                                    type="text"
+                                    placeholder="Firm name"
+                                  />
+                                </span>
+                              </div>
+                              <div class="col-md-4">
+                                <span class="p-input-icon-left ml-auto">
+                                  <input
+                                    formControlName="address"
+                                    pInputText
+                                    type="text"
+                                    placeholder="Street number, City"
+                                  />
+                                </span>
+                              </div>
+                              <div class="col-md-4">
+                                <button
+                                pButton
+                                type="submit"
+                                label="Search"
+                                class="p-button-secondary mt-2"
+                              ></button>
+                              </div>
+            
+                            </div>
+                              
+                              
+                             
+                            </form>
+                          </ng-template>
                         
                             <ng-template pTemplate="header">
                                 <tr>

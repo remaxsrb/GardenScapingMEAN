@@ -12,7 +12,7 @@ class FirmService {
 
   async getName(_id: string) {
     const firm = await Firm.findById(_id);
-    return firm ? firm.name : null 
+    return firm ? firm.name : null;
   }
 
   async getPaginated(page: number, limit: number) {
@@ -20,16 +20,40 @@ class FirmService {
     return await Firm.find({}).skip(skip).limit(limit);
   }
 
-  //write specific get methods for each display view to optimize data flow
-
   async countDocuments() {
     return await Firm.countDocuments();
   }
 
-  async countFilteredDocuments(value:string) {
-    return await Firm.countDocuments({name:{ $regex: value, $options: 'i' }});
-  }
+  async countFilteredDocuments(
+    name: string,
+    street: string,
+    number: string,
+    city: string
+  ) {
+    const query: any = {};
 
+    if (name !== "") {
+      query.name = { $regex: name, $options: "i" };
+    }
+
+    if (street !== "") {
+      query["address.street"] = { $regex: street, $options: "i" };
+
+      if (city === "") {
+        if (number !== "") {
+          query["address.number"] = number;
+        }
+      } else {
+        query["address.city"] = { $regex: city, $options: "i" };
+
+        if (number !== "") {
+          query["address.number"] = number;
+        }
+      }
+    }
+
+    return await Firm.countDocuments(query);
+  }
 
   async sortAllByField(field: string, direction: "asc" | "desc") {
     const sortOptions: { [field: string]: "asc" | "desc" | 1 | -1 } = {
@@ -42,7 +66,7 @@ class FirmService {
     page: number,
     limit: number,
     field: string,
-    order: 1 | -1,
+    order: 1 | -1
   ) {
     const sortOptions: { [field: string]: 1 | -1 } = {
       [field]: order,
@@ -53,50 +77,57 @@ class FirmService {
     return await Firm.find({}).sort(sortOptions).skip(skip).limit(limit);
   }
 
-  async search(value: string, page: number, limit: number) {
+  async search(
+    name: string,
+    street: string,
+    number: string,
+    city: string,
+    page: number,
+    limit: number
+  ) {
     const skip = (page - 1) * limit;
-    return await Firm.find({name:{ $regex: value, $options: 'i' }}).skip(skip).limit(limit);
+    const query: any = {};
 
-  }
-
-  async readByFields(name: string, address: any) {
-    const query: { [key: string]: any } = {};
-
-    if (name !== "" && name !== null) {
-      query.name = name;
-    }
-    if (address.street !== "" && address.street !== null) {
-      query["address.street"] = address.street;
-    }
-    if (address.number !== "" && address.number !== null) {
-      query["address.number"] = address.number;
-    }
-    if (address.city !== "" && address.city !== null) {
-      query["address.city"] = address.city;
+    if (name !== "") {
+      query.name = { $regex: name, $options: "i" };
     }
 
-    return await Firm.find(query);
+    if (street !== "") {
+      query["address.street"] = { $regex: street, $options: "i" };
+
+      if (city === "") {
+        if (number !== "") {
+          query["address.number"] = number;
+        }
+      } else {
+        query["address.city"] = { $regex: city, $options: "i" };
+
+        if (number !== "") {
+          query["address.number"] = number;
+        }
+      }
+    }
+
+    return await Firm.find(query).skip(skip).limit(limit).populate("address");
   }
 
   async rate(ownerReview: number, _id: string | undefined) {
-    var newReviewCount = 0;
-    var newRating = 0;
-    const firm = await Firm.findOne({ _id });
+    const firm = await Firm.findById({ _id });
     if (firm) {
-      newReviewCount = firm.reviewCount++;
+      const newReviewCount = firm.reviewCount + 1;
       const newRating = Math.min(
         (firm.rating * firm.reviewCount + ownerReview) / newReviewCount,
-        5.0,
+        5.0
       );
+
+      const updateQuery = { _id: _id };
+      const update = {
+        reviewCount: newReviewCount,
+        rating: newRating,
+      };
+
+      return await Firm.findByIdAndUpdate(updateQuery, update);
     }
-
-    const updateQuery = { _id: _id };
-    const update = {
-      reviewCount: newReviewCount,
-      rating: newRating,
-    };
-
-    return await Firm.updateOne(updateQuery, update);
   }
 }
 export default new FirmService();

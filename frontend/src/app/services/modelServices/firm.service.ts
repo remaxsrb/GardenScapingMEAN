@@ -51,15 +51,21 @@ export class FirmService {
   }
 
 
-  readByValue(
-    value:string,
+  search(
+    name:string,
+    street:string,
+    number:string,
+    city:string,
     page: number,
     limit: number,
   
   ): Observable<any> {
     return this.http.get(`${this.backendUrl}/search`, {
       params: {
-        value: value,
+        name: name,
+        street: street,
+        number: number,
+        city: city,
         page: page.toString(),
         limit: limit.toString()
        

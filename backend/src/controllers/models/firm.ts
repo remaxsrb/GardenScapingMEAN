@@ -68,13 +68,17 @@ export class FirmController {
 
   async search(req: express.Request, res: express.Response) {
     try {
-      const value = req.query.value as string
+      const name = req.query.name as string
+      const street = req.query.street as string
+      const number = req.query.number as string
+      const city = req.query.city as string
+
       const page = parseInt(req.query.page as string);
       const limit = parseInt(req.query.limit as string);
 
-      const firms = await firmService.search(value, page, limit); 
+      const firms = await firmService.search(name, street, number, city, page, limit); 
 
-      const totalDocuments = await firmService.countFilteredDocuments(value);
+      const totalDocuments = await firmService.countFilteredDocuments(name, street, number, city);
 
       return res.json({
         page,
@@ -89,17 +93,7 @@ export class FirmController {
     }
   }
 
-  async rate(req: express.Request, res: express.Response) {
-    const ownerReview = parseInt(req.body.review as string);
-    const { _id } = req.body;
-
-    try {
-      await firmService.rate(ownerReview, _id as string);
-      return res.status(200);
-    } catch (err: any) {
-      res.status(500).send(err);
-    }
-  }
+ 
 }
 
 export default new FirmController();

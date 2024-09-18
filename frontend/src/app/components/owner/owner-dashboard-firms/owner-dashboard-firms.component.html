@@ -78,7 +78,7 @@
                         
                             <ng-template pTemplate="body" let-firm>
                                 <tr>
-                                    <td><a routerLink="/firmInfo" (click)="onLinkClick(firm)"> {{ firm.name }}</a></td>
+                                    <td><a routerLink="/owner/firmInfo" (click)="onLinkClick(firm)"> {{ firm.name }}</a></td>
                                     <td>
                                         {{ firm.address.street }} {{ firm.address.number }},
                                         {{ firm.address.city }}

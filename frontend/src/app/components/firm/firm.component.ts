@@ -413,13 +413,6 @@ export class FirmComponent
   }
 
 
-
-  private setErr(message: string) {
-    this.errorMessage = [
-      { severity: 'error', summary: 'Error', detail: message },
-    ];
-  }
-
   toggleService(service: Service, index: number) {
     if (!this.selectedServicesArray.some((s) => s.name === service.name)) {
       this.selectedServicesArray.push(service);
@@ -433,8 +426,6 @@ export class FirmComponent
 
   onSubmit() {
 
-
-    // console.log(payload);
 
     // const jsonData = this.drawnShapes;
     // const blob = new Blob([JSON.stringify(jsonData, null, 2)], {

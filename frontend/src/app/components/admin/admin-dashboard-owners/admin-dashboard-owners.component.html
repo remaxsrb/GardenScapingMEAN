@@ -1,53 +1,59 @@
-<div class="table-responsive">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>Username</th>
-        <th>Phone number</th>
-        <th>Email</th>
-        <th>Credit card number</th>
-        <th>Status</th>
-        <th>Change status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let owner of owners; let i = index">
-        <td>{{ owner.firstname }}</td>
-        <td>{{ owner.lastname }}</td>
-        <td>{{ owner.username }}</td>
-        <td>{{ owner.phoneNumber }}</td>
-        <td>{{ owner.email }}</td>
-        <td>{{ owner.creditCardNumber.cardNumber }}</td>
-        <td>{{ owner.status }}</td>
-        <td>
-          <form (ngSubmit)="updateStatus(owner, i)" #ownerStatusForm="ngForm" class="inline-form">
-            <div class="d-flex align-items-center">
-              <select
-                id="status-{{ i }}"
-                class="form-select"
-                required
-                [(ngModel)]="updatedOwnerStatuses[i]"
-                name="status-{{ i }}"
-                required
-              >
-                <option value="" disabled>Select a status</option>
-                <option value="Active">Active</option>
-                <option value="Rejected">Rejected</option>
-                <option value="Blocked">Banned</option>
-              </select>
-              <button
-                type="submit"
-                class="btn btn-primary"
-                [disabled]="!ownerStatusForm.form.valid"
-              >
-                Change
-              </button>
-            </div>
-          </form>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
+<div class="content-container d-flex justify-content-start align-items-center">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Username</th>
+          <th>Phone number</th>
+          <th>Email</th>
+          <th>Credit card number</th>
+          <th>Status</th>
+          <th>Change status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let owner of owners; let i = index">
+          <td>{{ owner.firstname }}</td>
+          <td>{{ owner.lastname }}</td>
+          <td>{{ owner.username }}</td>
+          <td>{{ owner.phoneNumber }}</td>
+          <td>{{ owner.email }}</td>
+          <td>{{ owner.creditCardNumber.cardNumber }}</td>
+          <td>{{ owner.status }}</td>
+          <td>
+            <form (ngSubmit)="updateStatus(owner, i)" #ownerStatusForm="ngForm" class="inline-form">
+              <div class="d-flex align-items-center">
+                <select
+                  id="status-{{ i }}"
+                  class="form-select"
+                  required
+                  [(ngModel)]="updatedOwnerStatuses[i]"
+                  name="status-{{ i }}"
+                  required
+                >
+                  <option value="" disabled>Select a status</option>
+                  <option value="Active">Active</option>
+                  <option value="Rejected">Rejected</option>
+                  <option value="Blocked">Banned</option>
+                </select>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="!ownerStatusForm.form.valid"
+                >
+                  Change
+                </button>
+              </div>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+
+
+

@@ -38,9 +38,10 @@ const routes: Routes = [
       { path: 'maintenence', component: OwnerDashboardMaintenenceComponent },
       { path: 'profile', component: UserProfileComponent },
       { path: '', redirectTo: 'profile', pathMatch: 'full' }, 
+      { path: 'firmInfo', component: FirmComponent},
+
     ]
   },
-  { path: 'firmInfo', component: FirmComponent},
 
   {
     path: 'decorator',

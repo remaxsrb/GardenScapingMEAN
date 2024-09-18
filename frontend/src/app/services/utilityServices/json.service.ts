@@ -8,19 +8,12 @@ import { Observable } from 'rxjs';
 export class JsonService {
 
   private layoutUrl = 'assets/gardenLayouts'; 
-  private photoUrl = 'assets/photos'; 
-
-  private apiUrl = 'http://127.0.0.1:4000';
 
   constructor(private http: HttpClient) { }
 
-  get_layout(fileName:string): Observable<string> {
-    return this.http.get<string>(`${this.layoutUrl}/${fileName}`);
+  get_layout(fileName:string): Observable<any> {
+    return this.http.get<any>(`${this.layoutUrl}/${fileName}`);
   }
 
 
-
-  get_photo(fileName:string): Observable<Blob> {
-    return this.http.get(`${this.photoUrl}/${fileName}`, { responseType: 'blob' });
-  }
 }

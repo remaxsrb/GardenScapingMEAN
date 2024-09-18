@@ -19,8 +19,6 @@ firmRouter.route('/getname').get(
 )
 
 
-
-
 firmRouter.route('/all').get(
     (req, res) => new FirmController().getIdName(req, res)
 )

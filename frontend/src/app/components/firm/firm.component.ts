@@ -168,7 +168,6 @@ export class FirmComponent
   }
 
   initializeCanvas() {
-    console.log('AAAAAAAAAAAAAAAAAAAAAAAA');
     const canvas = this.gardenCanvas.nativeElement;
     const context = canvas.getContext('2d');
 
@@ -177,7 +176,6 @@ export class FirmComponent
       context.clearRect(0, 0, canvas.width, canvas.height);
 
       if (this.activeIndex === 1) {
-        console.log(this.shapes);
         //this.drawShapesService.drawShapes(this.shapes);
       }
     }
@@ -326,8 +324,28 @@ export class FirmComponent
   }
 
   onFileChange(event: any) {
-    const file: File = event.target.files[0];
+    const file: File = event.files[0];
     this.selectedFile = file;
+
+    this.jsonService.get_layout(this.selectedFile.name).subscribe(data => {
+      const canvas = this.gardenCanvas.nativeElement;
+      const context = canvas.getContext('2d');
+
+      this.drawnShapes = data
+
+      this.drawnShapes.forEach(shape => {
+        this.drawShapesService.drawShapeOnCanvas(
+          context!,
+          shape,
+          shape.x!,
+          shape.y!,
+          this.drawnShapes
+        );
+      });
+
+    })
+
+
   }
 
   onDragStart(event: DragEvent, shape: Shape): void {
@@ -354,7 +372,9 @@ export class FirmComponent
     if (data) {
       const { shape, offsetX, offsetY } = JSON.parse(data);
 
-      const canvasRect = (event.target as HTMLCanvasElement).getBoundingClientRect();
+      const canvasRect = (
+        event.target as HTMLCanvasElement
+      ).getBoundingClientRect();
       const x = event.clientX - canvasRect.left - offsetX;
       const y = event.clientY - canvasRect.top - offsetY;
       this.overlapError = false;
@@ -392,6 +412,8 @@ export class FirmComponent
     else this.errorMessage = [];
   }
 
+
+
   private setErr(message: string) {
     this.errorMessage = [
       { severity: 'error', summary: 'Error', detail: message },
@@ -410,16 +432,20 @@ export class FirmComponent
   }
 
   onSubmit() {
-    const fileName = this.owner._id + '.json';
-    const text = this.shapes;
-    const payload = {
-      fileName,
-      text,
-    };
 
-    console.log(payload);
 
-    this.fileService.uploadFile(payload);
+    // console.log(payload);
+
+    // const jsonData = this.drawnShapes;
+    // const blob = new Blob([JSON.stringify(jsonData, null, 2)], {
+    //   type: 'application/json',
+    // });
+    // const url = window.URL.createObjectURL(blob);
+    // const a = document.createElement('a');
+    // a.href = url;
+    // a.download = 'gardenTest.json';
+    // a.click();
+    // window.URL.revokeObjectURL(url);
 
     this.bookingService.create(this.newBookingForm.value).subscribe((data) => {
       this.newBookingForm.reset();

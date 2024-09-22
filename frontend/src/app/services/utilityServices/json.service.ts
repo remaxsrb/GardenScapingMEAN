@@ -7,12 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class JsonService {
 
-  private layoutUrl = 'assets/gardenLayouts'; 
 
   constructor(private http: HttpClient) { }
 
-  get_layout(fileName:string): Observable<any> {
-    return this.http.get<any>(`${this.layoutUrl}/${fileName}`);
+  get_layout(filePath:string): Observable<any> {
+    return this.http.get<any>(filePath);
   }
 
 

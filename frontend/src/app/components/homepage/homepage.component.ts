@@ -71,7 +71,6 @@ export class HomepageComponent implements OnInit {
       data.forEach((element: Booking) => {
         this.jobPhotos!.push(element.photo);
       });
-      console.log('Job Photos:', this.jobPhotos);
     });
     this.initResponsiveOptions();
     this.initSearchForm();

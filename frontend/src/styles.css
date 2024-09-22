@@ -55,12 +55,14 @@ nav {
 }
 
 main {
-  flex: 1; /* Fill remaining space */
+  flex: 1; /* Fills remaining space between header and footer */
   display: flex;
-  flex-direction: column; /* Stack child elements vertically */
-  align-items: center; /* Center align horizontally */
-  height: 100vh;
+  flex-direction: column; 
+  align-items: center;
+  width: 100%; /* Ensures the content stretches across the available width */
+  padding: 20px; /* Adjust this if necessary for spacing */
 }
+
 
 .custom-container {
   width: 100%; 
@@ -133,14 +135,13 @@ form > * {
   margin-bottom: 15px; /* Increased margin between form elements */
 }
 
-/* Footer styles */
 footer {
-  background-color: #343b42; /* Bootstrap dark color */
+  background-color: #343b42;
   color: white;
   padding: 1rem 0;
   text-align: center;
-  margin-top: auto; /* Push footer to the bottom */
   width: 100%;
+  margin-top: auto; /* Keeps footer at the bottom if content is small */
 }
 
 

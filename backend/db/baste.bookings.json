@@ -16,13 +16,135 @@
   "finishDate": null,
   "garden": {
     "width": 3,
-    "height": 6,
+    "height": 2,
     "type": "private",
-    "waterArea": 5,
-    "greenArea": 5,
-    "sittingArea": 6,
+    "waterArea": 3,
+    "greenArea": 2,
+    "sittingArea": 2,
+    "layout": [
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 47,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa4"
+        }
+      },
+      {
+        "id": "shape2",
+        "type": "circle",
+        "color": "brown",
+        "width": 50,
+        "height": 50,
+        "x": 171,
+        "y": 49,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa5"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 269,
+        "y": 52,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa6"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 139,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa7"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 52,
+        "y": 232,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa8"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 358,
+        "y": 56,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa9"
+        }
+      },
+      {
+        "id": "shape4",
+        "type": "rectangle",
+        "color": "#00a7ff",
+        "width": 200,
+        "height": 100,
+        "x": 150,
+        "y": 189,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afaa"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 55,
+        "y": 311,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afab"
+        }
+      },
+      {
+        "id": "shape3",
+        "type": "rectangle",
+        "color": "gray",
+        "width": 50,
+        "height": 100,
+        "x": 431,
+        "y": 57,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afac"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 400,
+        "y": 194,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afad"
+        }
+      }
+    ],
     "_id": {
-      "$oid": "66dc417f4c6926f151576a51"
+      "$oid": "66f02ac006fb4ca93e91afa3"
     }
   },
   "photo": "",
@@ -57,14 +179,136 @@
   "startDate": null,
   "finishDate": null,
   "garden": {
-    "width": 5,
-    "height": 7,
+    "width": 3,
+    "height": 2,
     "type": "private",
-    "waterArea": 7,
-    "greenArea": 6,
-    "sittingArea": 7,
+    "waterArea": 3,
+    "greenArea": 2,
+    "sittingArea": 2,
+    "layout": [
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 47,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa4"
+        }
+      },
+      {
+        "id": "shape2",
+        "type": "circle",
+        "color": "brown",
+        "width": 50,
+        "height": 50,
+        "x": 171,
+        "y": 49,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa5"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 269,
+        "y": 52,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa6"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 139,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa7"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 52,
+        "y": 232,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa8"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 358,
+        "y": 56,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa9"
+        }
+      },
+      {
+        "id": "shape4",
+        "type": "rectangle",
+        "color": "#00a7ff",
+        "width": 200,
+        "height": 100,
+        "x": 150,
+        "y": 189,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afaa"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 55,
+        "y": 311,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afab"
+        }
+      },
+      {
+        "id": "shape3",
+        "type": "rectangle",
+        "color": "gray",
+        "width": 50,
+        "height": 100,
+        "x": 431,
+        "y": 57,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afac"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 400,
+        "y": 194,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afad"
+        }
+      }
+    ],
     "_id": {
-      "$oid": "66dcb659732981ec086812b3"
+      "$oid": "66f02ac006fb4ca93e91afa3"
     }
   },
   "photo": "",
@@ -112,14 +356,136 @@
     "$date": "2024-03-07T22:00:00.000Z"
   },
   "garden": {
-    "width": 4,
-    "height": 7,
-    "type": "restaurant",
-    "waterArea": 5,
-    "greenArea": 6,
-    "sittingArea": 7,
+    "width": 3,
+    "height": 2,
+    "type": "private",
+    "waterArea": 3,
+    "greenArea": 2,
+    "sittingArea": 2,
+    "layout": [
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 47,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa4"
+        }
+      },
+      {
+        "id": "shape2",
+        "type": "circle",
+        "color": "brown",
+        "width": 50,
+        "height": 50,
+        "x": 171,
+        "y": 49,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa5"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 269,
+        "y": 52,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa6"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 139,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa7"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 52,
+        "y": 232,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa8"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 358,
+        "y": 56,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa9"
+        }
+      },
+      {
+        "id": "shape4",
+        "type": "rectangle",
+        "color": "#00a7ff",
+        "width": 200,
+        "height": 100,
+        "x": 150,
+        "y": 189,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afaa"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 55,
+        "y": 311,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afab"
+        }
+      },
+      {
+        "id": "shape3",
+        "type": "rectangle",
+        "color": "gray",
+        "width": 50,
+        "height": 100,
+        "x": 431,
+        "y": 57,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afac"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 400,
+        "y": 194,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afad"
+        }
+      }
+    ],
     "_id": {
-      "$oid": "66dcb6bb732981ec08681301"
+      "$oid": "66f02ac006fb4ca93e91afa3"
     }
   },
   "photo": "http://localhost:4000/files/photos/pool1.jpg",
@@ -134,7 +500,7 @@
   ],
   "requests": "",
   "status": "maintained",
-  "rating": 5,
+  "rating": 0,
   "lastServiceDate": null
 },
 {
@@ -160,14 +526,136 @@
     "$date": "2023-03-07T22:00:00.000Z"
   },
   "garden": {
-    "width": 4,
-    "height": 7,
-    "type": "restaurant",
-    "waterArea": 5,
-    "greenArea": 6,
-    "sittingArea": 7,
+    "width": 3,
+    "height": 2,
+    "type": "private",
+    "waterArea": 3,
+    "greenArea": 2,
+    "sittingArea": 2,
+    "layout": [
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 47,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa4"
+        }
+      },
+      {
+        "id": "shape2",
+        "type": "circle",
+        "color": "brown",
+        "width": 50,
+        "height": 50,
+        "x": 171,
+        "y": 49,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa5"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 269,
+        "y": 52,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa6"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 139,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa7"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 52,
+        "y": 232,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa8"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 358,
+        "y": 56,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa9"
+        }
+      },
+      {
+        "id": "shape4",
+        "type": "rectangle",
+        "color": "#00a7ff",
+        "width": 200,
+        "height": 100,
+        "x": 150,
+        "y": 189,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afaa"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 55,
+        "y": 311,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afab"
+        }
+      },
+      {
+        "id": "shape3",
+        "type": "rectangle",
+        "color": "gray",
+        "width": 50,
+        "height": 100,
+        "x": 431,
+        "y": 57,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afac"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 400,
+        "y": 194,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afad"
+        }
+      }
+    ],
     "_id": {
-      "$oid": "66dcb6bb732981ec08681301"
+      "$oid": "66f02ac006fb4ca93e91afa3"
     }
   },
   "photo": "http://localhost:4000/files/photos/pool2.jpg",
@@ -182,7 +670,7 @@
   ],
   "requests": "",
   "status": "archived",
-  "rating": 3,
+  "rating": 0,
   "lastServiceDate": {
     "$date": "2023-09-06T22:00:00.000Z"
   }
@@ -210,14 +698,136 @@
     "$date": "2022-03-07T22:00:00.000Z"
   },
   "garden": {
-    "width": 4,
-    "height": 7,
-    "type": "restaurant",
-    "waterArea": 5,
-    "greenArea": 6,
-    "sittingArea": 7,
+    "width": 3,
+    "height": 2,
+    "type": "private",
+    "waterArea": 3,
+    "greenArea": 2,
+    "sittingArea": 2,
+    "layout": [
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 47,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa4"
+        }
+      },
+      {
+        "id": "shape2",
+        "type": "circle",
+        "color": "brown",
+        "width": 50,
+        "height": 50,
+        "x": 171,
+        "y": 49,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa5"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 269,
+        "y": 52,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa6"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 139,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa7"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 52,
+        "y": 232,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa8"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 358,
+        "y": 56,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa9"
+        }
+      },
+      {
+        "id": "shape4",
+        "type": "rectangle",
+        "color": "#00a7ff",
+        "width": 200,
+        "height": 100,
+        "x": 150,
+        "y": 189,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afaa"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 55,
+        "y": 311,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afab"
+        }
+      },
+      {
+        "id": "shape3",
+        "type": "rectangle",
+        "color": "gray",
+        "width": 50,
+        "height": 100,
+        "x": 431,
+        "y": 57,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afac"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 400,
+        "y": 194,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afad"
+        }
+      }
+    ],
     "_id": {
-      "$oid": "66dcb6bb732981ec08681301"
+      "$oid": "66f02ac006fb4ca93e91afa3"
     }
   },
   "photo": "http://localhost:4000/files/photos/pool3.jpg",
@@ -232,7 +842,7 @@
   ],
   "requests": "",
   "status": "archived",
-  "rating": 3,
+  "rating": 0,
   "lastServiceDate": {
     "$date": "2022-09-06T22:00:00.000Z"
   }
@@ -256,13 +866,135 @@
   "lastServiceDate": null,
   "garden": {
     "width": 3,
-    "height": 4,
+    "height": 2,
     "type": "private",
-    "waterArea": 5,
-    "greenArea": 4,
-    "sittingArea": 5,
+    "waterArea": 3,
+    "greenArea": 2,
+    "sittingArea": 2,
+    "layout": [
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 47,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa4"
+        }
+      },
+      {
+        "id": "shape2",
+        "type": "circle",
+        "color": "brown",
+        "width": 50,
+        "height": 50,
+        "x": 171,
+        "y": 49,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa5"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 269,
+        "y": 52,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa6"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 139,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa7"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 52,
+        "y": 232,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa8"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 358,
+        "y": 56,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa9"
+        }
+      },
+      {
+        "id": "shape4",
+        "type": "rectangle",
+        "color": "#00a7ff",
+        "width": 200,
+        "height": 100,
+        "x": 150,
+        "y": 189,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afaa"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 55,
+        "y": 311,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afab"
+        }
+      },
+      {
+        "id": "shape3",
+        "type": "rectangle",
+        "color": "gray",
+        "width": 50,
+        "height": 100,
+        "x": 431,
+        "y": 57,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afac"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 400,
+        "y": 194,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afad"
+        }
+      }
+    ],
     "_id": {
-      "$oid": "66ddb9fbdb5350dd559d7598"
+      "$oid": "66f02ac006fb4ca93e91afa3"
     }
   },
   "photo": "",
@@ -298,13 +1030,135 @@
   "lastServiceDate": null,
   "garden": {
     "width": 3,
-    "height": 4,
+    "height": 2,
     "type": "private",
-    "waterArea": 4,
-    "greenArea": 5,
-    "sittingArea": 6,
+    "waterArea": 3,
+    "greenArea": 2,
+    "sittingArea": 2,
+    "layout": [
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 47,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa4"
+        }
+      },
+      {
+        "id": "shape2",
+        "type": "circle",
+        "color": "brown",
+        "width": 50,
+        "height": 50,
+        "x": 171,
+        "y": 49,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa5"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 269,
+        "y": 52,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa6"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 139,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa7"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 52,
+        "y": 232,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa8"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 358,
+        "y": 56,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa9"
+        }
+      },
+      {
+        "id": "shape4",
+        "type": "rectangle",
+        "color": "#00a7ff",
+        "width": 200,
+        "height": 100,
+        "x": 150,
+        "y": 189,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afaa"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 55,
+        "y": 311,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afab"
+        }
+      },
+      {
+        "id": "shape3",
+        "type": "rectangle",
+        "color": "gray",
+        "width": 50,
+        "height": 100,
+        "x": 431,
+        "y": 57,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afac"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 400,
+        "y": 194,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afad"
+        }
+      }
+    ],
     "_id": {
-      "$oid": "66ddbaa33e138f8120a01531"
+      "$oid": "66f02ac006fb4ca93e91afa3"
     }
   },
   "photo": "",
@@ -340,13 +1194,135 @@
   "lastServiceDate": null,
   "garden": {
     "width": 3,
-    "height": 5,
-    "type": "restaurant",
-    "waterArea": 4,
-    "greenArea": 4,
-    "sittingArea": 3,
+    "height": 2,
+    "type": "private",
+    "waterArea": 3,
+    "greenArea": 2,
+    "sittingArea": 2,
+    "layout": [
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 47,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa4"
+        }
+      },
+      {
+        "id": "shape2",
+        "type": "circle",
+        "color": "brown",
+        "width": 50,
+        "height": 50,
+        "x": 171,
+        "y": 49,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa5"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 269,
+        "y": 52,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa6"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 139,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa7"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 52,
+        "y": 232,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa8"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 358,
+        "y": 56,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa9"
+        }
+      },
+      {
+        "id": "shape4",
+        "type": "rectangle",
+        "color": "#00a7ff",
+        "width": 200,
+        "height": 100,
+        "x": 150,
+        "y": 189,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afaa"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 55,
+        "y": 311,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afab"
+        }
+      },
+      {
+        "id": "shape3",
+        "type": "rectangle",
+        "color": "gray",
+        "width": 50,
+        "height": 100,
+        "x": 431,
+        "y": 57,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afac"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 400,
+        "y": 194,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afad"
+        }
+      }
+    ],
     "_id": {
-      "$oid": "66ddbae33e138f8120a01538"
+      "$oid": "66f02ac006fb4ca93e91afa3"
     }
   },
   "photo": "",
@@ -381,14 +1357,136 @@
   "finishDate": null,
   "lastServiceDate": null,
   "garden": {
-    "width": 5,
-    "height": 7,
+    "width": 3,
+    "height": 2,
     "type": "private",
-    "waterArea": 5,
-    "greenArea": 4,
-    "sittingArea": 7,
+    "waterArea": 3,
+    "greenArea": 2,
+    "sittingArea": 2,
+    "layout": [
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 47,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa4"
+        }
+      },
+      {
+        "id": "shape2",
+        "type": "circle",
+        "color": "brown",
+        "width": 50,
+        "height": 50,
+        "x": 171,
+        "y": 49,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa5"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 269,
+        "y": 52,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa6"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 139,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa7"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 52,
+        "y": 232,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa8"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 358,
+        "y": 56,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa9"
+        }
+      },
+      {
+        "id": "shape4",
+        "type": "rectangle",
+        "color": "#00a7ff",
+        "width": 200,
+        "height": 100,
+        "x": 150,
+        "y": 189,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afaa"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 55,
+        "y": 311,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afab"
+        }
+      },
+      {
+        "id": "shape3",
+        "type": "rectangle",
+        "color": "gray",
+        "width": 50,
+        "height": 100,
+        "x": 431,
+        "y": 57,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afac"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 400,
+        "y": 194,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afad"
+        }
+      }
+    ],
     "_id": {
-      "$oid": "66ddf0477df7dcb73aa35662"
+      "$oid": "66f02ac006fb4ca93e91afa3"
     }
   },
   "photo": "",
@@ -423,14 +1521,136 @@
   "finishDate": null,
   "lastServiceDate": null,
   "garden": {
-    "width": 5,
-    "height": 4,
+    "width": 3,
+    "height": 2,
     "type": "private",
-    "waterArea": 4,
-    "greenArea": 4,
-    "sittingArea": 5,
+    "waterArea": 3,
+    "greenArea": 2,
+    "sittingArea": 2,
+    "layout": [
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 47,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa4"
+        }
+      },
+      {
+        "id": "shape2",
+        "type": "circle",
+        "color": "brown",
+        "width": 50,
+        "height": 50,
+        "x": 171,
+        "y": 49,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa5"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 269,
+        "y": 52,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa6"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 139,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa7"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 52,
+        "y": 232,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa8"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 358,
+        "y": 56,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa9"
+        }
+      },
+      {
+        "id": "shape4",
+        "type": "rectangle",
+        "color": "#00a7ff",
+        "width": 200,
+        "height": 100,
+        "x": 150,
+        "y": 189,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afaa"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 55,
+        "y": 311,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afab"
+        }
+      },
+      {
+        "id": "shape3",
+        "type": "rectangle",
+        "color": "gray",
+        "width": 50,
+        "height": 100,
+        "x": 431,
+        "y": 57,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afac"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 400,
+        "y": 194,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afad"
+        }
+      }
+    ],
     "_id": {
-      "$oid": "66ddf07b7df7dcb73aa35669"
+      "$oid": "66f02ac006fb4ca93e91afa3"
     }
   },
   "photo": "",
@@ -440,6 +1660,498 @@
       "price": 100,
       "_id": {
         "$oid": "66a7a40032ceeb1fa5b6fc66"
+      }
+    }
+  ],
+  "requests": "",
+  "status": "active",
+  "rating": 0
+},
+{
+  "_id": {
+    "$oid": "66e9febf98627c8d1127154a"
+  },
+  "owner": {
+    "$oid": "66a284a3191715590e4c3b8e"
+  },
+  "decorator": null,
+  "firm": {
+    "$oid": "66a7a40032ceeb1fa5b6fc64"
+  },
+  "bookingDate": {
+    "$date": "2024-09-17T22:10:10.193Z"
+  },
+  "startDate": null,
+  "finishDate": null,
+  "lastServiceDate": null,
+  "garden": {
+    "width": 3,
+    "height": 2,
+    "type": "private",
+    "waterArea": 3,
+    "greenArea": 2,
+    "sittingArea": 2,
+    "layout": [
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 47,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa4"
+        }
+      },
+      {
+        "id": "shape2",
+        "type": "circle",
+        "color": "brown",
+        "width": 50,
+        "height": 50,
+        "x": 171,
+        "y": 49,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa5"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 269,
+        "y": 52,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa6"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 139,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa7"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 52,
+        "y": 232,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa8"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 358,
+        "y": 56,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa9"
+        }
+      },
+      {
+        "id": "shape4",
+        "type": "rectangle",
+        "color": "#00a7ff",
+        "width": 200,
+        "height": 100,
+        "x": 150,
+        "y": 189,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afaa"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 55,
+        "y": 311,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afab"
+        }
+      },
+      {
+        "id": "shape3",
+        "type": "rectangle",
+        "color": "gray",
+        "width": 50,
+        "height": 100,
+        "x": 431,
+        "y": 57,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afac"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 400,
+        "y": 194,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afad"
+        }
+      }
+    ],
+    "_id": {
+      "$oid": "66f02ac006fb4ca93e91afa3"
+    }
+  },
+  "photo": "",
+  "services": [
+    {
+      "name": "Servis1",
+      "price": 100,
+      "_id": {
+        "$oid": "66a7a40032ceeb1fa5b6fc66"
+      }
+    }
+  ],
+  "requests": "",
+  "status": "active",
+  "rating": 0
+},
+{
+  "_id": {
+    "$oid": "66ebddcc5114b3674a71f97f"
+  },
+  "owner": {
+    "$oid": "66a284a3191715590e4c3b8e"
+  },
+  "decorator": null,
+  "firm": {
+    "$oid": "66a7a40032ceeb1fa5b6fc64"
+  },
+  "bookingDate": {
+    "$date": "2024-09-19T08:14:18.151Z"
+  },
+  "startDate": null,
+  "finishDate": null,
+  "lastServiceDate": null,
+  "garden": {
+    "width": 3,
+    "height": 2,
+    "type": "private",
+    "waterArea": 3,
+    "greenArea": 2,
+    "sittingArea": 2,
+    "layout": [
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 47,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa4"
+        }
+      },
+      {
+        "id": "shape2",
+        "type": "circle",
+        "color": "brown",
+        "width": 50,
+        "height": 50,
+        "x": 171,
+        "y": 49,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa5"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 269,
+        "y": 52,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa6"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 139,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa7"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 52,
+        "y": 232,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa8"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 358,
+        "y": 56,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa9"
+        }
+      },
+      {
+        "id": "shape4",
+        "type": "rectangle",
+        "color": "#00a7ff",
+        "width": 200,
+        "height": 100,
+        "x": 150,
+        "y": 189,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afaa"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 55,
+        "y": 311,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afab"
+        }
+      },
+      {
+        "id": "shape3",
+        "type": "rectangle",
+        "color": "gray",
+        "width": 50,
+        "height": 100,
+        "x": 431,
+        "y": 57,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afac"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 400,
+        "y": 194,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afad"
+        }
+      }
+    ],
+    "_id": {
+      "$oid": "66f02ac006fb4ca93e91afa3"
+    }
+  },
+  "photo": "",
+  "services": [
+    {
+      "name": "Servis1",
+      "price": 100,
+      "_id": {
+        "$oid": "66a7a40032ceeb1fa5b6fc66"
+      }
+    }
+  ],
+  "requests": "",
+  "status": "active",
+  "rating": 0
+},
+{
+  "_id": {
+    "$oid": "66f02ac006fb4ca93e91afa2"
+  },
+  "owner": {
+    "$oid": "66a284a3191715590e4c3b8e"
+  },
+  "decorator": null,
+  "firm": {
+    "$oid": "66a7a45a32ceeb1fa5b6fc6a"
+  },
+  "bookingDate": {
+    "$date": "2024-09-22T14:31:25.169Z"
+  },
+  "startDate": null,
+  "finishDate": null,
+  "lastServiceDate": null,
+  "garden": {
+    "width": 3,
+    "height": 2,
+    "type": "private",
+    "waterArea": 3,
+    "greenArea": 2,
+    "sittingArea": 2,
+    "layout": [
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 47,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa4"
+        }
+      },
+      {
+        "id": "shape2",
+        "type": "circle",
+        "color": "brown",
+        "width": 50,
+        "height": 50,
+        "x": 171,
+        "y": 49,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa5"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 269,
+        "y": 52,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa6"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 50,
+        "y": 139,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa7"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 52,
+        "y": 232,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa8"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 358,
+        "y": 56,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afa9"
+        }
+      },
+      {
+        "id": "shape4",
+        "type": "rectangle",
+        "color": "#00a7ff",
+        "width": 200,
+        "height": 100,
+        "x": 150,
+        "y": 189,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afaa"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 55,
+        "y": 311,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afab"
+        }
+      },
+      {
+        "id": "shape3",
+        "type": "rectangle",
+        "color": "gray",
+        "width": 50,
+        "height": 100,
+        "x": 431,
+        "y": 57,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afac"
+        }
+      },
+      {
+        "id": "shape1",
+        "type": "rectangle",
+        "color": "#11ff00",
+        "width": 50,
+        "height": 50,
+        "x": 400,
+        "y": 194,
+        "_id": {
+          "$oid": "66f02ac006fb4ca93e91afad"
+        }
+      }
+    ],
+    "_id": {
+      "$oid": "66f02ac006fb4ca93e91afa3"
+    }
+  },
+  "photo": "",
+  "services": [
+    {
+      "name": "Servis1",
+      "price": 100,
+      "_id": {
+        "$oid": "66a7a45a32ceeb1fa5b6fc6c"
       }
     }
   ],

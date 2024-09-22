@@ -32,6 +32,8 @@ export class OwnerDashboardMaintenenceComponent implements OnInit {
   maintained_totalPages: number = -1;
   maintained_number_of_bookings: number = 0;
 
+  waterBodies: number[] = []
+
   ngOnInit(): void {
     const ownerInfo = localStorage.getItem('user');
     if (ownerInfo) this.owner = JSON.parse(ownerInfo);
@@ -53,7 +55,6 @@ export class OwnerDashboardMaintenenceComponent implements OnInit {
           this.archivedBooking_currentPage = data.page;
           this.archivedBooking_number_of_bookings = data.totalDocuments;
           this.archivedBooking_totalPages = data.totalPages;
-
           this.prepareData('archived');
         });
     } else {
@@ -111,6 +112,12 @@ export class OwnerDashboardMaintenenceComponent implements OnInit {
           booking.lastServiceDate = this.timeService.formatDateToDDMMYYYY(
             new Date(booking.lastServiceDate)
           );
+          booking.garden.waterBodies = 0;
+          booking.garden.layout.forEach(shape => {
+          if(shape.color==="#00a7ff")
+              booking.garden.waterBodies++
+        });
+
       });
     } else {
       this.maintained_bookings.forEach((booking) => {
@@ -135,8 +142,6 @@ export class OwnerDashboardMaintenenceComponent implements OnInit {
     );
 
     let lastServiceDay = this.archived_bookings.at(index)!.lastServiceDate ;
-
-    console.log(lastServiceDay)
 
     if (lastServiceDay === null && finishDate <= sixMonthsAgo) return true;
 

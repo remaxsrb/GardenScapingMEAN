@@ -193,6 +193,8 @@ export class FirmComponent
       waterArea: [0],
       greenArea: [0],
       sittingArea: [0],
+      layout: [''],
+
     });
   }
 
@@ -235,6 +237,10 @@ export class FirmComponent
 
   get sittingArea() {
     return this.gardenForm.get('sittingArea');
+  }
+  
+  get layout() {
+    return this.gardenForm.get('layout')?.value || null;
   }
 
   get requests() {
@@ -327,7 +333,11 @@ export class FirmComponent
     const file: File = event.files[0];
     this.selectedFile = file;
 
-    this.jsonService.get_layout(this.selectedFile.name).subscribe(data => {
+    this.fileService.uploadFile(this.selectedFile).subscribe(fileUploadData => {
+      console.log(fileUploadData)
+
+      
+    this.jsonService.get_layout(fileUploadData.filePath).subscribe(data => {
       const canvas = this.gardenCanvas.nativeElement;
       const context = canvas.getContext('2d');
 
@@ -344,6 +354,10 @@ export class FirmComponent
       });
 
     })
+
+    })
+
+
 
 
   }
@@ -437,6 +451,8 @@ export class FirmComponent
     // a.download = 'gardenTest.json';
     // a.click();
     // window.URL.revokeObjectURL(url);
+  
+    this.gardenForm.patchValue({layout: this.drawnShapes});
 
     this.bookingService.create(this.newBookingForm.value).subscribe((data) => {
       this.newBookingForm.reset();

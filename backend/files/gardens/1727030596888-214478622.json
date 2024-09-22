@@ -1,0 +1,92 @@
+[
+  {
+    "id": "shape1",
+    "type": "rectangle",
+    "color": "#11ff00",
+    "width": 50,
+    "height": 50,
+    "x": 50,
+    "y": 47
+  },
+  {
+    "id": "shape2",
+    "type": "circle",
+    "color": "brown",
+    "width": 50,
+    "height": 50,
+    "x": 171,
+    "y": 49
+  },
+  {
+    "id": "shape1",
+    "type": "rectangle",
+    "color": "#11ff00",
+    "width": 50,
+    "height": 50,
+    "x": 269,
+    "y": 52
+  },
+  {
+    "id": "shape1",
+    "type": "rectangle",
+    "color": "#11ff00",
+    "width": 50,
+    "height": 50,
+    "x": 50,
+    "y": 139
+  },
+  {
+    "id": "shape1",
+    "type": "rectangle",
+    "color": "#11ff00",
+    "width": 50,
+    "height": 50,
+    "x": 52,
+    "y": 232
+  },
+  {
+    "id": "shape1",
+    "type": "rectangle",
+    "color": "#11ff00",
+    "width": 50,
+    "height": 50,
+    "x": 358,
+    "y": 56
+  },
+  {
+    "id": "shape4",
+    "type": "rectangle",
+    "color": "#00a7ff",
+    "width": 200,
+    "height": 100,
+    "x": 150,
+    "y": 189
+  },
+  {
+    "id": "shape1",
+    "type": "rectangle",
+    "color": "#11ff00",
+    "width": 50,
+    "height": 50,
+    "x": 55,
+    "y": 311
+  },
+  {
+    "id": "shape3",
+    "type": "rectangle",
+    "color": "gray",
+    "width": 50,
+    "height": 100,
+    "x": 431,
+    "y": 57
+  },
+  {
+    "id": "shape1",
+    "type": "rectangle",
+    "color": "#11ff00",
+    "width": 50,
+    "height": 50,
+    "x": 400,
+    "y": 194
+  }
+]

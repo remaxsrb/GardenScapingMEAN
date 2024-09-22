@@ -16,15 +16,23 @@
     
             <ng-template pTemplate="header">
               <tr>
+                <th style="width: 10%">Garden Type</th> 
+                <th style="width: 10%">Water area no.</th>
+
                 <th style="width: 10%">Finish Date</th>
                 <th style="width: 10%">Last Service Date</th>
-                <th style="width: 40%">Reject</th>
-                <th style="width: 40%">Accept</th>
+                <th style="width: 30%">Reject</th>
+                <th style="width: 30%">Accept</th>
 
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-maintainedBooking let-i="rowIndex">
               <tr>
+                <td>{{ maintainedBooking.garden.type }}</td>
+
+                <td>
+                  {{ maintainedBooking.garden.waterBodies}}
+                </td>
                 <td>{{ maintainedBooking.finishDate }}</td>
                 <td>{{ maintainedBooking.lastServiceDate }}</td>
                 <td>

@@ -17,7 +17,9 @@
         <ng-template pTemplate="header">
           <tr>
             <th style="width: 35%">Finish Date</th>
-            <th style="width: 35%">Last Service Date</th>
+            <th style="width: 30%">Last Service Date</th>
+            <th style="width: 5%">Water bodies no.</th>
+
             <th style="width: 10%">Firm</th>
             <th style="width: 10%">Request Maintenance</th>
 
@@ -27,6 +29,9 @@
           <tr>
             <td>{{ archivedBooking.finishDate }}</td>
             <td>{{ archivedBooking.lastServiceDate }}</td>
+            <td>
+              {{ archivedBooking.garden.waterBodies }}
+            </td>
             <td>{{ archivedBooking.firm }}</td>
             <td *ngIf="hasToRequestMaintaining(i)">
                 <button

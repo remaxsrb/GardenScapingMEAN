@@ -85,7 +85,15 @@ export class DecoraterDashboardMaintenenceComponent implements OnInit {
         booking.lastServiceDate = this.timeService.formatDateToDDMMYYYY(
           new Date(booking.lastServiceDate)
         );
+
+        booking.garden.waterBodies = 0;
+        booking.garden.layout.forEach(shape => {
+          if(shape.color==="#00a7ff")
+              booking.garden.waterBodies++
+        });
+
     });
+
   }
 
   reject(index: number) {
